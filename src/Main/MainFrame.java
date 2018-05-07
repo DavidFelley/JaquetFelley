@@ -36,16 +36,14 @@ public class MainFrame extends JFrame{
 		setUndecorated(true);
 		setLocationRelativeTo(null);
 		setAlwaysOnTop(true);
-		setLayout(new BorderLayout());
-
+		add(smartphonePanel);
 		
-		//FORME DU SMARTPHONE
-		setContentPane(smartphonePanel);
-		smartphonePanel.setOpaque(false);
-		smartphonePanel.setLayout(new BorderLayout());
-		smartphonePanel.add(contentPanel, BorderLayout.CENTER);
-	
-		
+//		//FORME DU SMARTPHONE
+//		setContentPane(smartphonePanel);
+//		smartphonePanel.setOpaque(false);
+//		smartphonePanel.setLayout(new BorderLayout());
+//		smartphonePanel.add(contentPanel, BorderLayout.CENTER);
+				
 		
 		
 		
