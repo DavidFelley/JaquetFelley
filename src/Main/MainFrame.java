@@ -10,6 +10,7 @@ import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -38,7 +39,7 @@ import View.BackgroundImagePanel;
 public class MainFrame extends JFrame{
 		
 		// Panel principal
-		private BackgroundImagePanel backgroundPanel = new BackgroundImagePanel(new ImageIcon("images/Fond/wallpaper.jpg"));
+		private BackgroundImagePanel backgroundPanel = new BackgroundImagePanel(new ImageIcon("images/Fond/wallpaper3.jpg"));
 		
 		// Panel de forme du smartphone
 		private BackgroundImagePanel formPanel = new BackgroundImagePanel(new ImageIcon("images/Fond/smartphone.png"));
@@ -51,7 +52,7 @@ public class MainFrame extends JFrame{
 		private JPanel homePanel = new JPanel();
 		
 		//Top Panel
-		private JPanel topPanel = new JPanel();
+		private JPanel topPanel = new JPanel(new FlowLayout());
 		
 		//Heure Top Panel
 		private JLabel heure = new JLabel();
@@ -68,7 +69,12 @@ private ButtonCreation offButton = new ButtonCreation(new ImageIcon("images/Icon
 private ButtonCreation contactButton = new ButtonCreation(new ImageIcon("images/Icones/contact.png"));
 private ButtonCreation galleryButton = new ButtonCreation(new ImageIcon("images/Icones/gallery.png"));
 private ButtonCreation bourseButton = new ButtonCreation(new ImageIcon("images/Icones/bourse.png"));
-	
+private ButtonCreation calculatorButton = new ButtonCreation(new ImageIcon("images/Icones/calculator.png"));
+private ButtonCreation MapButton = new ButtonCreation(new ImageIcon("images/Icones/maps.png"));
+private ButtonCreation messageButton = new ButtonCreation(new ImageIcon("images/Icones/message.png"));
+private ButtonCreation musicButton = new ButtonCreation(new ImageIcon("images/Icones/earphones.png"));
+private ButtonCreation parameterButton = new ButtonCreation(new ImageIcon("images/Icones/parametre.png"));
+
 	public MainFrame() 
 	{
 		//Top Panel
@@ -77,7 +83,7 @@ private ButtonCreation bourseButton = new ButtonCreation(new ImageIcon("images/I
 		timer.start();
 		topPanel.add(heure);
 		heure.setForeground(Color.WHITE);
-		heure.setPreferredSize(new Dimension(57, 40));
+		heure.setPreferredSize(new Dimension(50, 40));
 	    heure.setFont(new Font(null, Font.BOLD, 18));
 	    
 		//PARAMETRES DE LA FRAME
@@ -104,48 +110,68 @@ private ButtonCreation bourseButton = new ButtonCreation(new ImageIcon("images/I
 		homePanel.setOpaque(false);
 		homePanel.setPreferredSize(new Dimension(450, 50));
 		
-//Homepage panel
-homepagePanel.setOpaque(false);
-backgroundPanel.add(homepagePanel, BorderLayout.CENTER);	
+	//Homepage panel
+	homepagePanel.setOpaque(false);
+	backgroundPanel.add(homepagePanel, BorderLayout.CENTER);	
 
-//APPLICATIONS
-c.insets = new Insets(15,15,15,15);
-c.fill = GridBagConstraints.BOTH;
-c.weightx = 2;
-c.weighty = 2;
-c.ipady = c.anchor = GridBagConstraints.CENTER;
+	//APPLICATIONS
+	c.insets = new Insets(7,7,7,7);
+	c.fill = GridBagConstraints.BOTH;
+	c.weightx = 3;
+	c.weighty = 3;
+	c.ipady = c.anchor = GridBagConstraints.CENTER;
+	
+	//BOUTON BOURSE
+	c.gridx = 0;
+	c.gridy = 0;
+	homepagePanel.add(bourseButton,c);
 
+	//BOUTON CALCULETTE
+	c.gridx = 1;
+	c.gridy = 0;
+	c.gridwidth = 2;
+	homepagePanel.add(calculatorButton,c);
+	
+	//BOUTON CONTACT
+	c.gridx = 3;
+	c.gridy = 0;
+	homepagePanel.add(contactButton,c);
+	
+	//BOUTON GALERIE
+	c.gridx = 0;
+	c.gridy = 1;
+	homepagePanel.add(galleryButton,c);
+	
+	//BOUTON MAP
+	c.gridx = 1;
+	c.gridy = 1;
+	c.gridwidth = 2;
+	homepagePanel.add(MapButton,c);
+	
+	//BOUTON MESSAGE
+	c.gridx = 3;
+	c.gridy = 1;
+	homepagePanel.add(messageButton,c);
+	
+	//BOUTON MUSIC
+	c.gridx = 0;
+	c.gridy = 2;
+	c.gridwidth = 2;
+	homepagePanel.add(musicButton,c);
 
-//BOUTON OFF
-c.gridx = 0;
-c.gridy = 0;
-c.gridwidth = 1;
-c.gridheight = 1;
-homepagePanel.add(offButton,c);
-offButton.addActionListener(new ClickPowerOff());
-offButton.addMouseListener(new MouseBackground());
+	//BOUTON MUSIC
+	c.gridx = 2;
+	c.gridy = 2;
+	c.gridwidth = 2;
+	homepagePanel.add(parameterButton,c);
 
-
-c.gridx = 0;
-c.gridy = 1;
-c.gridwidth = 1;
-c.gridheight = 1;
-homepagePanel.add(contactButton,c);
-
-c.gridx = 1;
-c.gridy = 0;
-c.gridwidth = 1;
-c.gridheight = 1;
-homepagePanel.add(bourseButton,c);
-
-c.gridx = 1;
-c.gridy = 1;
-c.gridwidth = 1;
-c.gridheight = 1;
-homepagePanel.add(galleryButton,c);
-
-
-
+	//BOUTON OFF
+	c.gridx = 3;
+	c.gridy = 2;
+	c.gridwidth = 2;
+	homepagePanel.add(offButton,c);
+	offButton.addActionListener(new ClickPowerOff());
+	offButton.addMouseListener(new MouseBackground());
 
 
 	}
@@ -198,14 +224,10 @@ homepagePanel.add(galleryButton,c);
 			
 		}
 
-
-
 		@Override
 		public void mouseEntered(MouseEvent e) {
 			// TODO Auto-generated method stub
-			offButton.setIcon(new ImageIcon("images/Icones/power.png"));
-			
-			
+			offButton.setIcon(new ImageIcon("images/Icones/power.png"));			
 		}
 		
 	}

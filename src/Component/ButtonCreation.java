@@ -30,12 +30,10 @@ public class ButtonCreation extends JButton {
 	
 	public ButtonCreation (ImageIcon image) {
 		super(image);
-		setPreferredSize(new Dimension (100,100)); // à supprimer
-		setBackground(new Color(200,0,0));
-//		setLayout(new BorderLayout());		
+//		setBackground(new Color(0,150,255));
 		setFocusable(false);
 		setBorder(new EmptyBorder(0, 0, 0, 0));
-//		setContentAreaFilled(false);
+		setContentAreaFilled(false);
 	}
 	
 	public ButtonCreation(ImageIcon image, int width, int height) {
