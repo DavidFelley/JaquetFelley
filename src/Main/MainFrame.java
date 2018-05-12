@@ -26,10 +26,10 @@ public class MainFrame extends JFrame{
 	
 	
 		// Panel principal
-		private BackgroundImagePanel backgroundPanel = new BackgroundImagePanel(new ImageIcon("wallpaper.jpg"));
+		private BackgroundImagePanel backgroundPanel = new BackgroundImagePanel(new ImageIcon("images/wallpaper1.jpg"));
 		
 		// Panel de forme du smartphone
-		private BackgroundImagePanel formPanel = new BackgroundImagePanel(new ImageIcon("smartphone.png"));
+		private BackgroundImagePanel formPanel = new BackgroundImagePanel(new ImageIcon("images/smartphone.png"));
 		
 		// Gestion des panels
 		private CardLayout cardLayout = new CardLayout();
@@ -71,6 +71,7 @@ public class MainFrame extends JFrame{
 		//Top Panel
 		topPanel.setOpaque(false);
 		topPanel.setPreferredSize(new Dimension(450, 50));
+		
 		
 		
 		
