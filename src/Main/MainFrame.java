@@ -31,6 +31,13 @@ import javax.swing.border.EmptyBorder;
 import View.BackgroundImagePanel;
 
 public class MainFrame extends JFrame{
+	
+		//Top Panel
+		private JPanel topPanel = new JPanel();
+		//Heure Top Panel
+		private JLabel heure = new JLabel();
+		final private DateFormat DATEFORMAT = new SimpleDateFormat("HH:mm");
+		private Timer timer = new Timer(0, new CurrentTime());
 		
 		// Panel principal
 		private BackgroundImagePanel backgroundPanel = new BackgroundImagePanel(new ImageIcon("images/Fond/wallpaper1.jpg"));
@@ -42,15 +49,9 @@ public class MainFrame extends JFrame{
 		private CardLayout cardLayout = new CardLayout();
 		private JPanel contentPanel = new JPanel(cardLayout);
 		
-		//Panel Home
+		//Panel Home(bottom)
 		private JPanel homePanel = new JPanel();
 		
-		//Top Panel
-		private JPanel topPanel = new JPanel();
-		//Heure Top Panel
-		private JLabel heure = new JLabel();
-		final private DateFormat DATEFORMAT = new SimpleDateFormat("HH:mm");
-		private Timer timer = new Timer(0, new CurrentTime());
 	
 	public MainFrame() 
 	{
@@ -86,6 +87,7 @@ public class MainFrame extends JFrame{
 		//Home Panel
 		homePanel.setOpaque(false);
 		homePanel.setPreferredSize(new Dimension(450, 50));
+				
 		
 	}
 		
