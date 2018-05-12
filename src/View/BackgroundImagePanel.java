@@ -12,9 +12,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 public class BackgroundImagePanel extends JPanel{
+	
 	ImageIcon image;
 	
-	public BackgroundImagePanel(ImageIcon Image) {
+	public BackgroundImagePanel(ImageIcon image) {
 		this.image = image;
 	}
 	
