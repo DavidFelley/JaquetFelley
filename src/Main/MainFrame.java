@@ -19,6 +19,7 @@ import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.text.DateFormat;
@@ -49,7 +50,7 @@ public class MainFrame extends JFrame{
 		private JPanel contentPanel = new JPanel(cardLayout);
 		
 		//Panel Home
-		private JPanel homePanel = new JPanel();
+		private JPanel homePanel = new JPanel(new BorderLayout());
 		
 		//Top Panel
 		private JPanel topPanel = new JPanel(new FlowLayout());
@@ -65,15 +66,16 @@ private GridBagConstraints c = new GridBagConstraints();
 		
 		
 //Boutons et applications
-private ButtonCreation offButton = new ButtonCreation(new ImageIcon("images/Icones/powerVide.png"));
-private ButtonCreation contactButton = new ButtonCreation(new ImageIcon("images/Icones/contact.png"));
-private ButtonCreation galleryButton = new ButtonCreation(new ImageIcon("images/Icones/gallery.png"));
-private ButtonCreation bourseButton = new ButtonCreation(new ImageIcon("images/Icones/bourse.png"));
-private ButtonCreation calculatorButton = new ButtonCreation(new ImageIcon("images/Icones/calculator.png"));
-private ButtonCreation MapButton = new ButtonCreation(new ImageIcon("images/Icones/maps.png"));
-private ButtonCreation messageButton = new ButtonCreation(new ImageIcon("images/Icones/message.png"));
-private ButtonCreation musicButton = new ButtonCreation(new ImageIcon("images/Icones/earphones.png"));
-private ButtonCreation parameterButton = new ButtonCreation(new ImageIcon("images/Icones/parametre.png"));
+private ButtonCreation offButton = new ButtonCreation("off", new ImageIcon("images/Icones/powerVide.png"));
+private ButtonCreation contactButton = new ButtonCreation("contact", new ImageIcon("images/Icones/contactVide.png"));
+private ButtonCreation galleryButton = new ButtonCreation("gallery", new ImageIcon("images/Icones/galleryVide.png"));
+private ButtonCreation bourseButton = new ButtonCreation("bourse", new ImageIcon("images/Icones/bourseVide.png"));
+private ButtonCreation calculatorButton = new ButtonCreation("calculator", new ImageIcon("images/Icones/calculatorVide.png"));
+private ButtonCreation mapButton = new ButtonCreation("map", new ImageIcon("images/Icones/mapsVide.png"));
+private ButtonCreation messageButton = new ButtonCreation("message", new ImageIcon("images/Icones/messageVide.png"));
+private ButtonCreation musicButton = new ButtonCreation("music", new ImageIcon("images/Icones/earphonesVide.png"));
+private ButtonCreation parameterButton = new ButtonCreation("parameter", new ImageIcon("images/Icones/parametreVide.png"));
+private ButtonCreation homeButton = new ButtonCreation ("home", new ImageIcon("images/Icones/home.png"));
 
 	public MainFrame() 
 	{
@@ -110,6 +112,9 @@ private ButtonCreation parameterButton = new ButtonCreation(new ImageIcon("image
 		homePanel.setOpaque(false);
 		homePanel.setPreferredSize(new Dimension(450, 50));
 		
+		homePanel.add(homeButton);
+	
+		
 	//Homepage panel
 	homepagePanel.setOpaque(false);
 	backgroundPanel.add(homepagePanel, BorderLayout.CENTER);	
@@ -125,55 +130,63 @@ private ButtonCreation parameterButton = new ButtonCreation(new ImageIcon("image
 	c.gridx = 0;
 	c.gridy = 0;
 	homepagePanel.add(bourseButton,c);
+	bourseButton.addMouseListener(new ChangeBourse());
 
 	//BOUTON CALCULETTE
 	c.gridx = 1;
 	c.gridy = 0;
 	c.gridwidth = 2;
 	homepagePanel.add(calculatorButton,c);
+	calculatorButton.addMouseListener(new ChangeCalculator());
 	
 	//BOUTON CONTACT
 	c.gridx = 3;
 	c.gridy = 0;
 	homepagePanel.add(contactButton,c);
+	contactButton.addMouseListener(new ChangeContact());
 	
 	//BOUTON GALERIE
 	c.gridx = 0;
 	c.gridy = 1;
 	homepagePanel.add(galleryButton,c);
+	galleryButton.addMouseListener(new ChangeGallery());
 	
 	//BOUTON MAP
 	c.gridx = 1;
 	c.gridy = 1;
 	c.gridwidth = 2;
-	homepagePanel.add(MapButton,c);
+	homepagePanel.add(mapButton,c);
+	mapButton.addMouseListener(new ChangeMap());
 	
 	//BOUTON MESSAGE
 	c.gridx = 3;
 	c.gridy = 1;
 	homepagePanel.add(messageButton,c);
+	messageButton.addMouseListener(new ChangeMessage());
 	
 	//BOUTON MUSIC
 	c.gridx = 0;
 	c.gridy = 2;
 	c.gridwidth = 2;
 	homepagePanel.add(musicButton,c);
+	musicButton.addMouseListener(new ChangeMusic());
 
-	//BOUTON MUSIC
+	//BOUTON PARAMETER
 	c.gridx = 2;
 	c.gridy = 2;
 	c.gridwidth = 2;
 	homepagePanel.add(parameterButton,c);
-
+	parameterButton.addMouseListener(new ChangeParameter());
+	
 	//BOUTON OFF
 	c.gridx = 3;
 	c.gridy = 2;
 	c.gridwidth = 2;
 	homepagePanel.add(offButton,c);
 	offButton.addActionListener(new ClickPowerOff());
-	offButton.addMouseListener(new MouseBackground());
+	offButton.addMouseListener(new ChangeOff());
 
-
+	
 	}
 		
 	class CurrentTime implements ActionListener 
@@ -196,41 +209,143 @@ private ButtonCreation parameterButton = new ButtonCreation(new ImageIcon("image
 		
 	}
 	
-	class MouseBackground implements MouseListener{
-
-		@Override
-		public void mouseClicked(MouseEvent arg0) {
-			// TODO Auto-generated method stub
-			
-		}
-
-	
-
-		@Override
+	class ChangeOff extends MouseAdapter { 
 		public void mouseExited(MouseEvent arg0) {
 			// TODO Auto-generated method stub
-			offButton.setIcon(new ImageIcon("images/Icones/powerVide.png"));
+			if(offButton.getName().compareTo("off")==0) 
+			offButton.setIcon(new ImageIcon("images/Icones/powerVide.png"));			
 		}
 
-		@Override
-		public void mousePressed(MouseEvent arg0) {
-			// TODO Auto-generated method stub
-		
-		}
-
-		@Override
-		public void mouseReleased(MouseEvent arg0) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
 		public void mouseEntered(MouseEvent e) {
 			// TODO Auto-generated method stub
-			offButton.setIcon(new ImageIcon("images/Icones/power.png"));			
+			if(offButton.getName().compareTo("off")==0) 
+			offButton.setIcon(new ImageIcon("images/Icones/powerPlein.png"));	
 		}
-		
 	}
+	
+	class ChangeContact extends MouseAdapter { 
+		public void mouseExited(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			if(contactButton.getName().compareTo("contact")==0) 
+			contactButton.setIcon(new ImageIcon("images/Icones/contactVide.png"));			
+		}
+
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+			if(contactButton.getName().compareTo("contact")==0) 
+			contactButton.setIcon(new ImageIcon("images/Icones/contactPlein.png"));	
+		}
+	}
+	
+	class ChangeGallery extends MouseAdapter { 
+		public void mouseExited(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			if(galleryButton.getName().compareTo("gallery")==0) 
+			galleryButton.setIcon(new ImageIcon("images/Icones/galleryVide.png"));			
+		}
+
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+			if(galleryButton.getName().compareTo("gallery")==0) 
+			galleryButton.setIcon(new ImageIcon("images/Icones/galleryPlein.png"));	
+		}
+	}
+	
+	class ChangeBourse extends MouseAdapter { 
+		public void mouseExited(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			if(bourseButton.getName().compareTo("bourse")==0) 
+			bourseButton.setIcon(new ImageIcon("images/Icones/bourseVide.png"));			
+		}
+
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+			if(bourseButton.getName().compareTo("bourse")==0) 
+			bourseButton.setIcon(new ImageIcon("images/Icones/boursePlein.png"));	
+		}
+	}
+
+	class ChangeCalculator extends MouseAdapter { 
+		public void mouseExited(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			if(calculatorButton.getName().compareTo("calculator")==0) 
+			calculatorButton.setIcon(new ImageIcon("images/Icones/calculatorVide.png"));			
+		}
+
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+			if(calculatorButton.getName().compareTo("calculator")==0) 
+			calculatorButton.setIcon(new ImageIcon("images/Icones/calculatorPlein.png"));	
+		}
+	}
+	
+	class ChangeMap extends MouseAdapter { 
+		public void mouseExited(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			if(mapButton.getName().compareTo("map")==0) 
+			mapButton.setIcon(new ImageIcon("images/Icones/mapsVide.png"));			
+		}
+
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+			if(mapButton.getName().compareTo("map")==0) 
+			mapButton.setIcon(new ImageIcon("images/Icones/mapsPlein.png"));	
+		}
+	}
+	
+	
+	class ChangeMessage extends MouseAdapter { 
+		public void mouseExited(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			if(messageButton.getName().compareTo("message")==0) 
+				messageButton.setIcon(new ImageIcon("images/Icones/messageVide.png"));			
+		}
+
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+			if(messageButton.getName().compareTo("message")==0) 
+			messageButton.setIcon(new ImageIcon("images/Icones/messagePlein.png"));	
+		}
+	}
+	
+	class ChangeMusic extends MouseAdapter { 
+		public void mouseExited(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			if(musicButton.getName().compareTo("music")==0) 
+				musicButton.setIcon(new ImageIcon("images/Icones/earphonesVide.png"));			
+		}
+
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+			if(musicButton.getName().compareTo("music")==0) 
+				musicButton.setIcon(new ImageIcon("images/Icones/earphonesPlein.png"));	
+		}
+	}
+	
+	class ChangeParameter extends MouseAdapter { 
+		public void mouseExited(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			if(parameterButton.getName().compareTo("parameter")==0) 
+				parameterButton.setIcon(new ImageIcon("images/Icones/parametreVide.png"));			
+		}
+
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+			if(parameterButton.getName().compareTo("parameter")==0) 
+				parameterButton.setIcon(new ImageIcon("images/Icones/parametrePlein.png"));	
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

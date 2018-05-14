@@ -9,40 +9,60 @@ package Component;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.border.EmptyBorder;
 
 public class ButtonCreation extends JButton {
+	String name;
 	
 	public ButtonCreation() {
-//		setLayout(new BorderLayout());  
 		
 	}
 		
 	public ButtonCreation(String name, ImageIcon image) {
 		super(image);
+		this.name = name;
 		
-//		setLayout(new BorderLayout());
 		setName(name);
+		setFocusable(false);
+		//Supprime les bordures autour de chaque bouton
+		setBorder(new EmptyBorder(0, 0, 0, 0));
+		setContentAreaFilled(false);
 	}
 	
 	public ButtonCreation (ImageIcon image) {
 		super(image);
-//		setBackground(new Color(0,150,255));
+		
 		setFocusable(false);
+		//Supprime les bordures autour de chaque bouton
 		setBorder(new EmptyBorder(0, 0, 0, 0));
 		setContentAreaFilled(false);
+	
 	}
 	
 	public ButtonCreation(ImageIcon image, int width, int height) {
 		super(image);
 		
-//		setLayout(new BorderLayout());
 		setPreferredSize(new Dimension(width, height));
+		setFocusable(false);
+		//Supprime les bordures autour de chaque bouton
+		setBorder(new EmptyBorder(0, 0, 0, 0));
+		setContentAreaFilled(false);
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 	
+
 	
 	
 	
