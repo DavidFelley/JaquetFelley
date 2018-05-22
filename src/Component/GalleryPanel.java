@@ -16,9 +16,9 @@ public class GalleryPanel extends JPanel{
 
 private JLabel testLabel = new JLabel ("test Gallery");	
 	
-	public GalleryPanel (MainFrame mainframe) {
+	public GalleryPanel () {
 		
-		this.mainframe = mainframe;
+		
 		setLayout(new BorderLayout());
 		panelGallery.add(testLabel);
 		add(panelGallery);

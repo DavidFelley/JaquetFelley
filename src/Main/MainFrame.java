@@ -80,8 +80,8 @@ private ButtonCreation parameterButton = new ButtonCreation("parameter", new Ima
 private ButtonCreation homeButton = new ButtonCreation ("home", new ImageIcon("images/Icones/home.png"));
 
 
-private ContactPanel contactPanel = new ContactPanel(this);
-private GalleryPanel galleryPanel = new GalleryPanel(this);
+private ContactPanel contactPanel = new ContactPanel();
+private GalleryPanel galleryPanel = new GalleryPanel();
 
 	public MainFrame() 
 	{
