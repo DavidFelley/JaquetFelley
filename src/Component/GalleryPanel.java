@@ -14,10 +14,9 @@ public class GalleryPanel extends JPanel{
 	private CardLayout clGallery = new CardLayout();
 	private JPanel panelGallery = new JPanel(clGallery);
 
-private JLabel testLabel = new JLabel ("test Gallery");	
+	private JLabel testLabel = new JLabel ("test Gallery");	
 	
 	public GalleryPanel () {
-		
 		
 		setLayout(new BorderLayout());
 		panelGallery.add(testLabel);
