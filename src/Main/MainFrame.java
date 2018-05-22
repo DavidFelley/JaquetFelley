@@ -87,7 +87,7 @@ private GalleryPanel galleryPanel = new GalleryPanel(this);
 	{
 		//Top Panel
 		topPanel.setOpaque(false);
-		topPanel.setPreferredSize(new Dimension(450, 50));
+		topPanel.setPreferredSize(new Dimension(450, 40));
 		timer.start();
 		topPanel.add(heure);
 		heure.setForeground(Color.WHITE);
@@ -119,7 +119,7 @@ contentPanel.add(galleryPanel, "galleryPanel");
 		
 		//Home Panel
 		homePanel.setOpaque(false);
-		homePanel.setPreferredSize(new Dimension(450, 55));
+		homePanel.setPreferredSize(new Dimension(450, 40));
 		
 		homePanel.add(homeButton);
 homeButton.addActionListener(new ClickHome());
