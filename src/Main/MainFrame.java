@@ -35,6 +35,8 @@ import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
 import Component.ButtonCreation;
+import Component.ContactPanel;
+import Component.GalleryPanel;
 import View.BackgroundImagePanel;
 
 public class MainFrame extends JFrame{
@@ -50,7 +52,7 @@ public class MainFrame extends JFrame{
 		private JPanel contentPanel = new JPanel(cardLayout);
 		
 		//Panel Home
-		private JPanel homePanel = new JPanel(new BorderLayout());
+private JPanel homePanel = new JPanel(new FlowLayout());
 		
 		//Top Panel
 		private JPanel topPanel = new JPanel(new FlowLayout());
@@ -76,6 +78,10 @@ private ButtonCreation messageButton = new ButtonCreation("message", new ImageIc
 private ButtonCreation musicButton = new ButtonCreation("music", new ImageIcon("images/Icones/earphonesVide.png"));
 private ButtonCreation parameterButton = new ButtonCreation("parameter", new ImageIcon("images/Icones/parametreVide.png"));
 private ButtonCreation homeButton = new ButtonCreation ("home", new ImageIcon("images/Icones/home.png"));
+
+
+private ContactPanel contactPanel = new ContactPanel(this);
+private GalleryPanel galleryPanel = new GalleryPanel(this);
 
 	public MainFrame() 
 	{
@@ -108,17 +114,20 @@ private ButtonCreation homeButton = new ButtonCreation ("home", new ImageIcon("i
 		contentPanel.add(backgroundPanel, "backgroundPanel");
 		backgroundPanel.setLayout(new BorderLayout());
 		
+contentPanel.add(contactPanel, "contactPanel");	
+contentPanel.add(galleryPanel, "galleryPanel");
+		
 		//Home Panel
 		homePanel.setOpaque(false);
-		homePanel.setPreferredSize(new Dimension(450, 50));
+		homePanel.setPreferredSize(new Dimension(450, 55));
 		
 		homePanel.add(homeButton);
-	
+homeButton.addActionListener(new ClickHome());
 		
 	//Homepage panel
 	homepagePanel.setOpaque(false);
 	backgroundPanel.add(homepagePanel, BorderLayout.CENTER);	
-
+	
 	//APPLICATIONS
 	c.insets = new Insets(7,7,7,7);
 	c.fill = GridBagConstraints.BOTH;
@@ -144,12 +153,14 @@ private ButtonCreation homeButton = new ButtonCreation ("home", new ImageIcon("i
 	c.gridy = 0;
 	homepagePanel.add(contactButton,c);
 	contactButton.addMouseListener(new ChangeContact());
+	contactButton.addActionListener(new ClickContact());
 	
 	//BOUTON GALERIE
 	c.gridx = 0;
 	c.gridy = 1;
 	homepagePanel.add(galleryButton,c);
 	galleryButton.addMouseListener(new ChangeGallery());
+	galleryButton.addActionListener(new ClickGallery());
 	
 	//BOUTON MAP
 	c.gridx = 1;
@@ -208,6 +219,38 @@ private ButtonCreation homeButton = new ButtonCreation ("home", new ImageIcon("i
 		}
 		
 	}
+	
+	class ClickContact implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			cardLayout.show(contentPanel, "contactPanel");
+		}
+	}
+	
+	class ClickGallery implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			cardLayout.show(contentPanel, "galleryPanel");
+		}
+	}
+	
+	class ClickHome implements ActionListener 
+	{
+		@Override
+		public void actionPerformed(ActionEvent e) 
+		{
+			cardLayout.show(contentPanel, "backgroundPanel");
+		}
+	}
+	
+	
+	
+	
+	
+	
+	// Mouse Listener changement icône 
 	
 	class ChangeOff extends MouseAdapter { 
 		public void mouseExited(MouseEvent arg0) {
