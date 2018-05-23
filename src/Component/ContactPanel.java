@@ -32,7 +32,7 @@ public class ContactPanel extends JPanel{
 //		contentContact.add(addContact);
 //		contentContact.setBackground(Color.PINK);
 		add(addContact);
-		
+		System.out.println("test");
 	}
 	
 	class AddContact extends JPanel {
