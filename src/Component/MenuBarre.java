@@ -12,20 +12,22 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 public class MenuBarre extends JPanel{
 
-	ButtonCreation bouton1 ;
-	ButtonCreation bouton2 ;
+	ButtonCreation bouton ;
 	String titre ;
+
+	private ButtonCreation retour = new ButtonCreation("return",new ImageIcon("images/Icones/retour.png"));
+
 	
-	public MenuBarre(ButtonCreation bouton1, ButtonCreation bouton2, String titre)
+	public MenuBarre(ButtonCreation bouton, String titre)
 	{
-		this.bouton1 = bouton1 ;
-		this.bouton2 = bouton2 ;
+		this.bouton = bouton ;
 		this.titre = titre ;
 		
 		//Paramètre fixe à la barre de menu
@@ -34,7 +36,7 @@ public class MenuBarre extends JPanel{
 		setLayout(new BorderLayout());
 		setBorder(new EmptyBorder(0, 5, 0, 5));
 		
-		add(bouton1, BorderLayout.EAST);
+		add(retour, BorderLayout.WEST);
 		
 		JLabel entete = new JLabel(titre);
 		entete.setFont(new Font(null, Font.BOLD, 20));
@@ -42,7 +44,7 @@ public class MenuBarre extends JPanel{
 		entete.setForeground(Color.WHITE);
 		add(entete, BorderLayout.CENTER);
 		
-		add(bouton2, BorderLayout.WEST);
+		add(bouton, BorderLayout.EAST);
 	}
 
 }
