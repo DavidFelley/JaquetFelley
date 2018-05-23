@@ -19,6 +19,7 @@ import javax.swing.border.EmptyBorder;
 public class ButtonCreation extends JButton {
 	String name;
 	
+	
 	public ButtonCreation() {
 		
 	}
@@ -53,7 +54,7 @@ public class ButtonCreation extends JButton {
 		setBorder(new EmptyBorder(0, 0, 0, 0));
 		setContentAreaFilled(false);
 	}
-
+	
 	public String getName() {
 		return name;
 	}
@@ -61,9 +62,6 @@ public class ButtonCreation extends JButton {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-
-	
 	
 	
 }

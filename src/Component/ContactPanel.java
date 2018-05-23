@@ -7,7 +7,11 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.Serializable;
 
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -18,14 +22,17 @@ import Main.MainFrame;
 
 public class ContactPanel extends JPanel{
 
-	private CardLayout cardLayout = new CardLayout();
-	private JPanel contentContact = new JPanel(cardLayout);
-	private AddContact addContact = new AddContact();	
-
-
+//	private CardLayout cardLayout = new CardLayout();
+//	private JPanel contentContact = new JPanel(cardLayout);
+	private AddContact addContact = new AddContact();		
+	
 	public ContactPanel () {
-		add(contentContact);
-		contentContact.add(addContact);
+		
+//		add(contentContact);
+//		contentContact.add(addContact);
+//		contentContact.setBackground(Color.PINK);
+		add(addContact);
+		
 	}
 	
 	class AddContact extends JPanel {
@@ -43,73 +50,73 @@ public class ContactPanel extends JPanel{
 		private JTextField tfTelephone = new JTextField();
 		
 		// Icone de base  du champ contact 
-		private ButtonCreation contactEmpty = new ButtonCreation("contactEmpty", new ImageIcon("images/Icones/contactVide.png"));
-		
-		// Bouton delete 
-		private ButtonCreation buttonDelete = new ButtonCreation("validate", new ImageIcon("images/Icones/trash.png"));
-		
+		private ButtonCreation contactEmpty = new ButtonCreation("contactEmpty", new ImageIcon("images/Galerie/canada.jpg"));
+	
+		// Bouton delete, valider, modifier, retour
+		private ButtonCreation buttonDelete = new ButtonCreation("delete", new ImageIcon("images/Icones/trash.png"));
+		private ButtonCreation buttonReturn = new ButtonCreation("return", new ImageIcon("images/Icones/retour.png"));
+		private ButtonCreation buttonValidate = new ButtonCreation("validate", new ImageIcon("images/Icones/Validate.png"));
+		private ButtonCreation buttonModify = new ButtonCreation("modify", new ImageIcon("images/Icones/modify.png"));
 		
 		// Liste des différentes panels 
-		private JPanel fullPanel = new JPanel(new GridLayout(4,1));
+		private JPanel fullPanel = new JPanel();
 		private JPanel topPanel = new JPanel(new BorderLayout());
 		private JPanel photoPanel = new JPanel(new BorderLayout());
 		private JPanel infoPanel = new JPanel(new GridLayout(4,2,5,5));
 		private JPanel bottomPanel = new JPanel(new BorderLayout());
 		
 		public AddContact() {
-			
 			add(fullPanel);
-			fullPanel.setPreferredSize(new Dimension(450,800));
-			fullPanel.setBorder(new EmptyBorder(20,20,20,20));
-			
+			setOpaque(true);
+			fullPanel.setLayout(new BoxLayout(fullPanel, BoxLayout.Y_AXIS));
+			fullPanel.setBackground(Color.RED);
 		
+//			fullPanel.setPreferredSize(new Dimension(450,800));
+			
 			// TopPanel contenant les boutons retour et valider
 			fullPanel.add(topPanel);
-			
-			topPanel.setBackground(Color.WHITE);
-			topPanel.add(new JLabel ("BOUTON RETOUR ET BOUTON VALIDER"));
-
+			topPanel.setPreferredSize(new Dimension(450,40));
+			topPanel.add(new MenuBarre(buttonValidate, "Add contact"), BorderLayout.NORTH);
+//			topPanel.setBorder(new EmptyBorder(0,0,0,0));
+			topPanel.setOpaque(false);
 			
 			// PhotoPanel contenant la photo du contact
 			fullPanel.add(photoPanel);
+			photoPanel.setPreferredSize(new Dimension(450,325));
 			photoPanel.add(contactEmpty);
 		
 			//InfoPanel contenant les informations du contact
 			fullPanel.add(infoPanel);
-		
+			infoPanel.setPreferredSize(new Dimension(450,305));
 			infoPanel.add(prenom);
-			prenom.setForeground(Color.WHITE);
+			infoPanel.setBorder(new EmptyBorder(10,10,10,10));
+			
 			prenom.setFont(new Font(null, Font.BOLD, 20));
 			infoPanel.add(tfPrenom);
+			tfPrenom.setFont(new Font(null, Font.PLAIN, 20));
 			
 			infoPanel.add(nom);
-			nom.setForeground(Color.WHITE);
 			nom.setFont(new Font(null, Font.BOLD, 20));
 			infoPanel.add(tfNom);
 			tfNom.setPreferredSize(new Dimension(200,10));
+			tfNom.setFont(new Font(null, Font.PLAIN, 20));
 			
 			infoPanel.add(email);
-			email.setForeground(Color.WHITE);
 			email.setFont(new Font(null, Font.BOLD, 20));
 			infoPanel.add(tfEmail);
+			tfEmail.setFont(new Font(null, Font.PLAIN,20));
 			
 			infoPanel.add(telephone);
-			telephone.setForeground(Color.WHITE);
 			telephone.setFont(new Font(null, Font.BOLD, 20));
 			infoPanel.add(tfTelephone);
+			tfTelephone.setFont(new Font(null, Font.PLAIN,20));
 			
 			//BottomPanel contenant le button delete
 			fullPanel.add(bottomPanel);
-			bottomPanel.add(buttonDelete);	
-			buttonDelete.setPreferredSize(new Dimension());
+			bottomPanel.add(buttonDelete);
 			bottomPanel.setBackground(Color.RED);
-			
+			bottomPanel.setPreferredSize(new Dimension(450,40));
+						
 		}
-	}
-	
-	class listContact extends JPanel{
-		
-	}
-	
-	
+	}	
 }
