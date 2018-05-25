@@ -58,7 +58,7 @@ public class MainFrame extends JFrame{
 private JPanel homePanel = new JPanel(new FlowLayout());
 		
 		//Top Panel
-		private JPanel topPanel = new JPanel(new FlowLayout());
+		private JPanel topPanel = new JPanel(new BorderLayout());
 		
 		//Heure Top Panel
 		private JLabel heure = new JLabel();
@@ -92,7 +92,9 @@ private GalleryPanel galleryPanel = new GalleryPanel();
 		topPanel.setOpaque(false);
 		topPanel.setPreferredSize(new Dimension(450, 40));
 		timer.start();
-		topPanel.add(heure);
+		topPanel.add(heure, BorderLayout.CENTER);
+		heure.setHorizontalAlignment(JLabel.CENTER);
+		heure.setVerticalAlignment(JLabel.CENTER);
 		heure.setForeground(Color.WHITE);
 		heure.setPreferredSize(new Dimension(50, 40));
 	    heure.setFont(new Font(null, Font.BOLD, 18));

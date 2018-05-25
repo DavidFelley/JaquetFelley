@@ -33,8 +33,8 @@ public class ContactApp extends JPanel{
 	private ArrayList <Contact> contacts = new ArrayList<>();
 		
 	public ContactApp (){
-	
-		add(contentContact);
+	    setLayout(new BorderLayout());
+		add(contentContact, BorderLayout.NORTH);
 		
 		contentContact.add("contactAppList", contactAppList);
 
@@ -64,7 +64,7 @@ public class ContactApp extends JPanel{
 		private ButtonCreation buttonValidate = new ButtonCreation("validate", new ImageIcon("images/Icones/Validate.png"));
 		private ButtonCreation buttonModify = new ButtonCreation("modify", new ImageIcon("images/Icones/modify.png"));
 		private ButtonCreation buttonReturn = new ButtonCreation ("return", new ImageIcon("images/Icones/retour.png"));
-		private MenuBarre menuAddContact = new MenuBarre(buttonReturn, buttonValidate, "Add contact");
+		private MenuBarre menuAddContact = new MenuBarre(buttonReturn, buttonValidate, "A");
 		
 		// Liste des différentes panels 
 		private JPanel panelAdd = new JPanel();
@@ -74,8 +74,8 @@ public class ContactApp extends JPanel{
 		private JPanel bottomPanel = new JPanel(new BorderLayout());
 		
 		public ContactAppAdd() {
-			
-			add(panelAdd);
+			setLayout(new BorderLayout());
+			add(panelAdd, BorderLayout.NORTH);
 //			setOpaque(true);
 			panelAdd.setLayout(new BoxLayout(panelAdd, BoxLayout.Y_AXIS));
 			panelAdd.setBackground(Color.RED);
@@ -86,6 +86,7 @@ public class ContactApp extends JPanel{
 			panelAdd.add(topPanel);
 			topPanel.setPreferredSize(new Dimension(450,40));
 			topPanel.add(menuAddContact, BorderLayout.NORTH);
+			topPanel.setBorder(new EmptyBorder(0,0,0,0));
 			buttonValidate.addActionListener(new ClickSaveContact());  
 			menuAddContact.getBoutonWest().addActionListener(new ClickBack());
 			
@@ -177,11 +178,11 @@ public class ContactApp extends JPanel{
 		
 		private JPanel panelList = new JPanel();
 		private ButtonCreation buttonPlus = new ButtonCreation("plus",new ImageIcon("images/Icones/plus.png"));
-		private MenuBarre menuList = new MenuBarre(buttonPlus, "Liste des contacts");
+		private MenuBarre menuList = new MenuBarre(buttonPlus, "CONTACTS");
 		
 		public ContactAppList() {
-			
-			add(panelList);
+			setLayout(new BorderLayout());
+			add(panelList, BorderLayout.NORTH);
 			panelList.setLayout(new BoxLayout(panelList, BoxLayout.Y_AXIS));
 			
 			panelList.add(menuList);
