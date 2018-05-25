@@ -19,14 +19,15 @@ import javax.swing.border.EmptyBorder;
 
 public class MenuBarre extends JPanel{
 
-	ButtonCreation bouton ;
+	ButtonCreation boutonWest ;
+	ButtonCreation boutonEast ;
 	String titre ;
-
-	private ButtonCreation retour = new ButtonCreation("return",new ImageIcon("images/Icones/retour.png"));
 	
-	public MenuBarre(ButtonCreation bouton, String titre)
+	//Constructeur MenuBarre avec le boutonEast
+	public MenuBarre(ButtonCreation boutonEast, String titre)
 	{
-		this.bouton = bouton ;
+	
+		this.boutonEast = boutonEast;
 		this.titre = titre ;
 		
 		//Paramètre fixe à la barre de menu
@@ -35,7 +36,29 @@ public class MenuBarre extends JPanel{
 		setLayout(new BorderLayout());
 		setBorder(new EmptyBorder(0, 5, 0, 5));
 		
-		add(retour, BorderLayout.WEST);
+		JLabel entete = new JLabel(titre);
+		entete.setFont(new Font(null, Font.BOLD, 20));
+		entete.setHorizontalAlignment(JLabel.CENTER);
+		entete.setForeground(Color.WHITE);
+		add(entete, BorderLayout.CENTER);
+		
+		add(boutonEast, BorderLayout.EAST);
+	}
+	
+	//Constructeur MenuBarre avec les boutonEast et boutonWest
+	public MenuBarre(ButtonCreation boutonWest, ButtonCreation boutonEast, String titre)
+	{
+		this.boutonWest = boutonWest ;
+		this.boutonEast = boutonEast;
+		this.titre = titre ;
+		
+		//Paramètre fixe à la barre de menu
+		setPreferredSize(new Dimension(480, 40));
+		setBackground(new Color(78, 104, 141));
+		setLayout(new BorderLayout());
+		setBorder(new EmptyBorder(0, 5, 0, 5));
+		
+		add(boutonWest, BorderLayout.WEST);
 		
 		JLabel entete = new JLabel(titre);
 		entete.setFont(new Font(null, Font.BOLD, 20));
@@ -43,11 +66,18 @@ public class MenuBarre extends JPanel{
 		entete.setForeground(Color.WHITE);
 		add(entete, BorderLayout.CENTER);
 		
-		add(bouton, BorderLayout.EAST);
+		add(boutonEast, BorderLayout.EAST);
 	}
 
-	public ButtonCreation getRetour() {
-		return retour;
+	
+	
+	
+	public ButtonCreation getBoutonEast() {
+		return boutonEast;
+	}
+	
+	public ButtonCreation getBoutonWest() {
+		return boutonWest;
 	}
 	
 	

@@ -23,20 +23,23 @@ import javax.swing.border.EmptyBorder;
 import Main.MainFrame;
 
 public class ContactApp extends JPanel{
-	private MainFrame mainframe;
+	
+
+	
 	private CardLayout cardLayoutContact = new CardLayout();
 	private JPanel contentContact = new JPanel(cardLayoutContact);
 	private ContactAppAdd contactAppAdd	;
 	private ContactAppList contactAppList = new ContactAppList();
 	private ArrayList <Contact> contacts = new ArrayList<>();
 		
-	public ContactApp () {
-		
+	public ContactApp (){
+	
 		add(contentContact);
 		
 		contentContact.add("contactAppList", contactAppList);
 
 		cardLayoutContact.show(contentContact, "contactAppList");
+		
 	}
 	
 	class ContactAppAdd extends JPanel {
@@ -60,8 +63,9 @@ public class ContactApp extends JPanel{
 		private ButtonCreation buttonDelete = new ButtonCreation("delete", new ImageIcon("images/Icones/trash.png"));
 		private ButtonCreation buttonValidate = new ButtonCreation("validate", new ImageIcon("images/Icones/Validate.png"));
 		private ButtonCreation buttonModify = new ButtonCreation("modify", new ImageIcon("images/Icones/modify.png"));
+		private ButtonCreation buttonReturn = new ButtonCreation ("return", new ImageIcon("images/Icones/retour.png"));
+		private MenuBarre menuAddContact = new MenuBarre(buttonReturn, buttonValidate, "Add contact");
 		
-		private MenuBarre menuAddContact = new MenuBarre(buttonValidate, "Add contact");
 		// Liste des différentes panels 
 		private JPanel panelAdd = new JPanel();
 		private JPanel topPanel = new JPanel(new BorderLayout());
@@ -83,9 +87,9 @@ public class ContactApp extends JPanel{
 			topPanel.setPreferredSize(new Dimension(450,40));
 			topPanel.add(menuAddContact, BorderLayout.NORTH);
 			buttonValidate.addActionListener(new ClickSaveContact());  
-			menuAddContact.getRetour().addActionListener(new ClickBack());
+			menuAddContact.getBoutonWest().addActionListener(new ClickBack());
 			
-//			topPanel.setBorder(new EmptyBorder(0,0,0,0));
+
 			topPanel.setOpaque(false);
 			
 			// PhotoPanel contenant la photo du contact
@@ -175,7 +179,6 @@ public class ContactApp extends JPanel{
 		private ButtonCreation buttonPlus = new ButtonCreation("plus",new ImageIcon("images/Icones/plus.png"));
 		private MenuBarre menuList = new MenuBarre(buttonPlus, "Liste des contacts");
 		
-		
 		public ContactAppList() {
 			
 			add(panelList);
@@ -184,28 +187,19 @@ public class ContactApp extends JPanel{
 			panelList.add(menuList);
 			menuList.setPreferredSize(new Dimension(450,40));
 			buttonPlus.addActionListener(new ClickAddContact());
-			menuList.getRetour().addActionListener(new ClickBackH());
+
 		}
 		
 		class ClickAddContact implements ActionListener 
 		{
 			@Override
-			public void actionPerformed(ActionEvent e) 
+			public void actionPerformed(ActionEvent e)
 			{
 				contactAppAdd = new ContactAppAdd();
 				contactAppAdd.eraseInfos();
 				contentContact.add("contactAppAdd",contactAppAdd);
 				cardLayoutContact.show(contentContact, "contactAppAdd");
-			}
-		}
-		
-		class ClickBackH implements ActionListener 
-		{
-			@Override
-			public void actionPerformed(ActionEvent e) 
-			{
-				mainframe.getCardLayout().show(mainframe.getContentPanel(), "backgroundPanel");
-				System.out.println("clique sur le bouton retour");
+//				System.out.println("je clique sur ce putain de bouton de merde");
 			}
 		}
 
