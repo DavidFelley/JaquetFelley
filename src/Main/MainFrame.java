@@ -35,7 +35,7 @@ import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
 import Component.ButtonCreation;
-import Component.ContactPanel;
+import Component.ContactApp;
 import Component.GalleryPanel;
 import View.BackgroundImagePanel;
 
@@ -51,7 +51,10 @@ public class MainFrame extends JFrame{
 		private CardLayout cardLayout = new CardLayout();
 		private JPanel contentPanel = new JPanel(cardLayout);
 		
-		//Panel Home
+		
+
+
+//Panel Home
 private JPanel homePanel = new JPanel(new FlowLayout());
 		
 		//Top Panel
@@ -80,7 +83,7 @@ private ButtonCreation parameterButton = new ButtonCreation("parameter", new Ima
 private ButtonCreation homeButton = new ButtonCreation ("home", new ImageIcon("images/Icones/home.png"));
 
 
-private ContactPanel contactPanel = new ContactPanel();
+private ContactApp contactApp = new ContactApp();
 private GalleryPanel galleryPanel = new GalleryPanel();
 
 	public MainFrame() 
@@ -113,9 +116,8 @@ private GalleryPanel galleryPanel = new GalleryPanel();
 		//Gestion des panels
 		contentPanel.add(backgroundPanel, "backgroundPanel");
 		backgroundPanel.setLayout(new BorderLayout());
-		
-contentPanel.add(contactPanel, "contactPanel");	
-contentPanel.add(galleryPanel, "galleryPanel");
+		contentPanel.add(contactApp, "contactApp");	
+		contentPanel.add(galleryPanel, "galleryPanel");
 		
 		//Home Panel
 		homePanel.setOpaque(false);
@@ -224,7 +226,7 @@ homeButton.addActionListener(new ClickHome());
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			cardLayout.show(contentPanel, "contactPanel");
+			cardLayout.show(contentPanel, "contactApp");
 		}
 	}
 	
@@ -316,6 +318,25 @@ homeButton.addActionListener(new ClickHome());
 			}
 			System.out.println(e.getComponent().getName());
 		}
+	}
+
+
+	public CardLayout getCardLayout() {
+		return cardLayout;
 	}	
+	
+	public BackgroundImagePanel getBackgroundPanel() {
+		return backgroundPanel;
+	}
+
+
+	public JPanel getContentPanel() {
+		return contentPanel;
+	}
+
+
+	public JPanel getHomepagePanel() {
+		return homepagePanel;
+	}
 	
 }

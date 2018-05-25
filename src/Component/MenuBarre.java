@@ -23,7 +23,6 @@ public class MenuBarre extends JPanel{
 	String titre ;
 
 	private ButtonCreation retour = new ButtonCreation("return",new ImageIcon("images/Icones/retour.png"));
-
 	
 	public MenuBarre(ButtonCreation bouton, String titre)
 	{
@@ -46,5 +45,11 @@ public class MenuBarre extends JPanel{
 		
 		add(bouton, BorderLayout.EAST);
 	}
+
+	public ButtonCreation getRetour() {
+		return retour;
+	}
+	
+	
 
 }
