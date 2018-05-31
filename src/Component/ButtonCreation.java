@@ -14,6 +14,7 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
 public class ButtonCreation extends JButton {
@@ -44,6 +45,17 @@ public class ButtonCreation extends JButton {
 		setContentAreaFilled(false);
 	
 	}
+	
+	public ButtonCreation(int width, int height) {		
+		setMaximumSize(new Dimension(width, height));
+		setMinimumSize(new Dimension(width, height));
+		setPreferredSize(new Dimension(width, height));
+		setFocusable(false);
+		//Supprime les bordures autour de chaque bouton
+		setBorder(new EmptyBorder(0, 0, 0, 0));
+//		setContentAreaFilled(false);
+	}
+	
 	
 	public ButtonCreation(ImageIcon image, int width, int height) {
 		super(image);

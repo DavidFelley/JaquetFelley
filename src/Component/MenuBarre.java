@@ -69,9 +69,6 @@ public class MenuBarre extends JPanel{
 		add(boutonEast, BorderLayout.EAST);
 	}
 
-	
-	
-	
 	public ButtonCreation getBoutonEast() {
 		return boutonEast;
 	}
