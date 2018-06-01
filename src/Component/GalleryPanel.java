@@ -9,7 +9,7 @@ package Component;
 import java.awt.AlphaComposite;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
-import java.awt.Dimension;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
@@ -28,40 +28,39 @@ import java.util.Scanner;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class GalleryPanel extends JPanel{
 	
-	//Varia
+	//Variables
 	private int numImg ;
 	private ArrayList<String> photos = new ArrayList<String>();
 	
+	//private CardLayout clGallery = new CardLayout();
 	private JPanel backPanel = new JPanel(new FlowLayout());
+	private JPanel panelGallery = new JPanel();
 	
-	private CardLayout clGallery = new CardLayout();
-	private JPanel panelGallery = new JPanel(clGallery);
+	private JScrollPane scrollPane = new JScrollPane(backPanel);
 
 	private ButtonCreation ajout = new ButtonCreation("ajout", new ImageIcon("images/Icones/plus.png"));
 	private MenuBarre menuGalerie = new MenuBarre(ajout, "GALERIE");
-	
-	ButtonCreation salut = new ButtonCreation();
-		
+			
 	//FileChooser permet d'ouvrir un navigateur de fichier
 	private JFileChooser fc = new JFileChooser();
 	//Ici on défini le type d'extension que le browser va accepter
 	private FileNameExtensionFilter ff = new FileNameExtensionFilter("Extension types : Images", "jpg", "png", "jpeg");
-	
+		
 	public GalleryPanel() 
 	{		
 		//Paramètre principaux de la galerie (Format, et topMenu)
 		setLayout(new BorderLayout());
 		add(menuGalerie, BorderLayout.NORTH);
-		add(backPanel);
-		backPanel.setBorder(new EmptyBorder(0, 0, 0, 0));
 		ajout.addActionListener(new addGalerie());
-		
+				
 		//Browser d'image
 		fc.setApproveButtonText("Ajouter");
 		fc.setAcceptAllFileFilterUsed(false);
@@ -70,31 +69,30 @@ public class GalleryPanel extends JPanel{
 		backPanel.add(panelGallery);
 		panelGallery.setLayout(new GridLayout(0, 3, 7, 7));
 		panelGallery.setBorder(new EmptyBorder(3, 0, 0, 0));
+		
 		display();
-
+		
+		scrollPane.setBorder(new EmptyBorder(0, 0, 0, 0));
+		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		add(scrollPane);
+		
 	}
 	
-	class addGalerie implements ActionListener 
+	private ArrayList<String> arrayOfPhotos()
 	{
-		public void actionPerformed(ActionEvent e) 
-		{
-			int resultat = fc.showOpenDialog(panelGallery);
-			
-			if(resultat == fc.CANCEL_OPTION)
-			{
-				fc.cancelSelection();
-				return;
-			}
-			
-			if (resultat == fc.APPROVE_OPTION) 
-			{
-				saveToGalerie(fc.getSelectedFile());
-				//update();
-			}
-		}
+		String path = "images/Galerie";
+		
+		File folder = new File(path);
+		File[] listOfFiles = folder.listFiles();
+		
+		    for (int i = 0; i < listOfFiles.length; i++)
+		    {
+		    	photos.add(listOfFiles[i].getPath());
+		    }
+		    
+		return photos ;
 	}
 	
-	//Sauvegarde une image choisie par le fc dans le dossier galerie.
 	private void saveToGalerie(File img)
 	{			
 		String path = "config\\num.txt" ;
@@ -121,7 +119,6 @@ public class GalleryPanel extends JPanel{
 		}
 	}
 	
-	
 	//Permet de récupérer l'extension de l'image que l'on veut enregistrer.
 	private String getExtension(File fichier)
 	{
@@ -137,14 +134,14 @@ public class GalleryPanel extends JPanel{
 	//Lis le numéro stocké dans le fichier text de la galerie
 	private int readNumImg(String path) 
 	{
-		
 	    Scanner s;
 		try
 		{
 			s = new Scanner(new File(path));
 			numImg = s.nextInt();
 			s.close();
-		} catch (FileNotFoundException e)
+		} 
+		catch (FileNotFoundException e)
 		{
 			e.printStackTrace();
 		}
@@ -152,21 +149,12 @@ public class GalleryPanel extends JPanel{
 	    return numImg ;
 	}
 	
-	//AFFICHAGE DE LA GALERIE ---> Penser a mettre a jour le tableau de photos a chaque ajout et suppression d'images !
-	private ArrayList<String> arrayOfPhotos()
+	public void refresh() 
 	{
-		String path = "images/Galerie";
-		
-		File folder = new File(path);
-		File[] listOfFiles = folder.listFiles();
-		
-		    for (int i = 0; i < listOfFiles.length; i++)
-		    {
-		    	System.out.println(listOfFiles[i]);
-		    	photos.add(listOfFiles[i].getPath());
-		    }
-		    
-		return photos ;
+		panelGallery.removeAll();
+		arrayOfPhotos().clear();
+		display();
+		panelGallery.updateUI();
 	}
 	
 	private BufferedImage createPreview(String path)
@@ -178,19 +166,16 @@ public class GalleryPanel extends JPanel{
 			try 
 			{
 				img = ImageIO.read(new File(path));
-				System.out.println("Largeur :"+img.getWidth()+" Hauteur :"+img.getHeight());
 				
 				if(img.getWidth() < img.getHeight())
 				{
 					newWidth = 140;
 					newHeight = img.getHeight()*140/img.getWidth();
-					System.out.println(newHeight);
 				}
 				else
 				{
-					newWidth = img.getWidth()*140/img.getHeight();
 					newHeight =  140;
-					System.out.println(newWidth);
+					newWidth = img.getWidth()*140/img.getHeight();
 				}
 				
 				BufferedImage resizedImage = new BufferedImage(newWidth, newHeight, img.getType());
@@ -209,7 +194,6 @@ public class GalleryPanel extends JPanel{
 			} 
 			catch (IOException e) 
 			{
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
@@ -220,15 +204,44 @@ public class GalleryPanel extends JPanel{
 	private void display()
 	{
 		arrayOfPhotos();
+		ButtonCreation buttonPreview ;
 		
 		for (int i = 0; i < photos.size(); i++) 
 		{
-			System.out.println(photos.get(i));
-			panelGallery.add(salut = new ButtonCreation(new ImageIcon(createPreview(photos.get(i)))));
-			salut.setPreferredSize(new Dimension(140, 140));
+			//panelGallery.add(new ButtonCreation("photos.get(i)",new ImageIcon(createPreview(photos.get(i)))));
+			buttonPreview = new ButtonCreation("photos.get(i)",new ImageIcon(createPreview(photos.get(i))));
+			buttonPreview.addActionListener(new affichePhoto());
+			panelGallery.add(buttonPreview);
+			
 		}
 	}
 	
+	class addGalerie implements ActionListener 
+	{
+		public void actionPerformed(ActionEvent e) 
+		{
+			int resultat = fc.showOpenDialog(panelGallery);
+			
+			if(resultat == fc.CANCEL_OPTION)
+			{
+				fc.cancelSelection();
+				return;
+			}
+			
+			if (resultat == fc.APPROVE_OPTION) 
+			{
+				saveToGalerie(fc.getSelectedFile());
+				refresh();
+			}
+		}
+	}
 	
+	class affichePhoto implements ActionListener
+	{
+		public void actionPerformed(ActionEvent e) 
+		{
+
+		}
+	}
 	
 }

@@ -38,6 +38,7 @@ import javax.swing.border.EmptyBorder;
 import Component.ButtonCreation;
 import Component.ContactApp;
 import Component.ContactAppOld;
+import Component.GalleryApp;
 import Component.GalleryPanel;
 import View.BackgroundImagePanel;
 
@@ -86,7 +87,7 @@ private ButtonCreation homeButton = new ButtonCreation ("home", new ImageIcon("i
 
 
 private ContactApp contactApp = new ContactApp();
-private GalleryPanel galleryPanel = new GalleryPanel();
+private GalleryApp galleryApp = new GalleryApp();
 
 	public MainFrame() 
 	{
@@ -121,7 +122,7 @@ private GalleryPanel galleryPanel = new GalleryPanel();
 		contentPanel.add(backgroundPanel, "backgroundPanel");
 		backgroundPanel.setLayout(new BorderLayout());
 		contentPanel.add(contactApp, "contactApp");	
-		contentPanel.add(galleryPanel, "galleryPanel");
+		contentPanel.add(galleryApp, "galleryPanel");
 		
 		//Home Panel
 		homePanel.setOpaque(false);
