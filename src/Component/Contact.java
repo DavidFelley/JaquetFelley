@@ -17,15 +17,23 @@ public class Contact implements Serializable  {
 		this.email = email;
 		this.telephone = telephone;
 		this.id = id;
-		
 	}
 
-	
 	public String toString() {
 		// TODO Auto-generated method stub
 		return "Contact inséré: " + getNom() + " " + getPrenom() + " " + getEmail() + " " + getTelephone();
 	}
 	
+	public String infosContact() {
+		// TODO Auto-generated method stub
+		return  getId() + " " + getNom() + " " + getPrenom() + " " + getEmail() + " " + getTelephone();
+	}
+	
+	public String texteBoutonContact() {
+		return getNom() + " " + getPrenom();
+	}
+	
+
 	
 	public String getNom() {
 		return nom;
@@ -62,7 +70,6 @@ public class Contact implements Serializable  {
 	public int getId() {
 		return id;
 	}
-
 
 	public void setId(int id) {
 		this.id = id;

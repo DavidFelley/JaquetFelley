@@ -22,6 +22,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -220,9 +221,9 @@ homeButton.addActionListener(new ClickHome());
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
+			contactApp.serializeContact();
 			System.exit(0);
 		}
-		
 	}
 	
 	class ClickContact implements ActionListener{

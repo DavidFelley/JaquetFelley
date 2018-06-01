@@ -7,21 +7,22 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
+import Component.ContactApp.ContactList;
+
 
 
 public class ContactAdd extends ContactForm{
 	
-	private ContactApp contactApp;
-
 	private CardLayout cl ;
 	private JPanel jp;
+	ArrayList <Contact> contacts;
 	
 	
-	
-	public ContactAdd(boolean modification, CardLayout cl, JPanel jp) {
+	public ContactAdd(boolean modification, CardLayout cl, JPanel jp,ArrayList <Contact> contacts) {
 		super(modification);
 		this.cl = cl;
 		this.jp = jp;
+		this.contacts=contacts;
 		buttonReturn.addActionListener(new ClickBack());
 		buttonValidate.addActionListener(new ClickSaveContact());
 	}
@@ -33,16 +34,15 @@ public class ContactAdd extends ContactForm{
 			{
 				@Override
 				public void actionPerformed(ActionEvent e) 
-				{
-				
-//					contacts.add(getInfos(id));
-//					System.out.println(contacts.get(id).toString());
-//					eraseInfos();
-//					System.out.println("valeur de l'id: " + id);
-//					id++;
+				{								
+					contacts.add(getInfos(id));
+					System.out.println(contactApp.getContacts().get(id).toString());
+					eraseInfos();
+					System.out.println("valeur de l'id: " + id);
+					id++;		 	
 				}
 			}
-	
+			
 	//ActionListener sur le bouton retour afin d'afficher la liste des contacts
 			class ClickBack implements ActionListener 
 			{

@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -15,6 +16,7 @@ import javax.swing.border.EmptyBorder;
 
 import Component.ContactAppOld.ContactAppAdd.ClickBack;
 import Component.ContactAppOld.ContactAppAdd.ClickSaveContact;
+
 
 public class ContactForm extends JPanel{
 
@@ -50,11 +52,10 @@ public class ContactForm extends JPanel{
 	private JPanel bottomPanel = new JPanel(new BorderLayout());
 
 	protected Contact contact;
+	protected ContactApp contactApp = new ContactApp();
 	protected boolean modification;
 	
-	
-	
-	protected int id;
+	protected int id = 0;
 	
 	
 	// Constructeur pour le formulaire vide
@@ -126,15 +127,8 @@ public class ContactForm extends JPanel{
 	
 	
 	// Méthode qui retourne les informations d'un nouveau contact
-	public Contact getInfos(int id) {
+	public Contact getInfos(int  id) {
 		return new Contact (tfNom.getText(), tfPrenom.getText(),tfEmail.getText(), tfTelephone.getText(), id);
-	}
-	
-	
-	// Méthode qui augmente l'id des la liste de contacts
-	
-	public void nextID() {
-		
 	}
 	
 	
