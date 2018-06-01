@@ -9,6 +9,7 @@ package Component;
 import java.awt.AlphaComposite;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
@@ -26,20 +27,24 @@ import java.util.Scanner;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class GalleryApp extends JPanel
 {
 	private CardLayout cardlayout = new CardLayout();
+	private ButtonCreation element;
+	private FullScreenPanel fullscreenPanel = new FullScreenPanel();
 	
 	public GalleryApp() 
 	{
 		setLayout(cardlayout);
 		add(new GalleryPanel(),"GalleryPanel");
-		add(new FullScreenPanel(),"FullScreenPanel");
+		add(fullscreenPanel,"FullScreenPanel");
 	}
 	
 	class GalleryPanel extends JPanel
@@ -212,10 +217,9 @@ public class GalleryApp extends JPanel
 			
 			for (int i = 0; i < photos.size(); i++) 
 			{
-				//panelGallery.add(new ButtonCreation("photos.get(i)",new ImageIcon(createPreview(photos.get(i)))));
-				buttonPreview = new ButtonCreation("photos.get(i)",new ImageIcon(createPreview(photos.get(i))));
+				buttonPreview = new ButtonCreation(photos.get(i),new ImageIcon(createPreview(photos.get(i))));
+				buttonPreview.addActionListener(new afficheGrandePhoto());
 				panelGallery.add(buttonPreview);
-				
 			}
 		}
 		
@@ -245,6 +249,8 @@ public class GalleryApp extends JPanel
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
+				element = (ButtonCreation) e.getSource();
+				fullscreenPanel.refresh();
 				cardlayout.show(GalleryApp.this, "FullScreenPanel");
 			}
 			
@@ -253,7 +259,17 @@ public class GalleryApp extends JPanel
 	
 	class FullScreenPanel extends JPanel
 	{
+		public FullScreenPanel() 
+		{
+			setBackground(Color.black);
+		}
 		
+		public void refresh()
+		{
+			this.removeAll();
+			JLabel imageGrande = new JLabel(new ImageIcon(element.getName()));
+			this.add(imageGrande, BorderLayout.CENTER);
+		}
 	}
 	
 	

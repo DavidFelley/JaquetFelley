@@ -18,7 +18,9 @@ import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
 public class ButtonCreation extends JButton {
-	String name;
+	
+	private String name;
+	private ImageIcon image;
 	
 	
 	public ButtonCreation() {
@@ -38,6 +40,7 @@ public class ButtonCreation extends JButton {
 	
 	public ButtonCreation (ImageIcon image) {
 		super(image);
+		this.image = image ;
 		
 		setFocusable(false);
 		//Supprime les bordures autour de chaque bouton
@@ -74,6 +77,9 @@ public class ButtonCreation extends JButton {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
+	public ImageIcon getImage() {
+		return image;
+	}	
 	
 }
