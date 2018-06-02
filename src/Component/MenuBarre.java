@@ -23,6 +23,17 @@ public class MenuBarre extends JPanel{
 	ButtonCreation boutonEast ;
 	String titre ;
 	
+	public MenuBarre(ButtonCreation boutonEast, ButtonCreation boutonWest)
+	{
+		this.boutonEast = boutonEast ;
+		this.boutonWest = boutonWest ;
+		setPreferredSize(new Dimension(480, 40));
+		setBackground(Color.black);
+		
+		add(boutonEast, BorderLayout.EAST);
+		add(boutonWest, BorderLayout.WEST);
+	}
+	
 	//Constructeur MenuBarre avec le boutonEast
 	public MenuBarre(ButtonCreation boutonEast, String titre)
 	{

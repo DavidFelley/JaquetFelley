@@ -250,7 +250,7 @@ public class GalleryApp extends JPanel
 			public void actionPerformed(ActionEvent e)
 			{
 				element = (ButtonCreation) e.getSource();
-				fullscreenPanel.refresh();
+				//fullscreenPanel.refresh();
 				cardlayout.show(GalleryApp.this, "FullScreenPanel");
 			}
 			
@@ -259,17 +259,28 @@ public class GalleryApp extends JPanel
 	
 	class FullScreenPanel extends JPanel
 	{
+		private ButtonCreation trashButton = new ButtonCreation("trash", new ImageIcon("images/Icones/trash.png"));
+		private ButtonCreation backButton = new ButtonCreation("back", new ImageIcon("images/Icones/retour.png"));
+		private MenuBarre menuImage = new MenuBarre(trashButton, backButton);
+
 		public FullScreenPanel() 
 		{
 			setBackground(Color.black);
+			setLayout(new BorderLayout());
+			setBorder(new EmptyBorder(0, 0, 0, 0));
+			add(menuImage, BorderLayout.NORTH);
+			//TROUVER PQ LA MENU BAR EST PAS AU TOP ET CORRIGER LES BOUTONS
+
 		}
 		
-		public void refresh()
-		{
-			this.removeAll();
-			JLabel imageGrande = new JLabel(new ImageIcon(element.getName()));
-			this.add(imageGrande, BorderLayout.CENTER);
-		}
+//		public void refresh()
+//		{
+//			this.removeAll();
+//			JLabel imageGrande = new JLabel(new ImageIcon(element.getName()));
+//			this.add(imageGrande);
+//		}
+		
+		
 	}
 	
 	
