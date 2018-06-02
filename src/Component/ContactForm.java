@@ -42,7 +42,7 @@ public class ContactForm extends JPanel{
 	protected ButtonCreation buttonReturn = new ButtonCreation ("return", new ImageIcon("images/Icones/retour.png"));
 //	private MenuBarre menuAddContact = new MenuBarre(buttonReturn, buttonValidate, "AJOUTER UN CONTACT");
 //	private MenuBarre menuModifyContact = new MenuBarre(buttonReturn, buttonModify, "CONTACT");
-	protected MenuBarre menuBarre =  new MenuBarre(buttonReturn, buttonValidate, "AJOUTER UN CONTACT");
+//	protected MenuBarre menuBarre ;
 	
 	// Liste des différentes panels 
 	private JPanel panelBase = new JPanel();
@@ -50,6 +50,8 @@ public class ContactForm extends JPanel{
 	private JPanel photoPanel = new JPanel(new BorderLayout());
 	private JPanel formPanel = new JPanel(new GridLayout(4,2,5,5));
 	protected JPanel bottomPanel = new JPanel(new BorderLayout());
+	
+	protected Color color = new Color(78,104,141);
 
 	protected Contact contact;
 	protected ContactApp contactApp = new ContactApp();
@@ -84,7 +86,6 @@ public class ContactForm extends JPanel{
 		// menuPanel contenant la menu barre
 		panelBase.add(menuPanel);
 		menuPanel.setPreferredSize(new Dimension(450,40));
-		menuPanel.add(menuBarre, BorderLayout.NORTH);
 		menuPanel.setBorder(new EmptyBorder(0,0,0,0));
 		menuPanel.setOpaque(false);
 

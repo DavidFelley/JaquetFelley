@@ -39,7 +39,7 @@ public class GalleryApp extends JPanel
 	private CardLayout cardlayout = new CardLayout();
 	private ButtonCreation element;
 	private FullScreenPanel fullscreenPanel = new FullScreenPanel();
-	
+	private Color color = new Color(78,104,141);
 	public GalleryApp() 
 	{
 		setLayout(cardlayout);
@@ -50,7 +50,7 @@ public class GalleryApp extends JPanel
 	class GalleryPanel extends JPanel
 	{
 		private ButtonCreation ajout = new ButtonCreation("ajout", new ImageIcon("images/Icones/plus.png"));
-		private MenuBarre menuGalerie = new MenuBarre(ajout, "GALERIE");
+		private MenuBarre menuGalerie = new MenuBarre("GALERIE",ajout,color);
 		
 		//FileChooser permet d'ouvrir un navigateur de fichier
 		private JFileChooser fc = new JFileChooser();
@@ -261,7 +261,8 @@ public class GalleryApp extends JPanel
 	{
 		private ButtonCreation trashButton = new ButtonCreation("trash", new ImageIcon("images/Icones/trash.png"));
 		private ButtonCreation backButton = new ButtonCreation("back", new ImageIcon("images/Icones/retour.png"));
-		private MenuBarre menuImage = new MenuBarre(trashButton, backButton);
+		
+		private MenuBarre menuImage = new MenuBarre("NOM DE LA PHOTO", backButton,trashButton, color.BLACK );
 
 		public FullScreenPanel() 
 		{

@@ -1,5 +1,6 @@
 package Component;
 
+import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,6 +17,7 @@ public class ContactAdd extends ContactForm{
 	private CardLayout cl ;
 	private JPanel jp;
 	ArrayList <Contact> contacts;
+	private MenuBarre menuAdd = new MenuBarre("AJOUTER UN CONTACT", buttonReturn, buttonValidate, color);
 
 	
 	
@@ -24,6 +26,7 @@ public class ContactAdd extends ContactForm{
 		this.cl = cl;
 		this.jp = jp;
 		this.contacts=contacts;
+		menuPanel.add(menuAdd, BorderLayout.NORTH);
 		buttonReturn.addActionListener(new ClickBack());
 		buttonValidate.addActionListener(new ClickSaveContact());
 		bottomPanel.setVisible(false);

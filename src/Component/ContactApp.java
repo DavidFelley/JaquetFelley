@@ -121,8 +121,9 @@ public class ContactApp extends JPanel{
 	class ContactList extends JPanel{
 		
 		private JPanel panelList = new JPanel();
+		private Color color = new Color(78,104,141);
 		private ButtonCreation buttonPlus = new ButtonCreation("plus",new ImageIcon("images/Icones/plus.png"));
-		private MenuBarre menuBarreList = new MenuBarre(buttonPlus, "CONTACTS");
+		private MenuBarre menuBarreList = new MenuBarre("CONTACTS", buttonPlus, color);
 		private JScrollPane scroll = new JScrollPane(panelList, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		
 		

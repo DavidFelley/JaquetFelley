@@ -39,7 +39,6 @@ import Component.ButtonCreation;
 import Component.ContactApp;
 import Component.ContactAppOld;
 import Component.GalleryApp;
-import Component.GalleryPanel;
 import View.BackgroundImagePanel;
 
 public class MainFrame extends JFrame{

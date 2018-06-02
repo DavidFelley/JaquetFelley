@@ -7,10 +7,11 @@ import java.util.ArrayList;
 
 public class ContactModify extends ContactForm{
 	
+	private MenuBarre menuModify = new MenuBarre ("CONTACT", buttonReturn, buttonModify, color);
+	
 	public ContactModify(Contact contact, boolean modification) {
 		super(contact, modification);
-		menuBarre = new MenuBarre(buttonReturn, buttonModify, "CONTACT");
-		menuPanel.add(menuBarre, BorderLayout.NORTH);
+		menuPanel.add(menuModify, BorderLayout.NORTH);
 		changeModification();
 		buttonModify.addActionListener(new ClickModifyContact());
 	}

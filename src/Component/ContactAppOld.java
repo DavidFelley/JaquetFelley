@@ -73,7 +73,7 @@ public class ContactAppOld extends JPanel{
 		private ButtonCreation buttonValidate = new ButtonCreation("validate", new ImageIcon("images/Icones/Validate.png"));
 		private ButtonCreation buttonModify = new ButtonCreation("modify", new ImageIcon("images/Icones/modify.png"));
 		private ButtonCreation buttonReturn = new ButtonCreation ("return", new ImageIcon("images/Icones/retour.png"));
-		private MenuBarre menuAddContact = new MenuBarre(buttonReturn, buttonValidate, "AJOUTER UN CONTACT");
+//		private MenuBarre menuAddContact = new MenuBarre(buttonReturn, buttonValidate, "AJOUTER UN CONTACT");
 
 		// Liste des différentes panels 
 		private JPanel panelAdd = new JPanel();
@@ -96,10 +96,10 @@ public class ContactAppOld extends JPanel{
 			// MenuPanel contenant 
 			panelAdd.add(topPanel);
 			topPanel.setPreferredSize(new Dimension(450,40));
-			topPanel.add(menuAddContact, BorderLayout.NORTH);
+//			topPanel.add(menuAddContact, BorderLayout.NORTH);
 			topPanel.setBorder(new EmptyBorder(0,0,0,0));
 			buttonValidate.addActionListener(new ClickSaveContact());  
-			menuAddContact.getBoutonWest().addActionListener(new ClickBack());
+//			menuAddContact.getBoutonWest().addActionListener(new ClickBack());
 
 			topPanel.setOpaque(false);
 
@@ -209,18 +209,18 @@ public class ContactAppOld extends JPanel{
 
 		private JPanel panelList = new JPanel();
 		private ButtonCreation buttonPlus = new ButtonCreation("plus",new ImageIcon("images/Icones/plus.png"));
-		private MenuBarre menuBarreList = new MenuBarre(buttonPlus, "CONTACTS");
+//		private MenuBarre menuBarreList = new MenuBarre(buttonPlus, "CONTACTS");
 		private JScrollPane scroll = new JScrollPane(panelList);
 
 		// Constructeur de la liste des contacts
 		public ContactAppList() {
 
 			setLayout(new BorderLayout());
-			add(menuBarreList, BorderLayout.NORTH);
+//			add(menuBarreList, BorderLayout.NORTH);
 
 			panelList.setLayout(new BoxLayout(panelList, BoxLayout.Y_AXIS));
 			panelList.setPreferredSize(new Dimension(450, 680));
-			menuBarreList.setPreferredSize(new Dimension(450,40));
+//			menuBarreList.setPreferredSize(new Dimension(450,40));
 			buttonPlus.addActionListener(new ClickAddContact());
 
 			add(scroll, BorderLayout.CENTER);
