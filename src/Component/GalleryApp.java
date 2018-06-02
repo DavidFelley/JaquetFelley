@@ -16,6 +16,7 @@ import java.awt.GridLayout;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.font.ImageGraphicAttribute;
 import java.awt.image.BufferedImage;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -26,6 +27,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -38,19 +40,22 @@ public class GalleryApp extends JPanel
 {
 	private CardLayout cardlayout = new CardLayout();
 	private ButtonCreation element;
-	private FullScreenPanel fullscreenPanel = new FullScreenPanel();
-	private Color color = new Color(78,104,141);
+	private int id;
+	private GalleryPanel galleryPanel = new GalleryPanel();
+	private FullScreenPanel fullscreenPanel = new FullScreenPanel(galleryPanel);
+	
 	public GalleryApp() 
 	{
 		setLayout(cardlayout);
-		add(new GalleryPanel(),"GalleryPanel");
+		add(galleryPanel,"GalleryPanel");
 		add(fullscreenPanel,"FullScreenPanel");
 	}
 	
 	class GalleryPanel extends JPanel
 	{
+		private Color color = new Color(78,104,141);
 		private ButtonCreation ajout = new ButtonCreation("ajout", new ImageIcon("images/Icones/plus.png"));
-		private MenuBarre menuGalerie = new MenuBarre("GALERIE",ajout,color);
+		private MenuBarre menuGalerie = new MenuBarre("GALERIE",ajout, color);
 		
 		//FileChooser permet d'ouvrir un navigateur de fichier
 		private JFileChooser fc = new JFileChooser();
@@ -78,7 +83,7 @@ public class GalleryApp extends JPanel
 			
 			backPanel.add(panelGallery);
 			panelGallery.setLayout(new GridLayout(0, 3, 7, 7));
-			panelGallery.setBorder(new EmptyBorder(3, 0, 0, 0));
+			panelGallery.setBorder(new EmptyBorder(2, 2, 2, 2));
 			
 			display();
 			
@@ -158,7 +163,7 @@ public class GalleryApp extends JPanel
 		    return numImg ;
 		}
 		
-		public void refresh() 
+		public void update() 
 		{
 			panelGallery.removeAll();
 			arrayOfPhotos().clear();
@@ -166,11 +171,11 @@ public class GalleryApp extends JPanel
 			panelGallery.updateUI();
 		}
 		
-		private BufferedImage createPreview(String path)
+		private BufferedImage createPreview(String path, int newFormat)
 		{
 			BufferedImage img = null ;
-			int newWidth = 0;
-			int newHeight = 0;
+			int newWidth = newFormat;
+			int newHeight = newFormat;
 			
 				try 
 				{
@@ -178,13 +183,11 @@ public class GalleryApp extends JPanel
 					
 					if(img.getWidth() < img.getHeight())
 					{
-						newWidth = 140;
-						newHeight = img.getHeight()*140/img.getWidth();
+						newHeight = img.getHeight()*newWidth/img.getWidth();
 					}
 					else
 					{
-						newHeight =  140;
-						newWidth = img.getWidth()*140/img.getHeight();
+						newWidth = img.getWidth()*newHeight/img.getHeight();
 					}
 					
 					BufferedImage resizedImage = new BufferedImage(newWidth, newHeight, img.getType());
@@ -197,7 +200,7 @@ public class GalleryApp extends JPanel
 					g.drawImage(img, 0, 0, newWidth, newHeight, null);
 					g.dispose();
 					
-					resizedImage = resizedImage.getSubimage(0, 0, 140, 140);
+					resizedImage = resizedImage.getSubimage(0, 0, newFormat, newFormat);
 					
 					return resizedImage ;				
 				} 
@@ -217,7 +220,7 @@ public class GalleryApp extends JPanel
 			
 			for (int i = 0; i < photos.size(); i++) 
 			{
-				buttonPreview = new ButtonCreation(photos.get(i),new ImageIcon(createPreview(photos.get(i))));
+				buttonPreview = new ButtonCreation(new ImageIcon(createPreview(photos.get(i),140)),i);
 				buttonPreview.addActionListener(new afficheGrandePhoto());
 				panelGallery.add(buttonPreview);
 			}
@@ -238,7 +241,7 @@ public class GalleryApp extends JPanel
 				if (resultat == fc.APPROVE_OPTION) 
 				{
 					saveToGalerie(fc.getSelectedFile());
-					refresh();
+					update();
 				}
 			}
 		}
@@ -250,7 +253,8 @@ public class GalleryApp extends JPanel
 			public void actionPerformed(ActionEvent e)
 			{
 				element = (ButtonCreation) e.getSource();
-				//fullscreenPanel.refresh();
+				id = element.getId();
+				fullscreenPanel.refresh();
 				cardlayout.show(GalleryApp.this, "FullScreenPanel");
 			}
 			
@@ -259,31 +263,142 @@ public class GalleryApp extends JPanel
 	
 	class FullScreenPanel extends JPanel
 	{
+		private GalleryPanel galleryPanel = new GalleryPanel();
 		private ButtonCreation trashButton = new ButtonCreation("trash", new ImageIcon("images/Icones/trash.png"));
 		private ButtonCreation backButton = new ButtonCreation("back", new ImageIcon("images/Icones/retour.png"));
+		private ButtonCreation nextPhoto = new ButtonCreation();
+		private ButtonCreation backPhoto = new ButtonCreation();
+		private MenuBarre menuImage = new MenuBarre("", backButton,trashButton, Color.BLACK);
+		private JLabel imageGrande = new JLabel() ;
 		
-		private MenuBarre menuImage = new MenuBarre("NOM DE LA PHOTO", backButton,trashButton, color.BLACK );
-
-		public FullScreenPanel() 
+		public FullScreenPanel(GalleryPanel galleryPanel) 
 		{
+			this.galleryPanel = galleryPanel;
+			
 			setBackground(Color.black);
 			setLayout(new BorderLayout());
 			setBorder(new EmptyBorder(0, 0, 0, 0));
+			
 			add(menuImage, BorderLayout.NORTH);
-			//TROUVER PQ LA MENU BAR EST PAS AU TOP ET CORRIGER LES BOUTONS
+			
+			backButton.addActionListener(new backGallery());
+			trashButton.addActionListener(new deleteGallery());
+			
+			nextPhoto.addActionListener(new nextPhoto());
+			backPhoto.addActionListener(new backPhoto());
 
 		}
+
+		public void refresh()
+		{
+			imageGrande.setIcon(new ImageIcon(resizePhoto(galleryPanel.photos.get(id))));
+			imageGrande.setLayout(new BorderLayout());
+			
+			imageGrande.add(nextPhoto, BorderLayout.EAST);
+			imageGrande.add(backPhoto, BorderLayout.WEST);
+
+			this.add(imageGrande);
+		}
 		
-//		public void refresh()
-//		{
-//			this.removeAll();
-//			JLabel imageGrande = new JLabel(new ImageIcon(element.getName()));
-//			this.add(imageGrande);
-//		}
+		private BufferedImage resizePhoto(String path)
+		{
+			BufferedImage img = null ;
+			int newWidth = 0;
+			int newHeight = 0;
+			
+				try 
+				{
+					img = ImageIO.read(new File(path));
+					double ratio = img.getHeight()/img.getWidth();
+					
+					if(ratio <= 1.51)
+					{
+						newWidth = 450;
+						newHeight = img.getHeight()*newWidth/img.getWidth();
+					}
+					else
+					{
+						newHeight = 680;
+						newWidth = img.getWidth()*newHeight/img.getHeight();
+					}
+					
+					BufferedImage resizedImage = new BufferedImage(newWidth, newHeight, img.getType());
+					Graphics2D g = resizedImage.createGraphics();
+					g.setComposite(AlphaComposite.Src);
+					g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+					g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+					g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+					 
+					g.drawImage(img, 0, 0, newWidth, newHeight, null);
+					g.dispose();
+										
+					return resizedImage ;				
+				} 
+				catch (IOException e) 
+				{
+					e.printStackTrace();
+				}
+				
+			return null ;
+				
+		}
 		
+		class backGallery implements ActionListener
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				cardlayout.show(GalleryApp.this,"GalleryPanel");
+			}
+			
+		}
+		
+		class deleteGallery implements ActionListener
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				 File file = new File(galleryPanel.photos.get(id));
+				 
+				 file.delete();
+				 
+				 galleryPanel.update();
+				 
+				 cardlayout.show(GalleryApp.this, "GalleryPanel");
+			}
+			
+		}
+		
+		class nextPhoto implements ActionListener
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				if(id == galleryPanel.photos.size()-1)
+				id = 0;
+				else
+				id++;
+				
+				fullscreenPanel.refresh();
+			}
+			
+		}
+		
+		class backPhoto implements ActionListener
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				if(id == 0)
+				id = galleryPanel.photos.size()-1;
+				else
+				id--;
+				
+				fullscreenPanel.refresh();
+			}
+			
+		}
 		
 	}
-	
-	
 
 }

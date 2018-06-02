@@ -21,10 +21,14 @@ public class ButtonCreation extends JButton {
 	
 	private String name;
 	private ImageIcon image;
-	
-	
-	public ButtonCreation() {
-		
+	private int id;
+
+	public ButtonCreation()
+	{
+		setOpaque(false);
+		setContentAreaFilled(false);
+		setBorderPainted(false);
+		setPreferredSize(new Dimension(200,680));
 	}
 		
 	public ButtonCreation(String name, ImageIcon image) {
@@ -41,6 +45,18 @@ public class ButtonCreation extends JButton {
 	public ButtonCreation (ImageIcon image) {
 		super(image);
 		this.image = image ;
+		
+		setFocusable(false);
+		//Supprime les bordures autour de chaque bouton
+		setBorder(new EmptyBorder(0, 0, 0, 0));
+		setContentAreaFilled(false);
+	
+	}
+	
+	public ButtonCreation (ImageIcon image, int id) {
+		super(image);
+		this.image = image ;
+		this.id = id;
 		
 		setFocusable(false);
 		//Supprime les bordures autour de chaque bouton
@@ -81,5 +97,9 @@ public class ButtonCreation extends JButton {
 	public ImageIcon getImage() {
 		return image;
 	}	
+	
+	public int getId() {
+		return id;
+	}
 	
 }
