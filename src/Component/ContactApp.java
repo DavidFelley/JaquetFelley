@@ -4,9 +4,13 @@ import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -19,6 +23,7 @@ import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.border.EmptyBorder;
 
 
 
@@ -28,24 +33,22 @@ public class ContactApp extends JPanel{
 	private JPanel contentContact = new JPanel(cardLayoutContact);
 	private ContactAdd contactAdd ;
 	private ContactList contactList ;
+	private ContactModify contactModify;
 //	private ContactModify contactModify = new ContactModify(null, autoscrolls);
 	public ArrayList <Contact> contacts;// = new ArrayList<Contact>();
-	
-
+		
 
 	public ContactApp () {
-		
-		
 		
 		deserializeContact();
 		
 		setLayout(new BorderLayout());
-
-		add(contentContact, BorderLayout.NORTH);
+		
+		add(contentContact, BorderLayout.CENTER);
 			
 		contactList = new ContactList();
 		
-		contactList.updateListContact();
+//		contactList.updateListContact();
 		
 		contentContact.add("contactList", contactList);
 	
@@ -120,22 +123,22 @@ public class ContactApp extends JPanel{
 		private JPanel panelList = new JPanel();
 		private ButtonCreation buttonPlus = new ButtonCreation("plus",new ImageIcon("images/Icones/plus.png"));
 		private MenuBarre menuBarreList = new MenuBarre(buttonPlus, "CONTACTS");
-		private JScrollPane scroll = new JScrollPane(panelList, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		private JScrollPane scroll = new JScrollPane(panelList, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		
 		
 		// Constructeur de la liste des contacts
 				public ContactList() {
-
+					
 					setLayout(new BorderLayout());
 					add(menuBarreList, BorderLayout.NORTH);
-
 					displayListContacts();
-			
-					panelList.setLayout(new BoxLayout(panelList, BoxLayout.Y_AXIS));
-					panelList.setPreferredSize(new Dimension(450, 680));
-					menuBarreList.setPreferredSize(new Dimension(450,40));
+					scroll.setPreferredSize(new Dimension(450, 680));
+					panelList.setLayout(new GridLayout(0,1));
 					buttonPlus.addActionListener(new ClickAddContact());
-					
-					add(scroll, BorderLayout.CENTER);
+//					scroll.setBorder(new EmptyBorder(0,0,0,0));
+					add(scroll);
+					this.addComponentListener(new UpdateListContact());
+					updateListContact();
 				}
 			
 				
@@ -150,21 +153,13 @@ public class ContactApp extends JPanel{
 							panelList.add(temp);
 							temp.setFont(new Font(null, Font.PLAIN,20));
 							temp.setBackground(Color.white);
+							temp.addActionListener(new ClickShowContact());
 						}  
 				}
 				
 				public void updateListContact() {
 					panelList.removeAll();
-					
-					ButtonCreation temp;
-					
-					for (int i = 0; i < contacts.size(); i++) {
-						temp = new ButtonCreation(450,60);
-						temp.setText(contacts.get(i).texteBoutonContact());
-						panelList.add(temp);
-						temp.setFont(new Font(null, Font.PLAIN,20));
-						temp.setBackground(Color.white);
-					}  
+					displayListContacts();
 				}
 
 				// ActionListener bouton ajouter
@@ -177,9 +172,52 @@ public class ContactApp extends JPanel{
 						contactAdd.eraseInfos();
 						contentContact.add("contactAdd",contactAdd);
 						cardLayoutContact.show(contentContact, "contactAdd");
-						//liste boutons en boxlayout dans le borderlayout en center 
 					}
 				}	
+				
+				// ActionListener bouton ajouter
+				class ClickShowContact implements ActionListener 
+				{
+					@Override
+					public void actionPerformed(ActionEvent e)
+					{
+						contactModify = new ContactModify(null, true);
+						contentContact.add("contactModify",contactModify);
+						cardLayoutContact.show(contentContact, "contactModify");
+					}
+				}	
+				
+				
+				
+				
+				// Componenent Lister qui met à jour la liste de contacts
+				class UpdateListContact implements ComponentListener{
+
+					@Override
+					public void componentHidden(ComponentEvent arg0) {
+						// TODO Auto-generated method stub
+						
+					}
+
+					@Override
+					public void componentMoved(ComponentEvent arg0) {
+						// TODO Auto-generated method stub
+						
+					}
+
+					@Override
+					public void componentResized(ComponentEvent arg0) {
+						// TODO Auto-generated method stub
+						
+					}
+
+					@Override
+					public void componentShown(ComponentEvent arg0) {
+						// TODO Auto-generated method stub
+						updateListContact();
+					}
+					
+				}
 				
 	}
 }

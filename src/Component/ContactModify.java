@@ -1,14 +1,18 @@
 package Component;
 
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class ContactModify extends ContactForm{
-
+	
 	public ContactModify(Contact contact, boolean modification) {
 		super(contact, modification);
 		menuBarre = new MenuBarre(buttonReturn, buttonModify, "CONTACT");
-		
+		menuPanel.add(menuBarre, BorderLayout.NORTH);
+		changeModification();
+		buttonModify.addActionListener(new ClickModifyContact());
 	}
 
 	//ActionListener sur le bouton modifier 
@@ -17,7 +21,7 @@ public class ContactModify extends ContactForm{
 				@Override
 				public void actionPerformed(ActionEvent e) 
 				{
-				// change la valeur de modification
+				changeModification();
 				}
 			}
 	
@@ -40,4 +44,6 @@ public class ContactModify extends ContactForm{
 				// delete le contact
 				}
 			}		
+			
+
 }

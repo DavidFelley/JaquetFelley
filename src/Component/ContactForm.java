@@ -46,10 +46,10 @@ public class ContactForm extends JPanel{
 	
 	// Liste des différentes panels 
 	private JPanel panelBase = new JPanel();
-	private JPanel menuPanel = new JPanel(new BorderLayout());
+	protected JPanel menuPanel = new JPanel(new BorderLayout());
 	private JPanel photoPanel = new JPanel(new BorderLayout());
 	private JPanel formPanel = new JPanel(new GridLayout(4,2,5,5));
-	private JPanel bottomPanel = new JPanel(new BorderLayout());
+	protected JPanel bottomPanel = new JPanel(new BorderLayout());
 
 	protected Contact contact;
 	protected ContactApp contactApp = new ContactApp();
@@ -72,12 +72,7 @@ public class ContactForm extends JPanel{
 		createFormPanel();
 		writeInfos();
 		
-		//BottomPanel contenant le bouton delete et le bouton save
-		panelBase.add(bottomPanel);
-		bottomPanel.add(buttonDelete, BorderLayout.EAST);
-		bottomPanel.add(buttonValidate, BorderLayout.WEST);
-		bottomPanel.setBackground(Color.RED);
-		bottomPanel.setPreferredSize(new Dimension(450,40));
+
 	}
 
 	public void createFormPanel() {
@@ -123,6 +118,14 @@ public class ContactForm extends JPanel{
 		telephone.setFont(new Font(null, Font.BOLD, 20));
 		formPanel.add(tfTelephone);
 		tfTelephone.setFont(new Font(null, Font.PLAIN,20));
+		
+		//BottomPanel contenant le bouton delete et le bouton save
+		panelBase.add(bottomPanel, BorderLayout.SOUTH);
+		bottomPanel.add(buttonDelete, BorderLayout.EAST);
+		bottomPanel.add(buttonValidate, BorderLayout.WEST);
+		bottomPanel.setBackground(Color.RED);
+		bottomPanel.setBorder(new EmptyBorder(0,100,0,100));
+		bottomPanel.setPreferredSize(new Dimension(450,50));
 	}
 	
 	

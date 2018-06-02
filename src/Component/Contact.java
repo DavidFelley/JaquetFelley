@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 public class Contact implements Serializable  {
 	
-	
 	private String nom;
 	private String prenom;
 	private String email;
@@ -32,8 +31,6 @@ public class Contact implements Serializable  {
 	public String texteBoutonContact() {
 		return getNom() + " " + getPrenom();
 	}
-	
-
 	
 	public String getNom() {
 		return nom;

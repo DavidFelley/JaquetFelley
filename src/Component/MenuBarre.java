@@ -21,29 +21,33 @@ public class MenuBarre extends JPanel{
 
 	ButtonCreation boutonWest ;
 	ButtonCreation boutonEast ;
+	Color color ;
 	String titre ;
 	
-	public MenuBarre(ButtonCreation boutonEast, ButtonCreation boutonWest)
+	public MenuBarre(ButtonCreation boutonWest, ButtonCreation boutonEast, Color color )
 	{
-		this.boutonEast = boutonEast ;
 		this.boutonWest = boutonWest ;
-		setPreferredSize(new Dimension(480, 40));
-		setBackground(Color.black);
+		this.boutonEast = boutonEast ;
+		this.color = color;
 		
-		add(boutonEast, BorderLayout.EAST);
+		setPreferredSize(new Dimension(480, 40));
+		
+		setBackground(color);
+		
 		add(boutonWest, BorderLayout.WEST);
+		add(boutonEast, BorderLayout.EAST);
 	}
 	
 	//Constructeur MenuBarre avec le boutonEast
-	public MenuBarre(ButtonCreation boutonEast, String titre)
+	public MenuBarre(String titre, ButtonCreation boutonEast, Color color )
 	{
 	
-		this.boutonEast = boutonEast;
 		this.titre = titre ;
-		
+		this.boutonEast = boutonEast;
+		this.color = color;
 		//Paramètre fixe à la barre de menu
 		setPreferredSize(new Dimension(480, 40));
-		setBackground(new Color(78, 104, 141));
+		setBackground(color);
 		setLayout(new BorderLayout());
 		setBorder(new EmptyBorder(0, 40, 0, 5));
 		
@@ -57,19 +61,20 @@ public class MenuBarre extends JPanel{
 	}
 	
 	//Constructeur MenuBarre avec les boutonEast et boutonWest
-	public MenuBarre(ButtonCreation boutonWest, ButtonCreation boutonEast, String titre)
+	public MenuBarre(String titre, ButtonCreation boutonWest, ButtonCreation boutonEast, Color color)
 	{
+		this.titre = titre ;
 		this.boutonWest = boutonWest ;
 		this.boutonEast = boutonEast;
-		this.titre = titre ;
-		
+		this.color = color;
+	
 		//Paramètre fixe à la barre de menu
 		setPreferredSize(new Dimension(480, 40));
-		setBackground(new Color(78, 104, 141));
+		setBackground(color);
 		setLayout(new BorderLayout());
 		setBorder(new EmptyBorder(0, 5, 0, 5));
 		
-		add(boutonWest, BorderLayout.WEST);
+	
 		
 		JLabel entete = new JLabel(titre);
 		entete.setFont(new Font(null, Font.BOLD, 20));
@@ -77,6 +82,7 @@ public class MenuBarre extends JPanel{
 		entete.setForeground(Color.WHITE);
 		add(entete, BorderLayout.CENTER);
 		
+		add(boutonWest, BorderLayout.WEST);
 		add(boutonEast, BorderLayout.EAST);
 	}
 

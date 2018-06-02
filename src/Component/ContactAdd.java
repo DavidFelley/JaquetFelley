@@ -16,15 +16,17 @@ public class ContactAdd extends ContactForm{
 	private CardLayout cl ;
 	private JPanel jp;
 	ArrayList <Contact> contacts;
+
 	
 	
-	public ContactAdd(boolean modification, CardLayout cl, JPanel jp,ArrayList <Contact> contacts) {
+	public ContactAdd(boolean modification, CardLayout cl, JPanel jp, ArrayList <Contact> contacts) {
 		super(modification);
 		this.cl = cl;
 		this.jp = jp;
 		this.contacts=contacts;
 		buttonReturn.addActionListener(new ClickBack());
 		buttonValidate.addActionListener(new ClickSaveContact());
+		bottomPanel.setVisible(false);
 	}
 	
 	
