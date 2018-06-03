@@ -14,9 +14,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import Component.ContactAppOld.ContactAppAdd.ClickBack;
-import Component.ContactAppOld.ContactAppAdd.ClickSaveContact;
-
 
 public class ContactForm extends JPanel{
 

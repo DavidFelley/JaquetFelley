@@ -37,7 +37,6 @@ import javax.swing.border.EmptyBorder;
 
 import Component.ButtonCreation;
 import Component.ContactApp;
-import Component.ContactAppOld;
 import Component.GalleryApp;
 import View.BackgroundImagePanel;
 
