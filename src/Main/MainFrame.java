@@ -14,15 +14,11 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
-import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -32,10 +28,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
-import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
-
 import Component.ButtonCreation;
+import Component.CalculatriceApp;
 import Component.ContactApp;
 import Component.GalleryApp;
 import View.BackgroundImagePanel;
@@ -86,6 +80,7 @@ private ButtonCreation homeButton = new ButtonCreation ("home", new ImageIcon("i
 
 private ContactApp contactApp = new ContactApp();
 private GalleryApp galleryApp = new GalleryApp();
+private CalculatriceApp calculatriceApp = new CalculatriceApp();
 
 	public MainFrame() 
 	{
@@ -121,6 +116,7 @@ private GalleryApp galleryApp = new GalleryApp();
 		backgroundPanel.setLayout(new BorderLayout());
 		contentPanel.add(contactApp, "contactApp");	
 		contentPanel.add(galleryApp, "galleryPanel");
+		contentPanel.add(calculatriceApp, "calculatriceApp");
 		
 		//Home Panel
 		homePanel.setOpaque(false);
@@ -152,6 +148,7 @@ homeButton.addActionListener(new ClickHome());
 	c.gridwidth = 2;
 	homepagePanel.add(calculatorButton,c);
 	calculatorButton.addMouseListener(new ChangeLayoutButton());
+	calculatorButton.addActionListener(new ClickCalculatrice());
 	
 	//BOUTON CONTACT
 	c.gridx = 3;
@@ -238,6 +235,14 @@ homeButton.addActionListener(new ClickHome());
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			cardLayout.show(contentPanel, "galleryPanel");
+		}
+	}
+	
+	class ClickCalculatrice implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			cardLayout.show(contentPanel, "calculatriceApp");
 		}
 	}
 	
