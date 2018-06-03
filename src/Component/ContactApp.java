@@ -4,7 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
+
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -12,18 +12,19 @@ import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
-import javax.swing.BoxLayout;
+
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.border.EmptyBorder;
+
+
 
 
 
@@ -31,11 +32,12 @@ public class ContactApp extends JPanel{
 	
 	private CardLayout cardLayoutContact = new CardLayout();
 	private JPanel contentContact = new JPanel(cardLayoutContact);
+	
 	private ContactAdd contactAdd ;
 	private ContactList contactList ;
 	private ContactModify contactModify;
-//	private ContactModify contactModify = new ContactModify(null, autoscrolls);
-	public ArrayList <Contact> contacts;// = new ArrayList<Contact>();
+
+	public ArrayList <Contact> contacts = new ArrayList<Contact>();
 		
 
 	public ContactApp () {
@@ -47,8 +49,6 @@ public class ContactApp extends JPanel{
 		add(contentContact, BorderLayout.CENTER);
 			
 		contactList = new ContactList();
-		
-//		contactList.updateListContact();
 		
 		contentContact.add("contactList", contactList);
 	
@@ -104,7 +104,7 @@ public class ContactApp extends JPanel{
 	
 	public void contenuList() {
 		for(int i = 0 ; i < contacts.size(); i++) {
-			System.out.println("CONTENU DE MON ARRAY LIST" + contacts.get(i).toString());
+			System.out.println("CONTENU DE MON ARRAY LIST" + contacts.get(i).toString() + " ID = " + contacts.get(i).getId());
 		}
 	}
 	
@@ -132,7 +132,7 @@ public class ContactApp extends JPanel{
 					
 					setLayout(new BorderLayout());
 					add(menuBarreList, BorderLayout.NORTH);
-					displayListContacts();
+					updateListContact();
 					scroll.setPreferredSize(new Dimension(450, 680));
 					panelList.setLayout(new GridLayout(0,1));
 					buttonPlus.addActionListener(new ClickAddContact());
@@ -151,10 +151,12 @@ public class ContactApp extends JPanel{
 						for (int i = 0; i < contacts.size(); i++) {
 							temp = new ButtonCreation(450,60);
 							temp.setText(contacts.get(i).texteBoutonContact());
-							panelList.add(temp);
 							temp.setFont(new Font(null, Font.PLAIN,20));
 							temp.setBackground(Color.white);
-							temp.addActionListener(new ClickShowContact());
+							panelList.add(temp);
+							temp.addActionListener(new ClickShowContact(contacts.get(i)));
+//							contactModify = new ContactModify(contacts.get(i), false, cardLayoutContact, contentContact, contacts);
+//							contentContact.add(contactModify, "" + contacts.get(i).getId());
 						}  
 				}
 				
@@ -169,7 +171,7 @@ public class ContactApp extends JPanel{
 					@Override
 					public void actionPerformed(ActionEvent e)
 					{
-						contactAdd = new ContactAdd(true, cardLayoutContact, contentContact,contacts);
+						contactAdd = new ContactAdd(true, cardLayoutContact, contentContact,contacts, contactList);
 						contactAdd.eraseInfos();
 						contentContact.add("contactAdd",contactAdd);
 						cardLayoutContact.show(contentContact, "contactAdd");
@@ -179,12 +181,19 @@ public class ContactApp extends JPanel{
 				// ActionListener bouton ajouter
 				class ClickShowContact implements ActionListener 
 				{
+					Contact contact;
+					
+					public ClickShowContact(Contact contact) {
+						this.contact = contact;
+					}
+					
 					@Override
 					public void actionPerformed(ActionEvent e)
 					{
-						contactModify = new ContactModify(null, true);
+						contactModify = new ContactModify(contact, true, cardLayoutContact, contentContact, contacts, contactList);
 						contentContact.add("contactModify",contactModify);
 						cardLayoutContact.show(contentContact, "contactModify");
+//						cardLayoutContact.show(contentContact, "" + contact.getId());
 					}
 				}	
 				

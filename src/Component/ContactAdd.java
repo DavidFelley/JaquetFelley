@@ -19,13 +19,14 @@ public class ContactAdd extends ContactForm{
 	ArrayList <Contact> contacts;
 	private MenuBarre menuAdd = new MenuBarre("AJOUTER UN CONTACT", buttonReturn, buttonValidate, color);
 
+	private ContactList contactList;
 	
-	
-	public ContactAdd(boolean modification, CardLayout cl, JPanel jp, ArrayList <Contact> contacts) {
+	public ContactAdd(boolean modification, CardLayout cl, JPanel jp, ArrayList <Contact> contacts, ContactList contactList) {
 		super(modification);
 		this.cl = cl;
 		this.jp = jp;
 		this.contacts=contacts;
+		this.contactList = contactList;
 		menuPanel.add(menuAdd, BorderLayout.NORTH);
 		buttonReturn.addActionListener(new ClickBack());
 		buttonValidate.addActionListener(new ClickSaveContact());
@@ -45,6 +46,8 @@ public class ContactAdd extends ContactForm{
 					eraseInfos();
 					System.out.println("valeur de l'id: " + id);
 					id++;		 	
+					contactList.updateListContact();
+					
 				}
 			}
 			
@@ -55,6 +58,7 @@ public class ContactAdd extends ContactForm{
 				public void actionPerformed(ActionEvent e) 
 				{
 					cl.show(jp, "contactList");
+					contactList.updateListContact();
 				}
 			}
 			

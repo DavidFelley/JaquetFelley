@@ -60,6 +60,7 @@ public class ContactForm extends JPanel{
 	protected int id = 0;
 	
 	
+	
 	// Constructeur pour le formulaire vide
 	public ContactForm(boolean modification) {
 		this.modification = modification;
@@ -71,8 +72,9 @@ public class ContactForm extends JPanel{
 		
 		this.contact = contact;
 		this.modification = modification;
+
 		createFormPanel();
-		writeInfos();
+		writeInfos(contact);
 		
 
 	}
@@ -129,7 +131,6 @@ public class ContactForm extends JPanel{
 		bottomPanel.setPreferredSize(new Dimension(450,50));
 	}
 	
-	
 	// Méthode qui retourne les informations d'un nouveau contact
 	public Contact getInfos(int  id) {
 		return new Contact (tfNom.getText(), tfPrenom.getText(),tfEmail.getText(), tfTelephone.getText(), id);
@@ -138,19 +139,22 @@ public class ContactForm extends JPanel{
 	
 	//Méthode permettant de vider les textFields
 	protected void eraseInfos() {
-		tfNom.setText("");
-		tfPrenom.setText("");
-		tfEmail.setText("");
-		tfTelephone.setText("");
+		tfNom.setText(null);
+		tfPrenom.setText(null);
+		tfEmail.setText(null);
+		tfTelephone.setText(null);
 	}
 	
 	//Méthode permettant d'écrire les infos contacts dans les textFields
-	protected void writeInfos() {
-		tfNom.setText(nom.getText());
-		tfPrenom.setText(prenom.getText());
-		tfEmail.setText(email.getText());
-		tfTelephone.setText(telephone.getText());
+	protected void writeInfos(Contact contact) {
+	
+			tfNom.setText(contact.getNom());
+			tfPrenom.setText(contact.getPrenom());
+			tfEmail.setText(contact.getEmail());
+			tfTelephone.setText(contact.getTelephone());
+		
 	}
+	
 
 	
 	public void changeModification() {
