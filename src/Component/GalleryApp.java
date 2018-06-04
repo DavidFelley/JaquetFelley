@@ -292,6 +292,7 @@ public class GalleryApp extends JPanel
 		public void refresh()
 		{
 			imageGrande.setIcon(new ImageIcon(resizePhoto(galleryPanel.photos.get(id))));
+			imageGrande.setHorizontalTextPosition(JLabel.CENTER);
 			imageGrande.setLayout(new BorderLayout());
 			
 			imageGrande.add(nextPhoto, BorderLayout.EAST);

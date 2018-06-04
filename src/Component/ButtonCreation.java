@@ -6,15 +6,10 @@
 */
 package Component;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
 public class ButtonCreation extends JButton {
@@ -29,6 +24,14 @@ public class ButtonCreation extends JButton {
 		setContentAreaFilled(false);
 		setBorderPainted(false);
 		setPreferredSize(new Dimension(200,680));
+	}
+	
+	public ButtonCreation(String name)
+	{
+		setBackground(Color.white);
+		setBorderPainted(false);
+		setFocusable(false);
+		setText(name);
 	}
 		
 	public ButtonCreation(String name, ImageIcon image) {

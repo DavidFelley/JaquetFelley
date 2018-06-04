@@ -38,14 +38,9 @@ public class CalculatriceApp extends JPanel
 		
 		public Calculatrice()
 		{
-			 initComposant();
-
-		     //On ajoute le conteneur
-
-		    //this.setContentPane(container);
-
-		    this.setVisible(true);
+			setLayout(new BorderLayout());
 			
+			initComposant();	
 		}
 		
 		private void initComposant(){
@@ -409,8 +404,7 @@ public class CalculatriceApp extends JPanel
 		    }
 
 		  }
-
-
+		  
 		  //Listener affecté au bouton de remise à zéro
 
 		  class ResetListener implements ActionListener {
