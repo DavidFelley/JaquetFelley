@@ -22,15 +22,17 @@ public class ContactAdd extends ContactForm{
 	private ContactList contactList;
 	
 	public ContactAdd(boolean modification, CardLayout cl, JPanel jp, ArrayList <Contact> contacts, ContactList contactList) {
-		super(modification);
-		this.cl = cl;
-		this.jp = jp;
+		super(modification, cl, jp);
 		this.contacts=contacts;
 		this.contactList = contactList;
+		this.cl = cl;
+		this.jp = jp;
 		menuPanel.add(menuAdd, BorderLayout.NORTH);
 		buttonReturn.addActionListener(new ClickBack());
 		buttonValidate.addActionListener(new ClickSaveContact());
+		contactPhoto.addActionListener(new ClickPhotoContact());
 		bottomPanel.setVisible(false);
+		
 	}
 	
 	
@@ -54,6 +56,7 @@ public class ContactAdd extends ContactForm{
 	//ActionListener sur le bouton retour afin d'afficher la liste des contacts
 			class ClickBack implements ActionListener 
 			{
+				
 				@Override
 				public void actionPerformed(ActionEvent e) 
 				{

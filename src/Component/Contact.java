@@ -2,6 +2,8 @@ package Component;
 
 import java.io.Serializable;
 
+import javax.swing.ImageIcon;
+
 public class Contact implements Serializable  {
 	
 	private String nom;
@@ -9,13 +11,34 @@ public class Contact implements Serializable  {
 	private String email;
 	private String telephone;
 	private int id;
+	private ImageIcon contactPhoto;
 	
+	
+	// Constructeur sans photo
 	public Contact (String nom, String prenom, String email, String telephone, int id) {
 		this.nom = nom;
 		this.prenom = prenom;
 		this.email = email;
 		this.telephone = telephone;
 		this.id = id;
+	}
+	
+	// Constructeur avec photo
+	public Contact (String nom, String prenom, String email, String telephone, int id, ImageIcon contactPhoto) {
+		this.nom = nom;
+		this.prenom = prenom;
+		this.email = email;
+		this.telephone = telephone;
+		this.id = id;
+		setContactPhoto(contactPhoto);
+	}
+
+	private ImageIcon getContactPhoto() {
+		return contactPhoto;
+	}
+
+	private void setContactPhoto(ImageIcon contactPhoto) {
+		this.contactPhoto = contactPhoto;
 	}
 
 	public String toString() {

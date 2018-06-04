@@ -20,11 +20,11 @@ public class ContactModify extends ContactForm{
 	
 	
 	public ContactModify(Contact contact, boolean modification, CardLayout cl, JPanel jp, ArrayList<Contact> contacts, ContactList contactList) {
-		super(contact, modification);
-		this.cl = cl;
-		this.jp = jp;
+		super(contact, modification, cl, jp);
 		this.contacts = contacts;
 		this.contactList = contactList;
+		this.cl = cl;
+		this.jp = jp;
 		menuPanel.add(menuModify, BorderLayout.NORTH);
 		changeModification();
 		buttonModify.addActionListener(new ClickModifyContact());
@@ -49,11 +49,13 @@ public class ContactModify extends ContactForm{
 				@Override
 				public void actionPerformed(ActionEvent e) 
 				{
-					contacts.add(getInfos(id));
-					System.out.println(contactApp.getContacts().get(id).toString());
-					eraseInfos();
-					System.out.println("valeur de l'id: " + id);
-					id++;	
+					contacts.set(contacts.indexOf(contact), modifiedContact());
+//					contacts.add(modifiedContact());
+					contactList.updateListContact();
+					cl.show(jp, "contactList");
+//					System.out.println(contactApp.getContacts().get(id).toString());
+//					System.out.println("valeur de l'id: " + id);
+//					id++;	
 				}
 			}
 			
@@ -81,6 +83,7 @@ public class ContactModify extends ContactForm{
 				@Override
 				public void actionPerformed(ActionEvent e) 
 				{
+					contactList.updateListContact();
 					cl.show(jp, "contactList");
 				}
 			}

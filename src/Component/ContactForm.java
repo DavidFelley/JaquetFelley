@@ -1,10 +1,13 @@
 package Component;
 
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
@@ -30,16 +33,14 @@ public class ContactForm extends JPanel{
 	protected JTextField tfTelephone = new JTextField();
 
 	// Icone de base  du champ contact 
-	protected ButtonCreation contactPhoto = new ButtonCreation("contactPhoto", new ImageIcon("images/Galerie/canada.jpg"));
+	protected ButtonCreation contactPhoto = new ButtonCreation("contactPhoto", new ImageIcon("images/Icones/contactVide.png"));
 
 	// Bouton delete, valider, modifier, retour
 	protected ButtonCreation buttonDelete = new ButtonCreation("delete", new ImageIcon("images/Icones/trash.png"));
 	protected ButtonCreation buttonValidate = new ButtonCreation("validate", new ImageIcon("images/Icones/Validate.png"));
 	protected ButtonCreation buttonModify = new ButtonCreation("modify", new ImageIcon("images/Icones/modify.png"));
 	protected ButtonCreation buttonReturn = new ButtonCreation ("return", new ImageIcon("images/Icones/retour.png"));
-//	private MenuBarre menuAddContact = new MenuBarre(buttonReturn, buttonValidate, "AJOUTER UN CONTACT");
-//	private MenuBarre menuModifyContact = new MenuBarre(buttonReturn, buttonModify, "CONTACT");
-//	protected MenuBarre menuBarre ;
+
 	
 	// Liste des différentes panels 
 	private JPanel panelBase = new JPanel();
@@ -47,6 +48,9 @@ public class ContactForm extends JPanel{
 	private JPanel photoPanel = new JPanel(new BorderLayout());
 	private JPanel formPanel = new JPanel(new GridLayout(4,2,5,5));
 	protected JPanel bottomPanel = new JPanel(new BorderLayout());
+	
+	protected CardLayout cl;
+	protected JPanel jp;
 	
 	protected Color color = new Color(78,104,141);
 
@@ -59,16 +63,20 @@ public class ContactForm extends JPanel{
 	
 	
 	// Constructeur pour le formulaire vide
-	public ContactForm(boolean modification) {
+	public ContactForm(boolean modification, CardLayout cl, JPanel jp) {
 		this.modification = modification;
+		this.cl = cl;
+		this.jp = jp;
 		createFormPanel();
 	}
 	
 	// Constructeur pour le formulaire rempli
-	public ContactForm(Contact contact, boolean modification) {
+	public ContactForm(Contact contact, boolean modification, CardLayout cl, JPanel jp) {
 		
 		this.contact = contact;
 		this.modification = modification;
+		this.cl = cl;
+		this.jp = jp;
 
 		createFormPanel();
 		writeInfos(contact);
@@ -133,6 +141,16 @@ public class ContactForm extends JPanel{
 		return new Contact (tfNom.getText(), tfPrenom.getText(),tfEmail.getText(), tfTelephone.getText(), id);
 	}
 	
+	public Contact modifiedContact() {
+		contact.setPrenom(tfPrenom.getText());
+		contact.setNom(tfNom.getText());
+		contact.setEmail(tfEmail.getText());
+		contact.setTelephone(tfTelephone.getText());
+		
+		return contact;
+		
+	}
+	
 	
 	//Méthode permettant de vider les textFields
 	protected void eraseInfos() {
@@ -174,5 +192,15 @@ public class ContactForm extends JPanel{
 		}
 	}
 
+
+	//ActionListener sur le bouton save (appel à la méthode d'ajout d'un contact à la liste des contacts)
+			class ClickPhotoContact implements ActionListener 
+			{
+				@Override
+				public void actionPerformed(ActionEvent e) 
+				{								
+					cl.show(jp, "galleryApp");
+				}
+			}
 
 }

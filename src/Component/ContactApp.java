@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.border.EmptyBorder;
 
 
 
@@ -124,24 +125,22 @@ public class ContactApp extends JPanel{
 		private Color color = new Color(78,104,141);
 		private ButtonCreation buttonPlus = new ButtonCreation("plus",new ImageIcon("images/Icones/plus.png"));
 		private MenuBarre menuBarreList = new MenuBarre("CONTACTS", buttonPlus, color);
-		private JScrollPane scroll = new JScrollPane(panelList, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		private JScrollPane scroll = new JScrollPane(panelList, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		
 		
-		// Constructeur de la liste des contacts
+				// Constructeur de la liste des contacts
 				public ContactList() {
-					
+					updateListContact();
 					setLayout(new BorderLayout());
 					add(menuBarreList, BorderLayout.NORTH);
-					updateListContact();
 					scroll.setPreferredSize(new Dimension(450, 680));
 					panelList.setLayout(new GridLayout(0,1));
 					buttonPlus.addActionListener(new ClickAddContact());
-//					scroll.setBorder(new EmptyBorder(0,0,0,0));
+					scroll.setBorder(new EmptyBorder(0,0,0,0));
 					add(scroll);
 					this.addComponentListener(new UpdateListContact());
 					updateListContact();
 				}
-			
 				
 				// Affiche la liste des boutons contacts dans le panel liste des contacts
 				public void displayListContacts() {
@@ -153,10 +152,8 @@ public class ContactApp extends JPanel{
 							temp.setText(contacts.get(i).texteBoutonContact());
 							temp.setFont(new Font(null, Font.PLAIN,20));
 							temp.setBackground(Color.white);
-							panelList.add(temp);
+							panelList.add(temp, BorderLayout.NORTH);
 							temp.addActionListener(new ClickShowContact(contacts.get(i)));
-//							contactModify = new ContactModify(contacts.get(i), false, cardLayoutContact, contentContact, contacts);
-//							contentContact.add(contactModify, "" + contacts.get(i).getId());
 						}  
 				}
 				
@@ -193,12 +190,10 @@ public class ContactApp extends JPanel{
 						contactModify = new ContactModify(contact, true, cardLayoutContact, contentContact, contacts, contactList);
 						contentContact.add("contactModify",contactModify);
 						cardLayoutContact.show(contentContact, "contactModify");
-//						cardLayoutContact.show(contentContact, "" + contact.getId());
+						cardLayoutContact.show(contentContact, "" + contact.getId());
+						System.out.println("J'ai ouvert le contact " + contact.getNom() + " " + contact.getPrenom());
 					}
 				}	
-				
-				
-				
 				
 				// Componenent Lister qui met à jour la liste de contacts
 				class UpdateListContact implements ComponentListener{
