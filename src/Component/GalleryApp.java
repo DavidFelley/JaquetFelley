@@ -62,7 +62,7 @@ public class GalleryApp extends JPanel
 		//Ici on défini le type d'extension que le browser va accepter
 		private FileNameExtensionFilter ff = new FileNameExtensionFilter("Extension types : Images", "jpg", "png", "jpeg");
 		
-		private JPanel backPanel = new JPanel(new FlowLayout());
+		private JPanel backPanel = new JPanel();
 		private JPanel panelGallery = new JPanel();
 		
 		private JScrollPane scrollPane = new JScrollPane(backPanel);
@@ -81,6 +81,7 @@ public class GalleryApp extends JPanel
 			fc.setAcceptAllFileFilterUsed(false);
 			fc.setFileFilter(ff);
 			
+			backPanel.setLayout(new FlowLayout());
 			backPanel.add(panelGallery);
 			panelGallery.setLayout(new GridLayout(0, 3, 7, 7));
 			panelGallery.setBorder(new EmptyBorder(2, 2, 2, 2));
@@ -292,7 +293,7 @@ public class GalleryApp extends JPanel
 		public void refresh()
 		{
 			imageGrande.setIcon(new ImageIcon(resizePhoto(galleryPanel.photos.get(id))));
-			imageGrande.setHorizontalTextPosition(JLabel.CENTER);
+			imageGrande.setHorizontalAlignment(JLabel.CENTER);
 			imageGrande.setLayout(new BorderLayout());
 			
 			imageGrande.add(nextPhoto, BorderLayout.EAST);
