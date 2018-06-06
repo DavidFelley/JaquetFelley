@@ -162,9 +162,10 @@ public class ContactApp extends JPanel{
 							temp.setText(contacts.get(i).texteBoutonContact());
 							temp.setFont(new Font(null, Font.PLAIN,20));
 							temp.setBackground(Color.white);
-							panelList.add(temp, BorderLayout.NORTH);
+							panelList.add(temp);
 							temp.addActionListener(new ClickShowContact(contacts.get(i)));
 						}  
+						updateUI();
 				}
 				
 				public void updateListContact() {

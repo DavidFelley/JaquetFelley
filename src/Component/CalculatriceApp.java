@@ -59,9 +59,13 @@ public class CalculatriceApp extends JPanel
 			
 			ecran = new JLabel("0");
 			ecran.setHorizontalAlignment(JLabel.RIGHT);
+			ecran.setFont(new Font(null, Font.PLAIN,20));
+		
 			panEcran.setLayout(new BorderLayout());
 			panEcran.add(ecran);
 			panEcran.setBorder(BorderFactory.createLineBorder(Color.pink));
+			panEcran.setPreferredSize(new Dimension(450,200));
+			panEcran.setBackground(Color.WHITE);
 			backPanel.add(panEcran, BorderLayout.NORTH);
 			
 			chiffres.setLayout(new GridLayout(4, 4));
@@ -78,14 +82,14 @@ public class CalculatriceApp extends JPanel
 			 for(int i = 0; i < tabLabelButton.length; i++){
 				 
 				 tabButton[i] = new JButton(tabLabelButton[i]);
-
+				 tabButton[i].setPreferredSize(new Dimension (70,70));
 			      switch(i){
 
 			        // Ici on instancie les différents boutons qui ne sont pas des chiffres et on leur attribue un listener
 
 			        case 11 :
 
-			        	tabButton[i].addActionListener(new EgalListener());
+			          tabButton[i].addActionListener(new EgalListener());
 
 			          backPanel.add(tabButton[i], BorderLayout.SOUTH);
 
