@@ -25,6 +25,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
+import Main.MainFrame;
+
 
 
 
@@ -40,8 +42,11 @@ public class ContactApp extends JPanel{
 
 	public ArrayList <Contact> contacts = new ArrayList<Contact>();
 		
+	private MainFrame mainframe;
 
-	public ContactApp () {
+	public ContactApp (MainFrame mainframe) {
+		
+		this.mainframe = mainframe;
 		
 		deserializeContact();
 		
@@ -59,6 +64,11 @@ public class ContactApp extends JPanel{
 	}
 		
 	
+	public MainFrame getMainframe() {
+		return mainframe;
+	}
+
+
 	public void serializeContact() {
 		try 
 		{
@@ -168,7 +178,7 @@ public class ContactApp extends JPanel{
 					@Override
 					public void actionPerformed(ActionEvent e)
 					{
-						contactAdd = new ContactAdd(true, cardLayoutContact, contentContact,contacts, contactList);
+						contactAdd = new ContactAdd(true, cardLayoutContact, contentContact, mainframe, contacts, contactList);
 						contactAdd.eraseInfos();
 						contentContact.add("contactAdd",contactAdd);
 						cardLayoutContact.show(contentContact, "contactAdd");
@@ -187,7 +197,7 @@ public class ContactApp extends JPanel{
 					@Override
 					public void actionPerformed(ActionEvent e)
 					{
-						contactModify = new ContactModify(contact, true, cardLayoutContact, contentContact, contacts, contactList);
+						contactModify = new ContactModify(contact, true, cardLayoutContact, contentContact, mainframe, contacts, contactList);
 						contentContact.add("contactModify",contactModify);
 						cardLayoutContact.show(contentContact, "contactModify");
 						cardLayoutContact.show(contentContact, "" + contact.getId());

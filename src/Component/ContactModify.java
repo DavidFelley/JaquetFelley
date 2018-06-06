@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 
 import Component.ContactApp.ContactList;
+import Component.ContactForm.ClickPhotoContact;
+import Main.MainFrame;
 
 public class ContactModify extends ContactForm{
 	
@@ -19,8 +21,8 @@ public class ContactModify extends ContactForm{
 	private ContactList contactList;
 	
 	
-	public ContactModify(Contact contact, boolean modification, CardLayout cl, JPanel jp, ArrayList<Contact> contacts, ContactList contactList) {
-		super(contact, modification, cl, jp);
+	public ContactModify(Contact contact, boolean modification, CardLayout cl, JPanel jp, MainFrame mainframe, ArrayList<Contact> contacts, ContactList contactList) {
+		super(contact, modification, cl, jp, mainframe);
 		this.contacts = contacts;
 		this.contactList = contactList;
 		this.cl = cl;
@@ -31,6 +33,7 @@ public class ContactModify extends ContactForm{
 		buttonReturn.addActionListener(new ClickBack());
 		buttonValidate.addActionListener(new ClickSaveContact());
 		buttonDelete.addActionListener(new ClickDeleteContact(contact));
+		contactPhoto.addActionListener(new ClickPhotoContact());
 	}
 
 	//ActionListener sur le bouton modifier 
@@ -83,7 +86,7 @@ public class ContactModify extends ContactForm{
 				@Override
 				public void actionPerformed(ActionEvent e) 
 				{
-					contactList.updateListContact();
+//					contactList.updateListContact();
 					cl.show(jp, "contactList");
 				}
 			}

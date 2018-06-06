@@ -17,6 +17,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import Main.MainFrame;
+
 
 public class ContactForm extends JPanel{
 
@@ -52,32 +54,35 @@ public class ContactForm extends JPanel{
 	protected CardLayout cl;
 	protected JPanel jp;
 	
+	protected MainFrame mainframe ;
+	
 	protected Color color = new Color(78,104,141);
 
 	protected Contact contact;
-	protected ContactApp contactApp = new ContactApp();
+	protected ContactApp contactApp = new ContactApp(mainframe);
 	protected boolean modification;
 	
 	protected int id = 0;
 	
 	
 	
+	
 	// Constructeur pour le formulaire vide
-	public ContactForm(boolean modification, CardLayout cl, JPanel jp) {
+	public ContactForm(boolean modification, CardLayout cl, JPanel jp, MainFrame mainframe) {
 		this.modification = modification;
 		this.cl = cl;
 		this.jp = jp;
+		this.mainframe = mainframe;
 		createFormPanel();
 	}
 	
 	// Constructeur pour le formulaire rempli
-	public ContactForm(Contact contact, boolean modification, CardLayout cl, JPanel jp) {
-		
+	public ContactForm(Contact contact, boolean modification, CardLayout cl, JPanel jp, MainFrame mainframe) {
 		this.contact = contact;
 		this.modification = modification;
 		this.cl = cl;
 		this.jp = jp;
-
+		this.mainframe = mainframe;
 		createFormPanel();
 		writeInfos(contact);
 		
@@ -196,10 +201,16 @@ public class ContactForm extends JPanel{
 	//ActionListener sur le bouton save (appel à la méthode d'ajout d'un contact à la liste des contacts)
 			class ClickPhotoContact implements ActionListener 
 			{
+						
 				@Override
 				public void actionPerformed(ActionEvent e) 
 				{								
-					cl.show(jp, "galleryApp");
+				
+					System.out.println("je clique sur l'icône du contact");
+					mainframe.getCardLayout().show(mainframe.getContentPanel(), "galleryPanel");
+					
+//					contactApp.getMainframe().getCardLayout().show(contactApp.getMainframe().getContentPanel(), "galleryPanel");
+//					cardLayout.show(contentPanel, "galleryPanel");
 				}
 			}
 

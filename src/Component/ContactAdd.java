@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 
 import Component.ContactApp.ContactList;
+import Main.MainFrame;
 
 
 
@@ -21,8 +22,8 @@ public class ContactAdd extends ContactForm{
 
 	private ContactList contactList;
 	
-	public ContactAdd(boolean modification, CardLayout cl, JPanel jp, ArrayList <Contact> contacts, ContactList contactList) {
-		super(modification, cl, jp);
+	public ContactAdd(boolean modification, CardLayout cl, JPanel jp, MainFrame mainframe,ArrayList <Contact> contacts, ContactList contactList) {
+		super(modification, cl, jp, mainframe);
 		this.contacts=contacts;
 		this.contactList = contactList;
 		this.cl = cl;

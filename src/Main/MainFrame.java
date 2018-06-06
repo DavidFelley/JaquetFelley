@@ -31,6 +31,7 @@ import javax.swing.Timer;
 import Component.ButtonCreation;
 import Component.CalculatriceApp;
 import Component.ContactApp;
+import Component.ContactForm;
 import Component.GalleryApp;
 import View.BackgroundImagePanel;
 
@@ -78,7 +79,7 @@ private ButtonCreation parameterButton = new ButtonCreation("parameter", new Ima
 private ButtonCreation homeButton = new ButtonCreation ("home", new ImageIcon("images/Icones/home.png"));
 
 
-private ContactApp contactApp = new ContactApp();
+private ContactApp contactApp = new ContactApp(this);
 private GalleryApp galleryApp = new GalleryApp();
 private CalculatriceApp calculatriceApp = new CalculatriceApp();
 
