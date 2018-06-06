@@ -112,6 +112,7 @@ private CalculatriceApp calculatriceApp = new CalculatriceApp();
 		formPanel.add(homePanel,BorderLayout.SOUTH);
 		formPanel.add(topPanel,BorderLayout.NORTH);
 		
+		
 		//Gestion des panels
 		contentPanel.add(backgroundPanel, "backgroundPanel");
 		backgroundPanel.setLayout(new BorderLayout());
