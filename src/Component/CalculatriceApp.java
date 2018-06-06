@@ -6,17 +6,23 @@
 
 package Component;
 
+import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
 
 public class CalculatriceApp extends JPanel
 {	
@@ -24,157 +30,121 @@ public class CalculatriceApp extends JPanel
 	
 	public CalculatriceApp() 
 	{
+		setLayout(new BorderLayout());
 		add(calculette);
 	}
 	
 	class Calculatrice extends JPanel
 	{
+		private ButtonCreation ajout = new ButtonCreation("ajout", new ImageIcon("images/Icones/plus.png")); // A VIRER
+		private MenuBarre menuCalculatrice = new MenuBarre("CALCULATRICE",ajout, Color.BLACK); // CREER LE CONSTRUCTEUR SANS BOUTONS
 		private String[] tabLabelButton = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "0", ".", "=", "C", "+", "-", "*", "/"};
 		private JButton[] tabButton = new JButton[tabLabelButton.length];
 		private JLabel ecran = new JLabel() ;
-		private double chiffre1 ;
+		private double chiffre ;
 		private boolean clicOperator = false, update = false ;
 		private String operateur = "" ;
+		private JPanel flowPanel =  new JPanel();
+		private JPanel backPanel = new JPanel();
+		private JPanel operateurs = new JPanel();
+		private JPanel chiffres = new JPanel();
+		private JPanel panEcran = new JPanel();
 		
 		public Calculatrice()
 		{
 			setLayout(new BorderLayout());
+			add(menuCalculatrice, BorderLayout.NORTH);
 			
-			initComposant();	
+			backPanel.setLayout(new BorderLayout());
+			
+			ecran = new JLabel("0");
+			ecran.setHorizontalAlignment(JLabel.RIGHT);
+			panEcran.setLayout(new BorderLayout());
+			panEcran.add(ecran);
+			panEcran.setBorder(BorderFactory.createLineBorder(Color.pink));
+			backPanel.add(panEcran, BorderLayout.NORTH);
+			
+			chiffres.setLayout(new GridLayout(4, 4));
+			flowPanel.setLayout(new FlowLayout());
+			flowPanel.setBackground(Color.CYAN);
+			flowPanel.add(chiffres);
+			backPanel.add(flowPanel, BorderLayout.CENTER);
+			add(backPanel);
+			initButton();
 		}
 		
-		private void initComposant(){
+		private void initButton()
+		{
+			 for(int i = 0; i < tabLabelButton.length; i++){
+				 
+				 tabButton[i] = new JButton(tabLabelButton[i]);
 
-		    //On définit la police d'écriture à utiliser
+			      switch(i){
 
-		    Font police = new Font("Arial", Font.BOLD, 20);
+			        // Ici on instancie les différents boutons qui ne sont pas des chiffres et on leur attribue un listener
 
-		    ecran = new JLabel("0");
+			        case 11 :
 
-		    ecran.setFont(police);
+			        	tabButton[i].addActionListener(new EgalListener());
 
-		    //On aligne les informations à droite dans le JLabel
+			          backPanel.add(tabButton[i], BorderLayout.SOUTH);
 
-		    ecran.setHorizontalAlignment(JLabel.RIGHT);
+			          break;
 
-		    ecran.setPreferredSize(new Dimension(220, 20));
+			        case 12 :
 
-		    JPanel operateur = new JPanel();      
+			        	tabButton[i].setForeground(Color.red);
 
-		    operateur.setPreferredSize(new Dimension(55, 225));
+			        	tabButton[i].addActionListener(new ResetListener());
 
-		    JPanel chiffre = new JPanel();
+			        	chiffres.add(tabButton[i]);
 
-		    chiffre.setPreferredSize(new Dimension(165, 225));
+			          break;
 
-		    JPanel panEcran = new JPanel();
+			        case 13 :
 
-		    panEcran.setPreferredSize(new Dimension(220, 30));
+			        	tabButton[i].addActionListener(new PlusListener());
+			        	chiffres.add(tabButton[i]);
 
+			          break;
 
-		    //On parcourt le tableau initialisé
+			        case 14 :
 
-		    //afin de créer nos boutons
+			        	tabButton[i].addActionListener(new MoinsListener());
+			        	chiffres.add(tabButton[i]);
 
-		    for(int i = 0; i < tabLabelButton.length; i++){
+			          break;    
 
-		    	tabButton[i] = new JButton(tabLabelButton[i]);
+			        case 15 :   
 
-//		      tabButton[i].setPreferredSize(dim);
+			        tabButton[i].addActionListener(new MultiListener());
+			        chiffres.add(tabButton[i]);
 
-		      switch(i){
+			          break;
 
-		        //Pour chaque élément situé à la fin du tableau
+			        case 16 :
 
-		        //et qui n'est pas un chiffre
+			          tabButton[i].addActionListener(new DivListener());
+			          chiffres.add(tabButton[i]);
 
-		        //on définit le comportement à avoir grâce à un listener
+			          break;
 
-		        case 11 :
+			        default :
 
-		        	tabButton[i].addActionListener(new EgalListener());
+			          //Par défaut, ce sont les premiers éléments du tableau
 
-		          chiffre.add(tabButton[i]);
+			          //donc des chiffres, on affecte alors le bon listener
 
-		          break;
+			          chiffres.add(tabButton[i]);
 
-		        case 12 :
+			          tabButton[i].addActionListener(new ChiffreListener());
 
-		        	tabButton[i].setForeground(Color.red);
+			          break;
 
-		        	tabButton[i].addActionListener(new ResetListener());
+			      }
 
-		          operateur.add(tabButton[i]);
-
-		          break;
-
-		        case 13 :
-
-		        	tabButton[i].addActionListener(new PlusListener());
-
-		       //   tabButton[i].setPreferredSize(dim2);
-
-		          operateur.add(tabButton[i]);
-
-		          break;
-
-		        case 14 :
-
-		        	tabButton[i].addActionListener(new MoinsListener());
-
-		         // tabButton[i].setPreferredSize(dim2);
-
-		          operateur.add(tabButton[i]);
-
-		          break;    
-
-		        case 15 :   
-
-		        tabButton[i].addActionListener(new MultiListener());
-
-		       // tabButton[i].setPreferredSize(dim2);
-
-		          operateur.add(tabButton[i]);
-
-		          break;
-
-		        case 16 :
-
-		          tabButton[i].addActionListener(new DivListener());
-
-		         // tabButton[i].setPreferredSize(dim2);
-
-		          operateur.add(tabButton[i]);
-
-		          break;
-
-		        default :
-
-		          //Par défaut, ce sont les premiers éléments du tableau
-
-		          //donc des chiffres, on affecte alors le bon listener
-
-		          chiffre.add(tabButton[i]);
-
-		          tabButton[i].addActionListener(new ChiffreListener());
-
-		          break;
-
-		      }
-
-		    }
-
-		    panEcran.add(ecran);
-
-		    panEcran.setBorder(BorderFactory.createLineBorder(Color.black));
-
-		    add(panEcran, BorderLayout.NORTH);
-
-		    add(chiffre, BorderLayout.CENTER);
-
-		    add(operateur, BorderLayout.EAST);
-
-		  }
+			    }
+		}
 
 
 		  //Méthode permettant d'effectuer un calcul selon l'opérateur sélectionné
@@ -183,31 +153,31 @@ public class CalculatriceApp extends JPanel
 
 		    if(operateur.equals("+")){
 
-		      chiffre1 = chiffre1 + 
+		      chiffre = chiffre + 
 
 		            Double.valueOf(ecran.getText()).doubleValue();
 
-		      ecran.setText(String.valueOf(chiffre1));
+		      ecran.setText(String.valueOf(chiffre));
 
 		    }
 
 		    if(operateur.equals("-")){
 
-		      chiffre1 = chiffre1 - 
+		      chiffre = chiffre - 
 
 		            Double.valueOf(ecran.getText()).doubleValue();
 
-		      ecran.setText(String.valueOf(chiffre1));
+		      ecran.setText(String.valueOf(chiffre));
 
 		    }          
 
 		    if(operateur.equals("*")){
 
-		      chiffre1 = chiffre1 * 
+		      chiffre = chiffre * 
 
 		            Double.valueOf(ecran.getText()).doubleValue();
 
-		      ecran.setText(String.valueOf(chiffre1));
+		      ecran.setText(String.valueOf(chiffre));
 
 		    }     
 
@@ -215,11 +185,11 @@ public class CalculatriceApp extends JPanel
 
 		      try{
 
-		        chiffre1 = chiffre1 / 
+		        chiffre = chiffre / 
 
 		              Double.valueOf(ecran.getText()).doubleValue();
 
-		        ecran.setText(String.valueOf(chiffre1));
+		        ecran.setText(String.valueOf(chiffre));
 
 		      } catch(ArithmeticException e) {
 
@@ -292,13 +262,13 @@ public class CalculatriceApp extends JPanel
 
 		        calcul();
 
-		        ecran.setText(String.valueOf(chiffre1));
+		        ecran.setText(String.valueOf(chiffre));
 
 		      }
 
 		      else{
 
-		        chiffre1 = Double.valueOf(ecran.getText()).doubleValue();
+		        chiffre = Double.valueOf(ecran.getText()).doubleValue();
 
 		        clicOperator = true;
 
@@ -323,13 +293,13 @@ public class CalculatriceApp extends JPanel
 
 		        calcul();
 
-		        ecran.setText(String.valueOf(chiffre1));
+		        ecran.setText(String.valueOf(chiffre));
 
 		      }
 
 		      else{
 
-		        chiffre1 = Double.valueOf(ecran.getText()).doubleValue();
+		        chiffre = Double.valueOf(ecran.getText()).doubleValue();
 
 		        clicOperator = true;
 
@@ -354,13 +324,13 @@ public class CalculatriceApp extends JPanel
 
 		        calcul();
 
-		        ecran.setText(String.valueOf(chiffre1));
+		        ecran.setText(String.valueOf(chiffre));
 
 		      }
 
 		      else{
 
-		        chiffre1 = Double.valueOf(ecran.getText()).doubleValue();
+		        chiffre = Double.valueOf(ecran.getText()).doubleValue();
 
 		        clicOperator = true;
 
@@ -385,13 +355,13 @@ public class CalculatriceApp extends JPanel
 
 		        calcul();
 
-		        ecran.setText(String.valueOf(chiffre1));
+		        ecran.setText(String.valueOf(chiffre));
 
 		      }
 
 		      else{
 
-		        chiffre1 = Double.valueOf(ecran.getText()).doubleValue();
+		        chiffre = Double.valueOf(ecran.getText()).doubleValue();
 
 		        clicOperator = true;
 
@@ -415,7 +385,7 @@ public class CalculatriceApp extends JPanel
 
 		      update = true;
 
-		      chiffre1 = 0;
+		      chiffre = 0;
 
 		      operateur = "";
 
