@@ -204,6 +204,10 @@ homeButton.addActionListener(new ClickHome());
 	
 	}
 		
+	public GalleryApp getGalleryApp() {
+		return galleryApp;
+	}
+
 	class CurrentTime implements ActionListener 
 	{
 		@Override

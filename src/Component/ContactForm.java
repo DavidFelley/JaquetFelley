@@ -63,10 +63,8 @@ public class ContactForm extends JPanel{
 	protected boolean modification;
 	
 	protected int id = 0;
-	
-	
-	
-	
+	protected boolean fromContact = false ;
+
 	// Constructeur pour le formulaire vide
 	public ContactForm(boolean modification, CardLayout cl, JPanel jp, MainFrame mainframe) {
 		this.modification = modification;
@@ -175,6 +173,14 @@ public class ContactForm extends JPanel{
 		
 	}
 	
+	public boolean isFromContact() {
+		return fromContact;
+	}
+
+	public void setFromContact(boolean fromContact) {
+		this.fromContact = fromContact;
+	}
+	
 
 	
 	public void changeModification() {
@@ -207,8 +213,11 @@ public class ContactForm extends JPanel{
 				{								
 				
 					System.out.println("je clique sur l'icône du contact");
+					mainframe.getGalleryApp().rgallery();
 					mainframe.getCardLayout().show(mainframe.getContentPanel(), "galleryPanel");
+					mainframe.getGalleryApp().setFromContact(1);
 					
+				
 //					contactApp.getMainframe().getCardLayout().show(contactApp.getMainframe().getContentPanel(), "galleryPanel");
 //					cardLayout.show(contentPanel, "galleryPanel");
 				}

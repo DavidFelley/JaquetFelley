@@ -8,6 +8,7 @@ package Component;
 
 import java.awt.AlphaComposite;
 import java.awt.BorderLayout;
+import java.awt.Button;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -36,6 +37,8 @@ import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import Main.MainFrame;
+
 public class GalleryApp extends JPanel
 {
 	private CardLayout cardlayout = new CardLayout();
@@ -43,6 +46,9 @@ public class GalleryApp extends JPanel
 	private int id;
 	private GalleryPanel galleryPanel = new GalleryPanel();
 	private FullScreenPanel fullscreenPanel = new FullScreenPanel(galleryPanel);
+	protected int fromContact = 0 ;
+	
+	
 	
 	public GalleryApp() 
 	{
@@ -51,12 +57,44 @@ public class GalleryApp extends JPanel
 		add(fullscreenPanel,"FullScreenPanel");
 	}
 	
+	public int isFromContact() {
+		return fromContact;
+	}
+
+	public void setFromContact(int fromContact) {
+		this.fromContact = fromContact;
+	}
+	
+	public void rgallery()
+	{
+		galleryPanel.getMenuGalerie().remove(galleryPanel.getAjout());
+		fullscreenPanel.getMenuImage().remove(fullscreenPanel.getTrashButton());
+		fullscreenPanel.getMenuImage().add(fullscreenPanel.getValidateButton(), BorderLayout.EAST);
+	}
+	
 	class GalleryPanel extends JPanel
 	{
 		private Color color = new Color(78,104,141);
 		private ButtonCreation ajout = new ButtonCreation("ajout", new ImageIcon("images/Icones/plus.png"));
-		private MenuBarre menuGalerie = new MenuBarre("GALERIE",ajout, color);
 		
+		public ButtonCreation getAjout() {
+			return ajout;
+		}
+
+		public void setAjout(ButtonCreation ajout) {
+			this.ajout = ajout;
+		}
+
+		private MenuBarre menuGalerie;
+		
+		public MenuBarre getMenuGalerie() {
+			return menuGalerie;
+		}
+
+		public void setMenuGalerie(MenuBarre menuGalerie) {
+			this.menuGalerie = menuGalerie;
+		}
+
 		//FileChooser permet d'ouvrir un navigateur de fichier
 		private JFileChooser fc = new JFileChooser();
 		//Ici on défini le type d'extension que le browser va accepter
@@ -69,10 +107,22 @@ public class GalleryApp extends JPanel
 		
 		private int numImg ;
 		private ArrayList<String> photos = new ArrayList<String>();
-		
+				
 		public GalleryPanel()
 		{
 			setLayout(new BorderLayout());
+			
+			if(fromContact == 1)
+			{
+				menuGalerie = new MenuBarre("GALERIE", color);
+				System.out.println("JE VIENS DE CONTACT");
+			}		
+			else
+			{
+				menuGalerie = new MenuBarre("GALERIE",ajout, color);
+				System.out.println("JE VIENS DE galerie");
+			}
+	
 			add(menuGalerie, BorderLayout.NORTH);
 			ajout.addActionListener(new addGalerie());
 					
@@ -91,6 +141,10 @@ public class GalleryApp extends JPanel
 			scrollPane.setBorder(new EmptyBorder(0, 0, 0, 0));
 			scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 			add(scrollPane);
+		}
+		
+		public void refreshGallery() {
+			menuGalerie.remove(ajout);
 		}
 		
 		private ArrayList<String> arrayOfPhotos()
@@ -265,11 +319,37 @@ public class GalleryApp extends JPanel
 	class FullScreenPanel extends JPanel
 	{
 		private GalleryPanel galleryPanel = new GalleryPanel();
+		private ButtonCreation validateButton = new ButtonCreation("validate", new ImageIcon("images/Icones/validate.png"));
+		
+		
+
+		public void setValidateButton(ButtonCreation validateButton) {
+			this.validateButton = validateButton;
+		}
+
 		private ButtonCreation trashButton = new ButtonCreation("trash", new ImageIcon("images/Icones/trash.png"));
+		public ButtonCreation getTrashButton() {
+			return trashButton;
+		}
+
+		public void setTrashButton(ButtonCreation trashButton) {
+			this.trashButton = trashButton;
+		}
+
 		private ButtonCreation backButton = new ButtonCreation("back", new ImageIcon("images/Icones/retour.png"));
+		private ButtonCreation validButton = new ButtonCreation("valid",new ImageIcon("images/Icones/validate.png"));
+		
 		private ButtonCreation nextPhoto = new ButtonCreation();
 		private ButtonCreation backPhoto = new ButtonCreation();
-		private MenuBarre menuImage = new MenuBarre("", backButton,trashButton, Color.BLACK);
+		private MenuBarre menuImage;
+		public MenuBarre getMenuImage() {
+			return menuImage;
+		}
+		
+		public ButtonCreation getValidateButton() {
+			return validateButton;
+		}
+
 		private JLabel imageGrande = new JLabel() ;
 		
 		public FullScreenPanel(GalleryPanel galleryPanel) 
@@ -280,10 +360,16 @@ public class GalleryApp extends JPanel
 			setLayout(new BorderLayout());
 			setBorder(new EmptyBorder(0, 0, 0, 0));
 			
+			if(fromContact == 1)
+			menuImage = new MenuBarre("", backButton,validButton, Color.BLACK);
+			else
+			menuImage = new MenuBarre("", backButton,trashButton, Color.BLACK);
+			
 			add(menuImage, BorderLayout.NORTH);
 			
 			backButton.addActionListener(new backGallery());
 			trashButton.addActionListener(new deleteGallery());
+			validateButton.addActionListener(new addPhotoContact());
 			
 			nextPhoto.addActionListener(new nextPhoto());
 			backPhoto.addActionListener(new backPhoto());
@@ -399,6 +485,15 @@ public class GalleryApp extends JPanel
 				fullscreenPanel.refresh();
 			}
 			
+		}
+		
+		class addPhotoContact implements ActionListener
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				System.out.println(galleryPanel.photos.get(id));
+			}
 		}
 		
 	}
