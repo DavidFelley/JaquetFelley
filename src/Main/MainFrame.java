@@ -118,6 +118,7 @@ private CalculatriceApp calculatriceApp = new CalculatriceApp();
 		contentPanel.add(contactApp, "contactApp");	
 		contentPanel.add(galleryApp, "galleryPanel");
 		contentPanel.add(calculatriceApp, "calculatriceApp");
+
 		
 		//Home Panel
 		homePanel.setOpaque(false);
