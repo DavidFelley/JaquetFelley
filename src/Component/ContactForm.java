@@ -61,12 +61,11 @@ public class ContactForm extends JPanel{
 	protected Contact contact;
 	protected boolean modification;
 	
-protected int id = 0;
-	protected boolean fromContact = false ;
-	
+	protected int id = 0;
+
 	protected ButtonCreation tempIcon;
 
-private ContactApp contactApp = new ContactApp(mainframe);
+	private ContactApp contactApp = new ContactApp(mainframe);
 
 	// Constructeur pour le formulaire vide
 	public ContactForm(boolean modification, CardLayout cl, JPanel jp, MainFrame mainframe) {
@@ -107,8 +106,7 @@ private ContactApp contactApp = new ContactApp(mainframe);
 		panelBase.add(photoPanel);
 		photoPanel.setPreferredSize(new Dimension(450,325));
 		photoPanel.add(contactPhoto);
-		
-contactPhoto.setIcon(new ImageIcon("images/Galerie/canada.jpg"));
+
 		
 		//formPanel contenant les informations du contact
 		panelBase.add(formPanel);
@@ -146,8 +144,8 @@ contactPhoto.setIcon(new ImageIcon("images/Galerie/canada.jpg"));
 	}
 	
 	// Méthode qui retourne les informations d'un nouveau contact
-	public Contact getInfos(int  id) {
-		return new Contact (tfNom.getText(), tfPrenom.getText(),tfEmail.getText(), tfTelephone.getText(), id);
+	public Contact getInfos() {
+		return new Contact (tfNom.getText(), tfPrenom.getText(),tfEmail.getText(), tfTelephone.getText(), id, contactPhoto.getIcon().toString());
 	}
 	
 	public Contact modifiedContact() {
@@ -155,9 +153,8 @@ contactPhoto.setIcon(new ImageIcon("images/Galerie/canada.jpg"));
 		contact.setNom(tfNom.getText());
 		contact.setEmail(tfEmail.getText());
 		contact.setTelephone(tfTelephone.getText());
-		
+		contact.setImageContactPath(contactPhoto.getIcon().toString());
 		return contact;
-		
 	}
 	
 	
@@ -167,16 +164,16 @@ contactPhoto.setIcon(new ImageIcon("images/Galerie/canada.jpg"));
 		tfPrenom.setText(null);
 		tfEmail.setText(null);
 		tfTelephone.setText(null);
+		contactPhoto.setIcon(new ImageIcon("images/Icones/contactVide.png"));
 	}
 	
 	//Méthode permettant d'écrire les infos contacts dans les textFields
 	protected void writeInfos(Contact contact) {
-	
 			tfNom.setText(contact.getNom());
 			tfPrenom.setText(contact.getPrenom());
 			tfEmail.setText(contact.getEmail());
 			tfTelephone.setText(contact.getTelephone());
-		
+			contactPhoto.setIcon(new ImageIcon(contact.getImageContactPath()));
 	}
 	
 
@@ -197,7 +194,8 @@ contactPhoto.setIcon(new ImageIcon("images/Galerie/canada.jpg"));
 	public void setTempIcon(ButtonCreation tempIcon) {
 		this.tempIcon = tempIcon;
 	}
-	
+
+
 	public void changeModification() {
 		
 		modification =! modification;
@@ -230,6 +228,8 @@ contactPhoto.setIcon(new ImageIcon("images/Galerie/canada.jpg"));
 					
 					mainframe.getContactApp().getCardLayoutContact().show(mainframe.getContactApp().getContentContact(), "galleryApp");
 
+					
+					
 					System.out.println("je clique sur l'icône du contact");
 					
 			
@@ -244,22 +244,23 @@ contactPhoto.setIcon(new ImageIcon("images/Galerie/canada.jpg"));
 				}
 			}
 
-			class ReturnPath implements ActionListener
-			{
-				@Override
-				public void actionPerformed(ActionEvent e)
-				{
-					System.out.println("chemin de l'image" + " " + contactApp.getGalleryApp().getImagePath());
-
-					System.out.println(contactApp.getGalleryApp().getGalleryPanel().getPhotos().get(id));
-					
-					
-//					System.out.println(contactApp.getGalleryApp().photos.get(id));
-//					setImagePath(galleryPanel.photos.get(id)); 
-//					contactApp.getContactModify().getTempIcon().setIcon(new ImageIcon(imagePath));
-					
-//					contactApp.getCardLayoutContact().show(contactApp.getContentContact(), "" + contactApp.getContact().getId());
-				}
-			}
+//			class ReturnPath implements ActionListener
+//			{
+//				@Override
+//				public void actionPerformed(ActionEvent e)
+//				{
+//					System.out.println("chemin de l'image" + " " + contactApp.getGalleryApp().getImagePath());
+//
+//					System.out.println(contactApp.getGalleryApp().getGalleryPanel().getPhotos().get(id));
+//					
+//		
+//					
+////					System.out.println(contactApp.getGalleryApp().photos.get(id));
+////					setImagePath(galleryPanel.photos.get(id)); 
+////					contactApp.getContactModify().getTempIcon().setIcon(new ImageIcon(imagePath));
+//					
+////					contactApp.getCardLayoutContact().show(contactApp.getContentContact(), "" + contactApp.getContact().getId());
+//				}
+//			}
 			
 }

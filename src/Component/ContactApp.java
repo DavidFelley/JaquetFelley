@@ -37,7 +37,8 @@ public class ContactApp extends JPanel{
 	private ContactList contactList ;
 	private ContactModify contactModify;
 	
-
+	private ButtonCreation actualContact;
+	
 	public ArrayList <Contact> contacts = new ArrayList<Contact>();
 		
 	private MainFrame mainframe;
@@ -46,7 +47,11 @@ public class ContactApp extends JPanel{
 
 	public GalleryApp galleryApp = new GalleryApp(true, this);
 	
+	private boolean isFromContactAdd ;
 
+	
+
+	private int id;
 
 	public ContactApp (MainFrame mainframe) {
 		
@@ -66,7 +71,7 @@ public class ContactApp extends JPanel{
 	
 		cardLayoutContact.show(contentContact, "contactList");
 		
-		validButton.addActionListener(new ReturnPath());
+		validButton.addActionListener(new SaveImageContact());
 		
 		contenuList();
 	}
@@ -165,15 +170,44 @@ public void setValidButton(ButtonCreation validButton) {
 }
 
 
-class ReturnPath implements ActionListener
+public boolean isFromContactAdd() {
+	return isFromContactAdd;
+}
+
+
+public void setFromContactAdd(boolean isFromContactAdd) {
+	this.isFromContactAdd = isFromContactAdd;
+}
+
+
+class SaveImageContact implements ActionListener
 {
+//	Contact contact;
+//	
+//	public SaveImageContact(Contact contact) {
+//		this.contact = contact;
+//	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
+		actualContact = (ButtonCreation) e.getSource();
+		id = actualContact.getId();
 		System.out.println("chemin de l'image" + " " + galleryApp.getGalleryPanel().getPhotos().get(galleryApp.getId()));
-		contactModify.getContactPhoto().setIcon(new ImageIcon(galleryApp.getGalleryPanel().getPhotos().get(galleryApp.getId())));
 		
-		System.out.println();
+		System.out.println("value of my boolean" + isFromContactAdd);
+		
+		if(isFromContactAdd == false) {
+		contactModify.getContactPhoto().setIcon(new ImageIcon(galleryApp.getGalleryPanel().getPhotos().get(galleryApp.getId())));	
+		cardLayoutContact.show(contentContact, "contactModify");
+		cardLayoutContact.show(contentContact, "" + contacts.get(id));	
+		}else{
+		contactAdd.getContactPhoto().setIcon(new ImageIcon(galleryApp.getGalleryPanel().getPhotos().get(galleryApp.getId())));
+		contentContact.add("contactAdd",contactAdd);
+		cardLayoutContact.show(contentContact, "contactAdd");
+		}
+		System.out.println("==========save");
+		
 		
 	
 //		System.out.println(contactApp.getGalleryApp().photos.get(id));
@@ -192,14 +226,6 @@ class ReturnPath implements ActionListener
 	 * 
 	 */
 	
-
-
-
-
-
-
-
-
 
 
 	class ContactList extends JPanel{
@@ -252,7 +278,8 @@ class ReturnPath implements ActionListener
 					@Override
 					public void actionPerformed(ActionEvent e)
 					{
-						contactAdd = new ContactAdd(true, cardLayoutContact, contentContact, mainframe, contacts, contactList);
+						setFromContactAdd(true);
+						contactAdd = new ContactAdd(false, cardLayoutContact, contentContact, mainframe, contacts, contactList);
 						contactAdd.eraseInfos();
 						contentContact.add("contactAdd",contactAdd);
 						cardLayoutContact.show(contentContact, "contactAdd");
@@ -271,6 +298,7 @@ class ReturnPath implements ActionListener
 					@Override
 					public void actionPerformed(ActionEvent e)
 					{
+						setFromContactAdd(false);
 						contactModify = new ContactModify(contact, true, cardLayoutContact, contentContact, mainframe, contacts, contactList);
 						contentContact.add("contactModify",contactModify);
 						cardLayoutContact.show(contentContact, "contactModify");

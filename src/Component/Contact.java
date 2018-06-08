@@ -11,35 +11,36 @@ public class Contact implements Serializable  {
 	private String email;
 	private String telephone;
 	private int id;
-	private ImageIcon contactPhoto;
+	private String imageContactPath;
 	
 	
 	// Constructeur sans photo
-	public Contact (String nom, String prenom, String email, String telephone, int id) {
+	public Contact (String nom, String prenom, String email, String telephone, int id, String imageContactPath ) {
 		this.nom = nom;
 		this.prenom = prenom;
 		this.email = email;
 		this.telephone = telephone;
 		this.id = id;
+		this.imageContactPath = imageContactPath;
 	}
 	
-	// Constructeur avec photo
-	public Contact (String nom, String prenom, String email, String telephone, int id, ImageIcon contactPhoto) {
-		this.nom = nom;
-		this.prenom = prenom;
-		this.email = email;
-		this.telephone = telephone;
-		this.id = id;
-		setContactPhoto(contactPhoto);
-	}
+//	// Constructeur avec photo
+//	public Contact (String nom, String prenom, String email, String telephone, int id, 	String imageContactPath) {
+//		this.nom = nom;
+//		this.prenom = prenom;
+//		this.email = email;
+//		this.telephone = telephone;
+//		this.id = id;
+//		this.imageContactPath = imageContactPath;
+//	}
 
-	private ImageIcon getContactPhoto() {
-		return contactPhoto;
-	}
-
-	private void setContactPhoto(ImageIcon contactPhoto) {
-		this.contactPhoto = contactPhoto;
-	}
+//	private ImageIcon getContactPhoto() {
+//		return contactPhoto;
+//	}
+//
+//	private void setContactPhoto(ImageIcon contactPhoto) {
+//		this.contactPhoto = contactPhoto;
+//	}
 
 	public String toString() {
 		// TODO Auto-generated method stub
@@ -94,5 +95,15 @@ public class Contact implements Serializable  {
 	public void setId(int id) {
 		this.id = id;
 	}
+
+	public String getImageContactPath() {
+		return imageContactPath;
+	}
+
+	public void setImageContactPath(String imageContactPath) {
+		this.imageContactPath = imageContactPath;
+	}
+	
+	
 	
 }

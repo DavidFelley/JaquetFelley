@@ -11,8 +11,6 @@ import javax.swing.JPanel;
 import Component.ContactApp.ContactList;
 import Main.MainFrame;
 
-
-
 public class ContactAdd extends ContactForm{
 	
 	private CardLayout cl ;
@@ -44,11 +42,12 @@ public class ContactAdd extends ContactForm{
 				@Override
 				public void actionPerformed(ActionEvent e) 
 				{							
-					contacts.add(getInfos(id));
-					System.out.println(mainframe.getContactApp().getContacts().get(id).toString());
+					contacts.add(getInfos());
+					
+					System.out.println(mainframe.getContactApp().getContacts().toString());
 					eraseInfos();
-					System.out.println("valeur de l'id: " + id);
-					id++;		 	
+//					System.out.println("valeur de l'id: " + id);
+//					id++;		 	
 					contactList.updateListContact();
 					
 				}
