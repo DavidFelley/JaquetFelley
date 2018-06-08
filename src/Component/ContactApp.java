@@ -175,7 +175,7 @@ class ReturnPath implements ActionListener
 		
 		System.out.println();
 		
-		
+	
 //		System.out.println(contactApp.getGalleryApp().photos.get(id));
 //		setImagePath(galleryPanel.photos.get(id)); 
 //		contactApp.getContactModify().getTempIcon().setIcon(new ImageIcon(imagePath));
