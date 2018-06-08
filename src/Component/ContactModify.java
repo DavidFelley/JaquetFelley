@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 import Component.ContactApp.ContactList;
@@ -56,6 +57,7 @@ public class ContactModify extends ContactForm{
 //					contacts.add(modifiedContact());
 					contactList.updateListContact();
 					cl.show(jp, "contactList");
+			
 //					System.out.println(contactApp.getContacts().get(id).toString());
 //					System.out.println("valeur de l'id: " + id);
 //					id++;	

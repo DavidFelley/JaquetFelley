@@ -22,7 +22,7 @@ public class ContactAdd extends ContactForm{
 
 	private ContactList contactList;
 	
-	public ContactAdd(boolean modification, CardLayout cl, JPanel jp, MainFrame mainframe,ArrayList <Contact> contacts, ContactList contactList) {
+	public ContactAdd(boolean modification, CardLayout cl, JPanel jp, MainFrame mainframe,  ArrayList <Contact> contacts, ContactList contactList) {
 		super(modification, cl, jp, mainframe);
 		this.contacts=contacts;
 		this.contactList = contactList;
@@ -43,9 +43,9 @@ public class ContactAdd extends ContactForm{
 			{
 				@Override
 				public void actionPerformed(ActionEvent e) 
-				{								
+				{							
 					contacts.add(getInfos(id));
-					System.out.println(contactApp.getContacts().get(id).toString());
+					System.out.println(mainframe.getContactApp().getContacts().get(id).toString());
 					eraseInfos();
 					System.out.println("valeur de l'id: " + id);
 					id++;		 	

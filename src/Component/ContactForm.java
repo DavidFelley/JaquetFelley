@@ -59,11 +59,14 @@ public class ContactForm extends JPanel{
 	protected Color color = new Color(78,104,141);
 
 	protected Contact contact;
-	protected ContactApp contactApp = new ContactApp(mainframe);
 	protected boolean modification;
 	
-	protected int id = 0;
+protected int id = 0;
 	protected boolean fromContact = false ;
+	
+	protected ButtonCreation tempIcon;
+
+private ContactApp contactApp = new ContactApp(mainframe);
 
 	// Constructeur pour le formulaire vide
 	public ContactForm(boolean modification, CardLayout cl, JPanel jp, MainFrame mainframe) {
@@ -71,6 +74,7 @@ public class ContactForm extends JPanel{
 		this.cl = cl;
 		this.jp = jp;
 		this.mainframe = mainframe;
+	
 		createFormPanel();
 	}
 	
@@ -103,7 +107,9 @@ public class ContactForm extends JPanel{
 		panelBase.add(photoPanel);
 		photoPanel.setPreferredSize(new Dimension(450,325));
 		photoPanel.add(contactPhoto);
-
+		
+contactPhoto.setIcon(new ImageIcon("images/Galerie/canada.jpg"));
+		
 		//formPanel contenant les informations du contact
 		panelBase.add(formPanel);
 		formPanel.setPreferredSize(new Dimension(450,305));
@@ -173,15 +179,24 @@ public class ContactForm extends JPanel{
 		
 	}
 	
-	public boolean isFromContact() {
-		return fromContact;
-	}
 
-	public void setFromContact(boolean fromContact) {
-		this.fromContact = fromContact;
-	}
 	
+	
+	public ButtonCreation getContactPhoto() {
+		return contactPhoto;
+	}
 
+	public void setContactPhoto(ButtonCreation contactPhoto) {
+		this.contactPhoto = contactPhoto;
+	}
+
+	public ButtonCreation getTempIcon() {
+		return tempIcon;
+	}
+
+	public void setTempIcon(ButtonCreation tempIcon) {
+		this.tempIcon = tempIcon;
+	}
 	
 	public void changeModification() {
 		
@@ -204,23 +219,47 @@ public class ContactForm extends JPanel{
 	}
 
 
-	//ActionListener sur le bouton save (appel à la méthode d'ajout d'un contact à la liste des contacts)
+	//ActionListener sur l'icône contact qui ouvre la galerie
 			class ClickPhotoContact implements ActionListener 
 			{
 						
 				@Override
 				public void actionPerformed(ActionEvent e) 
-				{								
-				
-					System.out.println("je clique sur l'icône du contact");
-					mainframe.getGalleryApp().rgallery();
-					mainframe.getCardLayout().show(mainframe.getContentPanel(), "galleryPanel");
-					mainframe.getGalleryApp().setFromContact(1);
+				{													
+					tempIcon = (ButtonCreation) e.getSource();
 					
+					mainframe.getContactApp().getCardLayoutContact().show(mainframe.getContactApp().getContentContact(), "galleryApp");
+
+					System.out.println("je clique sur l'icône du contact");
+					
+			
+					
+//					contactPhoto.setIcon(new ImageIcon(contactApp.getGalleryApp().getImagePath()));
 				
-//					contactApp.getMainframe().getCardLayout().show(contactApp.getMainframe().getContentPanel(), "galleryPanel");
-//					cardLayout.show(contentPanel, "galleryPanel");
+					
+					
+//					mainframe.getGalleryApp().rgallery();
+//					mainframe.getCardLayout().show(mainframe.getContentPanel(), "galleryPanel");
+//					mainframe.getGalleryApp().setFromContact(1);
 				}
 			}
 
+			class ReturnPath implements ActionListener
+			{
+				@Override
+				public void actionPerformed(ActionEvent e)
+				{
+					System.out.println("chemin de l'image" + " " + contactApp.getGalleryApp().getImagePath());
+
+					System.out.println(contactApp.getGalleryApp().getGalleryPanel().getPhotos().get(id));
+					
+					
+//					System.out.println(contactApp.getGalleryApp().photos.get(id));
+//					setImagePath(galleryPanel.photos.get(id)); 
+//					contactApp.getContactModify().getTempIcon().setIcon(new ImageIcon(imagePath));
+					
+//					contactApp.getCardLayoutContact().show(contactApp.getContentContact(), "" + contactApp.getContact().getId());
+				}
+			}
+			
 }

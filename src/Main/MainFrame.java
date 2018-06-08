@@ -46,12 +46,9 @@ public class MainFrame extends JFrame{
 		// Gestion des panels
 		private CardLayout cardLayout = new CardLayout();
 		private JPanel contentPanel = new JPanel(cardLayout);
-		
-		
 
-
-//Panel Home
-private JPanel homePanel = new JPanel(new FlowLayout());
+		//Panel Home
+		private JPanel homePanel = new JPanel(new FlowLayout());
 		
 		//Top Panel
 		private JPanel topPanel = new JPanel(new BorderLayout());
@@ -206,6 +203,10 @@ homeButton.addActionListener(new ClickHome());
 		
 	public GalleryApp getGalleryApp() {
 		return galleryApp;
+	}
+	
+	public ContactApp getContactApp() {
+		return contactApp;
 	}
 
 	class CurrentTime implements ActionListener 

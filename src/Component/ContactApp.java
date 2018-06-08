@@ -28,9 +28,6 @@ import javax.swing.border.EmptyBorder;
 import Main.MainFrame;
 
 
-
-
-
 public class ContactApp extends JPanel{
 	
 	private CardLayout cardLayoutContact = new CardLayout();
@@ -39,17 +36,24 @@ public class ContactApp extends JPanel{
 	private ContactAdd contactAdd ;
 	private ContactList contactList ;
 	private ContactModify contactModify;
+	
 
 	public ArrayList <Contact> contacts = new ArrayList<Contact>();
 		
 	private MainFrame mainframe;
+	
+	private ButtonCreation validButton = new ButtonCreation("valid",new ImageIcon("images/Icones/validate.png"));
+
+	public GalleryApp galleryApp = new GalleryApp(true, this);
+	
+
 
 	public ContactApp (MainFrame mainframe) {
 		
 		this.mainframe = mainframe;
 		
 		deserializeContact();
-		
+
 		setLayout(new BorderLayout());
 		
 		add(contentContact, BorderLayout.CENTER);
@@ -57,8 +61,12 @@ public class ContactApp extends JPanel{
 		contactList = new ContactList();
 		
 		contentContact.add("contactList", contactList);
+		
+		contentContact.add("galleryApp", galleryApp);
 	
 		cardLayoutContact.show(contentContact, "contactList");
+		
+		validButton.addActionListener(new ReturnPath());
 		
 		contenuList();
 	}
@@ -119,6 +127,62 @@ public class ContactApp extends JPanel{
 		}
 	}
 	
+	public CardLayout getCardLayoutContact() {
+		return cardLayoutContact;
+	}
+
+
+	public JPanel getContentContact() {
+		return contentContact;
+	}
+	
+	
+public GalleryApp getGalleryApp() {
+	return galleryApp;
+}
+
+
+public void setGalleryApp(GalleryApp galleryApp) {
+	this.galleryApp = galleryApp;
+}
+
+public ContactModify getContactModify() {
+	return contactModify;
+}
+
+
+public void setContactModify(ContactModify contactModify) {
+	this.contactModify = contactModify;
+}
+	
+public ButtonCreation getValidButton() {
+	return validButton;
+}
+
+
+public void setValidButton(ButtonCreation validButton) {
+	this.validButton = validButton;
+}
+
+
+class ReturnPath implements ActionListener
+{
+	@Override
+	public void actionPerformed(ActionEvent e)
+	{
+		System.out.println("chemin de l'image" + " " + galleryApp.getGalleryPanel().getPhotos().get(galleryApp.getId()));
+		contactModify.getContactPhoto().setIcon(new ImageIcon(galleryApp.getGalleryPanel().getPhotos().get(galleryApp.getId())));
+		
+		System.out.println();
+		
+		
+//		System.out.println(contactApp.getGalleryApp().photos.get(id));
+//		setImagePath(galleryPanel.photos.get(id)); 
+//		contactApp.getContactModify().getTempIcon().setIcon(new ImageIcon(imagePath));
+		
+//		contactApp.getCardLayoutContact().show(contactApp.getContentContact(), "" + contactApp.getContact().getId());
+	}
+}
 	
 	/*
 	 * 
@@ -129,6 +193,15 @@ public class ContactApp extends JPanel{
 	 */
 	
 
+
+
+
+
+
+
+
+
+
 	class ContactList extends JPanel{
 		
 		private JPanel panelList = new JPanel();
@@ -136,7 +209,7 @@ public class ContactApp extends JPanel{
 		private ButtonCreation buttonPlus = new ButtonCreation("plus",new ImageIcon("images/Icones/plus.png"));
 		private MenuBarre menuBarreList = new MenuBarre("CONTACTS", buttonPlus, color);
 		private JScrollPane scroll = new JScrollPane(panelList, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		
+		private ContactApp contactApp;
 		
 				// Constructeur de la liste des contacts
 				public ContactList() {
@@ -232,7 +305,6 @@ public class ContactApp extends JPanel{
 						// TODO Auto-generated method stub
 						updateListContact();
 					}
-					
 				}
 				
 	}
