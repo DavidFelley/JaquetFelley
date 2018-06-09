@@ -46,7 +46,6 @@ public class CalculatriceApp extends JPanel
 		private String operateur = "" ;
 		private JPanel flowPanel =  new JPanel();
 		private JPanel backPanel = new JPanel();
-		private JPanel operateurs = new JPanel();
 		private JPanel chiffres = new JPanel();
 		private JPanel panEcran = new JPanel();
 		
@@ -74,82 +73,7 @@ public class CalculatriceApp extends JPanel
 			flowPanel.add(chiffres);
 			backPanel.add(flowPanel, BorderLayout.CENTER);
 			add(backPanel);
-			initButton();
 		}
-		
-		private void initButton()
-		{
-			 for(int i = 0; i < tabLabelButton.length; i++){
-				 
-				 tabButton[i] = new JButton(tabLabelButton[i]);
-				 tabButton[i].setPreferredSize(new Dimension (70,70));
-			      switch(i){
-
-			        // Ici on instancie les différents boutons qui ne sont pas des chiffres et on leur attribue un listener
-
-			        case 11 :
-
-			          tabButton[i].addActionListener(new EgalListener());
-
-			          backPanel.add(tabButton[i], BorderLayout.SOUTH);
-
-			          break;
-
-			        case 12 :
-
-			        	tabButton[i].setForeground(Color.red);
-
-			        	tabButton[i].addActionListener(new ResetListener());
-
-			        	chiffres.add(tabButton[i]);
-
-			          break;
-
-			        case 13 :
-
-			        	tabButton[i].addActionListener(new PlusListener());
-			        	chiffres.add(tabButton[i]);
-
-			          break;
-
-			        case 14 :
-
-			        	tabButton[i].addActionListener(new MoinsListener());
-			        	chiffres.add(tabButton[i]);
-
-			          break;    
-
-			        case 15 :   
-
-			        tabButton[i].addActionListener(new MultiListener());
-			        chiffres.add(tabButton[i]);
-
-			          break;
-
-			        case 16 :
-
-			          tabButton[i].addActionListener(new DivListener());
-			          chiffres.add(tabButton[i]);
-
-			          break;
-
-			        default :
-
-			          //Par défaut, ce sont les premiers éléments du tableau
-
-			          //donc des chiffres, on affecte alors le bon listener
-
-			          chiffres.add(tabButton[i]);
-
-			          tabButton[i].addActionListener(new ChiffreListener());
-
-			          break;
-
-			      }
-
-			    }
-		}
-
 
 		  //Méthode permettant d'effectuer un calcul selon l'opérateur sélectionné
 
