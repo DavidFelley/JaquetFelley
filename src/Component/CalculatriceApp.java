@@ -6,23 +6,22 @@
 
 package Component;
 
-import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.GridLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
 
 public class CalculatriceApp extends JPanel
 {	
@@ -38,42 +37,128 @@ public class CalculatriceApp extends JPanel
 	{
 		private ButtonCreation ajout = new ButtonCreation("ajout", new ImageIcon("images/Icones/plus.png")); // A VIRER
 		private MenuBarre menuCalculatrice = new MenuBarre("CALCULATRICE",ajout, Color.BLACK); // CREER LE CONSTRUCTEUR SANS BOUTONS
-		private String[] tabLabelButton = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "0", ".", "=", "C", "+", "-", "*", "/"};
-		private JButton[] tabButton = new JButton[tabLabelButton.length];
+		
+		private String[] tabLabelButton = {"1","2","3","/","4","5","6","*","7","8","9","-",".","0","C","+","="};
+		private JButton [] tabButton = new JButton[tabLabelButton.length];
 		private JLabel ecran = new JLabel() ;
 		private double chiffre ;
 		private boolean clicOperator = false, update = false ;
 		private String operateur = "" ;
-		private JPanel flowPanel =  new JPanel();
-		private JPanel backPanel = new JPanel();
-		private JPanel chiffres = new JPanel();
+		private JPanel panCalculatrice = new JPanel();
 		private JPanel panEcran = new JPanel();
+		private JPanel panelButton = new JPanel(new GridBagLayout());
+		private GridBagConstraints c = new GridBagConstraints();
 		
 		public Calculatrice()
 		{
 			setLayout(new BorderLayout());
-			add(menuCalculatrice, BorderLayout.NORTH);
-			
-			backPanel.setLayout(new BorderLayout());
+			add(panCalculatrice, BorderLayout.NORTH);
+			panCalculatrice.setLayout(new BoxLayout(panCalculatrice, BoxLayout.Y_AXIS));
+			panCalculatrice.add(menuCalculatrice);
 			
 			ecran = new JLabel("0");
 			ecran.setHorizontalAlignment(JLabel.RIGHT);
 			ecran.setFont(new Font(null, Font.PLAIN,20));
-		
-			panEcran.setLayout(new BorderLayout());
+			ecran.setPreferredSize(new Dimension(450,100));
+			panCalculatrice.add(panEcran);
 			panEcran.add(ecran);
 			panEcran.setBorder(BorderFactory.createLineBorder(Color.pink));
-			panEcran.setPreferredSize(new Dimension(450,200));
 			panEcran.setBackground(Color.WHITE);
-			backPanel.add(panEcran, BorderLayout.NORTH);
+	
 			
-			chiffres.setLayout(new GridLayout(4, 4));
-			flowPanel.setLayout(new FlowLayout());
-			flowPanel.setBackground(Color.CYAN);
-			flowPanel.add(chiffres);
-			backPanel.add(flowPanel, BorderLayout.CENTER);
-			add(backPanel);
+			//Paramètre du panel de bouton
+			c.insets = new Insets(5,5,5,5);
+			c.fill = GridBagConstraints.BOTH;
+			c.weightx = 5;
+			c.weighty = 4;
+			c.ipady = c.anchor = GridBagConstraints.CENTER;
+			
+			generateButton();
+//			displayButton();
+			panCalculatrice.add(panelButton);
+			
+			c.gridx = 0;
+			c.gridy = 0;
+			
+			panelButton.add(tabButton[0]);
+			
+			c.gridx = 1;
+			c.gridy = 0;
+			
+			panelButton.add(tabButton[1]);
+			
+			c.gridx = 2;
+			c.gridy = 0;
+			
+			panelButton.add(tabButton[2]);
+			
+		
 		}
+		
+		private void generateButton()
+		{
+			for (int i = 0; i < tabButton.length; i++)
+			{
+				switch (i) {
+				case 3:
+					
+					tabButton[i] = new JButton(tabLabelButton[i]);
+					tabButton[i].addActionListener(new DivListener());
+					break;
+					
+				case 7:
+					tabButton[i] = new JButton(tabLabelButton[i]);
+					tabButton[i].addActionListener(new MultiListener());
+					break;
+					
+				case 11:
+					tabButton[i] = new JButton(tabLabelButton[i]);
+					tabButton[i].addActionListener(new MoinsListener());
+					break;
+					
+				case 14:
+					tabButton[i] = new JButton(tabLabelButton[i]);
+					tabButton[i].addActionListener(new ResetListener());
+					break;
+					
+				case 15:
+					tabButton[i] = new JButton(tabLabelButton[i]);
+					tabButton[i].addActionListener(new PlusListener());
+					break;
+					
+				case 16:
+					tabButton[i] = new JButton(tabLabelButton[i]);
+					tabButton[i].addActionListener(new EgalListener());
+					break;
+					
+				default:
+					
+					tabButton[i] = new JButton(tabLabelButton[i]);
+					tabButton[i].addActionListener(new ChiffreListener());
+					
+					break;
+				}
+				
+			}
+		}
+		
+//		private void displayButton()
+//		{
+//			int numBtn = 0;
+//			
+//			for (int i = 0; i < 3; i++)
+//			{
+//				for (int j = 0; j < 4 ; j++)
+//				{
+//					c.gridx = i;
+//					c.gridy = j;
+//					
+//					panelButton.add(tabButton[numBtn]);
+//					numBtn++;
+//					
+//				}
+//			}
+//		}
 
 		  //Méthode permettant d'effectuer un calcul selon l'opérateur sélectionné
 
