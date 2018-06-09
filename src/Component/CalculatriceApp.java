@@ -69,30 +69,19 @@ public class CalculatriceApp extends JPanel
 			//Paramètre du panel de bouton
 			c.insets = new Insets(5,5,5,5);
 			c.fill = GridBagConstraints.BOTH;
-			c.weightx = 5;
-			c.weighty = 4;
+			c.weightx = 4;
+			c.weighty = 5;
 			c.ipady = c.anchor = GridBagConstraints.CENTER;
 			
 			generateButton();
-//			displayButton();
+			displayButton();
+	
+			c.gridx = 0 ;
+			c.gridy = 4 ;
+			c.gridwidth = 4 ;
+			panelButton.add(tabButton[16],c);
+			
 			panCalculatrice.add(panelButton);
-			
-			c.gridx = 0;
-			c.gridy = 0;
-			
-			panelButton.add(tabButton[0]);
-			
-			c.gridx = 1;
-			c.gridy = 0;
-			
-			panelButton.add(tabButton[1]);
-			
-			c.gridx = 2;
-			c.gridy = 0;
-			
-			panelButton.add(tabButton[2]);
-			
-		
 		}
 		
 		private void generateButton()
@@ -142,23 +131,23 @@ public class CalculatriceApp extends JPanel
 			}
 		}
 		
-//		private void displayButton()
-//		{
-//			int numBtn = 0;
-//			
-//			for (int i = 0; i < 3; i++)
-//			{
-//				for (int j = 0; j < 4 ; j++)
-//				{
-//					c.gridx = i;
-//					c.gridy = j;
-//					
-//					panelButton.add(tabButton[numBtn]);
-//					numBtn++;
-//					
-//				}
-//			}
-//		}
+		private void displayButton()
+		{
+			int numBtn = 0;
+			
+			for (int i = 0; i < 4 ; i++)
+			{
+				for (int j = 0; j < 4 ; j++)
+				{
+					c.gridx = j;
+					c.gridy = i;
+					
+					panelButton.add(tabButton[numBtn],c);
+					numBtn++;
+					
+				}
+			}
+		}
 
 		  //Méthode permettant d'effectuer un calcul selon l'opérateur sélectionné
 
