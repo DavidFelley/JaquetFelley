@@ -19,23 +19,22 @@ import javax.swing.border.EmptyBorder;
 
 import Main.MainFrame;
 
-
 public class ContactForm extends JPanel{
 
 	// Label infos contacts
-	protected JLabel nom = new JLabel("Nom: ");
-	protected JLabel prenom = new JLabel("Prénom: ");
-	protected JLabel email = new JLabel("E-mail: ");
-	protected JLabel telephone = new JLabel("Téléphone: ");
+	protected JLabel nom = new LabelPerso("Nom: ");
+	protected JLabel prenom = new LabelPerso("Prénom: ");
+	protected JLabel email = new LabelPerso("E-mail: ");
+	protected JLabel telephone = new LabelPerso("Téléphone: ");
 
 	// TextField infos contacts
-	protected JTextField tfNom = new JTextField();
-	protected JTextField tfPrenom = new JTextField();
-	protected JTextField tfEmail = new JTextField();
-	protected JTextField tfTelephone = new JTextField();
+	protected JTextField tfNom = new TextfieldPerso();
+	protected JTextField tfPrenom = new TextfieldPerso();
+	protected JTextField tfEmail = new TextfieldPerso();
+	protected JTextField tfTelephone = new TextfieldPerso();
 
 	// Icone de base  du champ contact 
-	protected ButtonCreation contactPhoto = new ButtonCreation("contactPhoto", new ImageIcon("images/Icones/contactVide.png"));
+	protected ButtonCreation contactPhoto = new ButtonCreation("contactPhoto", new ImageIcon("images/Icones/ContactVideNoir.png"));
 
 	// Bouton delete, valider, modifier, retour
 	protected ButtonCreation buttonDelete = new ButtonCreation("delete", new ImageIcon("images/Icones/trash.png"));
@@ -59,13 +58,12 @@ public class ContactForm extends JPanel{
 	protected Color color = new Color(78,104,141);
 
 	protected Contact contact;
+	
 	protected boolean modification;
 	
 	protected int id = 0;
 
 	protected ButtonCreation tempIcon;
-
-	private ContactApp contactApp = new ContactApp(mainframe);
 
 	// Constructeur pour le formulaire vide
 	public ContactForm(boolean modification, CardLayout cl, JPanel jp, MainFrame mainframe) {
@@ -86,53 +84,45 @@ public class ContactForm extends JPanel{
 		this.mainframe = mainframe;
 		createFormPanel();
 		writeInfos(contact);
-		
-
 	}
 
+	
 	public void createFormPanel() {
 
 		setLayout(new BorderLayout());
+setBackground(Color.WHITE);
+setOpaque(true);
 		add(panelBase, BorderLayout.NORTH);
 		panelBase.setLayout(new BoxLayout(panelBase, BoxLayout.Y_AXIS));
+
 
 		// menuPanel contenant la menu barre
 		panelBase.add(menuPanel);
 		menuPanel.setPreferredSize(new Dimension(450,40));
 		menuPanel.setBorder(new EmptyBorder(0,0,0,0));
 		menuPanel.setOpaque(false);
+	
 
 		// PhotoPanel contenant la photo du contact
 		panelBase.add(photoPanel);
 		photoPanel.setPreferredSize(new Dimension(450,325));
 		photoPanel.add(contactPhoto);
-
+photoPanel.setBackground(Color.WHITE);
 		
 		//formPanel contenant les informations du contact
 		panelBase.add(formPanel);
+		formPanel.setBackground(Color.WHITE);
 		formPanel.setPreferredSize(new Dimension(450,305));
-		formPanel.add(prenom);
 		formPanel.setBorder(new EmptyBorder(10,10,10,10));
-
-		prenom.setFont(new Font(null, Font.BOLD, 20));
+		
+		formPanel.add(prenom);
 		formPanel.add(tfPrenom);
-		tfPrenom.setFont(new Font(null, Font.PLAIN, 20));
-
 		formPanel.add(nom);
-		nom.setFont(new Font(null, Font.BOLD, 20));
 		formPanel.add(tfNom);
-		tfNom.setPreferredSize(new Dimension(200,10));
-		tfNom.setFont(new Font(null, Font.PLAIN, 20));
-
 		formPanel.add(email);
-		email.setFont(new Font(null, Font.BOLD, 20));
 		formPanel.add(tfEmail);
-		tfEmail.setFont(new Font(null, Font.PLAIN,20));
-
 		formPanel.add(telephone);
-		telephone.setFont(new Font(null, Font.BOLD, 20));
 		formPanel.add(tfTelephone);
-		tfTelephone.setFont(new Font(null, Font.PLAIN,20));
 		
 		//BottomPanel contenant le bouton delete et le bouton save
 		panelBase.add(bottomPanel, BorderLayout.SOUTH);
@@ -164,7 +154,7 @@ public class ContactForm extends JPanel{
 		tfPrenom.setText(null);
 		tfEmail.setText(null);
 		tfTelephone.setText(null);
-		contactPhoto.setIcon(new ImageIcon("images/Icones/contactVide.png"));
+		contactPhoto.setIcon(new ImageIcon("images/Icones/ContactVideNoir.png"));
 	}
 	
 	//Méthode permettant d'écrire les infos contacts dans les textFields
@@ -175,9 +165,6 @@ public class ContactForm extends JPanel{
 			tfTelephone.setText(contact.getTelephone());
 			contactPhoto.setIcon(new ImageIcon(contact.getImageContactPath()));
 	}
-	
-
-	
 	
 	public ButtonCreation getContactPhoto() {
 		return contactPhoto;
@@ -194,8 +181,7 @@ public class ContactForm extends JPanel{
 	public void setTempIcon(ButtonCreation tempIcon) {
 		this.tempIcon = tempIcon;
 	}
-
-
+	
 	public void changeModification() {
 		
 		modification =! modification;
@@ -206,6 +192,7 @@ public class ContactForm extends JPanel{
 			tfPrenom.setEditable(modification);
 			tfEmail.setEditable(modification);
 			tfTelephone.setEditable(modification);
+			contactPhoto.removeActionListener(new ClickPhotoContact());
 		} else {
 			bottomPanel.setVisible(modification);
 			bottomPanel.setVisible(modification);
@@ -213,54 +200,17 @@ public class ContactForm extends JPanel{
 			tfPrenom.setEditable(modification);
 			tfEmail.setEditable(modification);
 			tfTelephone.setEditable(modification);
+			contactPhoto.addActionListener(new ClickPhotoContact());
 		}
 	}
-
 
 	//ActionListener sur l'icône contact qui ouvre la galerie
 			class ClickPhotoContact implements ActionListener 
 			{
-						
 				@Override
 				public void actionPerformed(ActionEvent e) 
 				{													
-					tempIcon = (ButtonCreation) e.getSource();
-					
 					mainframe.getContactApp().getCardLayoutContact().show(mainframe.getContactApp().getContentContact(), "galleryApp");
-
-					
-					
-					System.out.println("je clique sur l'icône du contact");
-					
-			
-					
-//					contactPhoto.setIcon(new ImageIcon(contactApp.getGalleryApp().getImagePath()));
-				
-					
-					
-//					mainframe.getGalleryApp().rgallery();
-//					mainframe.getCardLayout().show(mainframe.getContentPanel(), "galleryPanel");
-//					mainframe.getGalleryApp().setFromContact(1);
 				}
 			}
-
-//			class ReturnPath implements ActionListener
-//			{
-//				@Override
-//				public void actionPerformed(ActionEvent e)
-//				{
-//					System.out.println("chemin de l'image" + " " + contactApp.getGalleryApp().getImagePath());
-//
-//					System.out.println(contactApp.getGalleryApp().getGalleryPanel().getPhotos().get(id));
-//					
-//		
-//					
-////					System.out.println(contactApp.getGalleryApp().photos.get(id));
-////					setImagePath(galleryPanel.photos.get(id)); 
-////					contactApp.getContactModify().getTempIcon().setIcon(new ImageIcon(imagePath));
-//					
-////					contactApp.getCardLayoutContact().show(contactApp.getContentContact(), "" + contactApp.getContact().getId());
-//				}
-//			}
-			
 }

@@ -37,8 +37,6 @@ public class ContactApp extends JPanel{
 	private ContactList contactList ;
 	private ContactModify contactModify;
 	
-	private ButtonCreation actualContact;
-	
 	public ArrayList <Contact> contacts = new ArrayList<Contact>();
 		
 	private MainFrame mainframe;
@@ -48,8 +46,6 @@ public class ContactApp extends JPanel{
 	public GalleryApp galleryApp = new GalleryApp(true, this);
 	
 	private boolean isFromContactAdd ;
-
-	
 
 	private int id;
 
@@ -73,7 +69,6 @@ public class ContactApp extends JPanel{
 		
 		validButton.addActionListener(new SaveImageContact());
 		
-		contenuList();
 	}
 		
 	
@@ -126,12 +121,6 @@ public class ContactApp extends JPanel{
 		this.contacts = contacts;
 	}
 	
-	public void contenuList() {
-		for(int i = 0 ; i < contacts.size(); i++) {
-			System.out.println("CONTENU DE MON ARRAY LIST" + contacts.get(i).toString() + " ID = " + contacts.get(i).getId());
-		}
-	}
-	
 	public CardLayout getCardLayoutContact() {
 		return cardLayoutContact;
 	}
@@ -182,20 +171,13 @@ public void setFromContactAdd(boolean isFromContactAdd) {
 
 class SaveImageContact implements ActionListener
 {
-//	Contact contact;
-//	
-//	public SaveImageContact(Contact contact) {
-//		this.contact = contact;
-//	}
-	
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
-		actualContact = (ButtonCreation) e.getSource();
-		id = actualContact.getId();
-		System.out.println("chemin de l'image" + " " + galleryApp.getGalleryPanel().getPhotos().get(galleryApp.getId()));
-		
-		System.out.println("value of my boolean" + isFromContactAdd);
+//		actualContact = (ButtonCreation) e.getSource();
+//		id = actualContact.getId();
+//		System.out.println("chemin de l'image" + " " + galleryApp.getGalleryPanel().getPhotos().get(galleryApp.getId()));
+//		System.out.println("value of my boolean" + isFromContactAdd);
 		
 		if(isFromContactAdd == false) {
 		contactModify.getContactPhoto().setIcon(new ImageIcon(galleryApp.getGalleryPanel().getPhotos().get(galleryApp.getId())));	
@@ -206,15 +188,6 @@ class SaveImageContact implements ActionListener
 		contentContact.add("contactAdd",contactAdd);
 		cardLayoutContact.show(contentContact, "contactAdd");
 		}
-		System.out.println("==========save");
-		
-		
-	
-//		System.out.println(contactApp.getGalleryApp().photos.get(id));
-//		setImagePath(galleryPanel.photos.get(id)); 
-//		contactApp.getContactModify().getTempIcon().setIcon(new ImageIcon(imagePath));
-		
-//		contactApp.getCardLayoutContact().show(contactApp.getContentContact(), "" + contactApp.getContact().getId());
 	}
 }
 	
@@ -235,7 +208,6 @@ class SaveImageContact implements ActionListener
 		private ButtonCreation buttonPlus = new ButtonCreation("plus",new ImageIcon("images/Icones/plus.png"));
 		private MenuBarre menuBarreList = new MenuBarre("CONTACTS", buttonPlus, color);
 		private JScrollPane scroll = new JScrollPane(panelList, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		private ContactApp contactApp;
 		
 				// Constructeur de la liste des contacts
 				public ContactList() {
@@ -303,7 +275,6 @@ class SaveImageContact implements ActionListener
 						contentContact.add("contactModify",contactModify);
 						cardLayoutContact.show(contentContact, "contactModify");
 						cardLayoutContact.show(contentContact, "" + contact.getId());
-						System.out.println("J'ai ouvert le contact " + contact.getNom() + " " + contact.getPrenom());
 					}
 				}	
 				
@@ -334,6 +305,5 @@ class SaveImageContact implements ActionListener
 						updateListContact();
 					}
 				}
-				
 	}
 }

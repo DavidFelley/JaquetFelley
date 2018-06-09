@@ -23,24 +23,6 @@ public class Contact implements Serializable  {
 		this.id = id;
 		this.imageContactPath = imageContactPath;
 	}
-	
-//	// Constructeur avec photo
-//	public Contact (String nom, String prenom, String email, String telephone, int id, 	String imageContactPath) {
-//		this.nom = nom;
-//		this.prenom = prenom;
-//		this.email = email;
-//		this.telephone = telephone;
-//		this.id = id;
-//		this.imageContactPath = imageContactPath;
-//	}
-
-//	private ImageIcon getContactPhoto() {
-//		return contactPhoto;
-//	}
-//
-//	private void setContactPhoto(ImageIcon contactPhoto) {
-//		this.contactPhoto = contactPhoto;
-//	}
 
 	public String toString() {
 		// TODO Auto-generated method stub

@@ -56,7 +56,6 @@ public class ContactAdd extends ContactForm{
 	//ActionListener sur le bouton retour afin d'afficher la liste des contacts
 			class ClickBack implements ActionListener 
 			{
-				
 				@Override
 				public void actionPerformed(ActionEvent e) 
 				{

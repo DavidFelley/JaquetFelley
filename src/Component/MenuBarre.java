@@ -24,19 +24,23 @@ public class MenuBarre extends JPanel{
 	Color color ;
 	String titre ;
 	
-	public MenuBarre(ButtonCreation boutonWest, ButtonCreation boutonEast, Color color )
+	public MenuBarre(String titre, Color color )
 	{
-		this.boutonWest = boutonWest ;
-		this.boutonEast = boutonEast ;
+		this.titre = titre ;
 		this.color = color;
-		
+		//Paramètre fixe à la barre de menu
 		setPreferredSize(new Dimension(480, 40));
-		
 		setBackground(color);
+		setLayout(new BorderLayout());
+		setBorder(new EmptyBorder(0, 0, 0, 0));
 		
-		add(boutonWest, BorderLayout.WEST);
-		add(boutonEast, BorderLayout.EAST);
+		JLabel entete = new JLabel(titre);
+		entete.setFont(new Font(null, Font.BOLD, 20));
+		entete.setHorizontalAlignment(JLabel.CENTER);
+		entete.setForeground(Color.WHITE);
+		add(entete, BorderLayout.CENTER);
 	}
+	
 	
 	//Constructeur MenuBarre avec le boutonEast
 	public MenuBarre(String titre, ButtonCreation boutonEast, Color color )
@@ -60,23 +64,22 @@ public class MenuBarre extends JPanel{
 		add(boutonEast, BorderLayout.EAST);
 	}
 	
-	public MenuBarre(String titre, Color color )
+
+	public MenuBarre(ButtonCreation boutonWest, ButtonCreation boutonEast, Color color )
 	{
-		this.titre = titre ;
-		this.boutonEast = boutonEast;
+		this.boutonWest = boutonWest ;
+		this.boutonEast = boutonEast ;
 		this.color = color;
-		//Paramètre fixe à la barre de menu
-		setPreferredSize(new Dimension(480, 40));
-		setBackground(color);
-		setLayout(new BorderLayout());
-		setBorder(new EmptyBorder(0, 40, 0, 5));
 		
-		JLabel entete = new JLabel(titre);
-		entete.setFont(new Font(null, Font.BOLD, 20));
-		entete.setHorizontalAlignment(JLabel.CENTER);
-		entete.setForeground(Color.WHITE);
-		add(entete, BorderLayout.CENTER);
+		setPreferredSize(new Dimension(480, 40));
+		
+		setBackground(color);
+		
+		add(boutonWest, BorderLayout.WEST);
+		add(boutonEast, BorderLayout.EAST);
 	}
+	
+
 	
 	//Constructeur MenuBarre avec les boutonEast et boutonWest
 	public MenuBarre(String titre, ButtonCreation boutonWest, ButtonCreation boutonEast, Color color)
@@ -91,8 +94,6 @@ public class MenuBarre extends JPanel{
 		setBackground(color);
 		setLayout(new BorderLayout());
 		setBorder(new EmptyBorder(0, 5, 0, 5));
-		
-	
 		
 		JLabel entete = new JLabel(titre);
 		entete.setFont(new Font(null, Font.BOLD, 20));

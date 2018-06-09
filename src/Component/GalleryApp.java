@@ -108,6 +108,7 @@ public class GalleryApp extends JPanel
 	{
 		private Color color = new Color(78,104,141);
 		private ButtonCreation ajout = new ButtonCreation("ajout", new ImageIcon("images/Icones/plus.png"));
+		private MenuBarre menuGalerie;
 		
 		public ButtonCreation getAjout() {
 			return ajout;
@@ -116,8 +117,6 @@ public class GalleryApp extends JPanel
 		public void setAjout(ButtonCreation ajout) {
 			this.ajout = ajout;
 		}
-
-		private MenuBarre menuGalerie;
 		
 		public MenuBarre getMenuGalerie() {
 			return menuGalerie;
@@ -346,7 +345,7 @@ public class GalleryApp extends JPanel
 				fullscreenPanel.refresh();
 				cardlayout.show(GalleryApp.this, "FullScreenPanel");
 			}
-			
+	
 		}
 		
 		
@@ -355,18 +354,16 @@ public class GalleryApp extends JPanel
 	class FullScreenPanel extends JPanel
 	{
 		private GalleryPanel galleryPanel = new GalleryPanel();
-		
-//		private ButtonCreation validateButton = new ButtonCreation("validate", new ImageIcon("images/Icones/validate.png"));
+	
 		private ButtonCreation trashButton = new ButtonCreation("trash", new ImageIcon("images/Icones/trash.png"));
 		private ButtonCreation backButton = new ButtonCreation("back", new ImageIcon("images/Icones/retour.png"));
-		
 		private ButtonCreation nextPhoto = new ButtonCreation();
 		private ButtonCreation backPhoto = new ButtonCreation();
+		
 		private MenuBarre menuImage;
 		
 		private JLabel imageGrande = new JLabel() ;
 
-		
 		public FullScreenPanel(GalleryPanel galleryPanel) 
 		{
 			this.galleryPanel = galleryPanel;
@@ -393,10 +390,8 @@ public class GalleryApp extends JPanel
 			imageGrande.setIcon(new ImageIcon(resizePhoto(galleryPanel.photos.get(id))));
 			imageGrande.setHorizontalAlignment(JLabel.CENTER);
 			imageGrande.setLayout(new BorderLayout());
-			
 			imageGrande.add(nextPhoto, BorderLayout.EAST);
 			imageGrande.add(backPhoto, BorderLayout.WEST);
-
 			this.add(imageGrande);
 		}
 		
@@ -518,18 +513,18 @@ public class GalleryApp extends JPanel
 			
 		}
 		
-	class ReturnPath implements ActionListener
-	{
-		@Override
-		public void actionPerformed(ActionEvent e)
-		{
-			System.out.println(galleryPanel.photos.get(id));
-			setImagePath(galleryPanel.photos.get(id)); 
-			contactApp.getContactModify().getTempIcon().setIcon(new ImageIcon(imagePath));
-			
-//			contactApp.getCardLayoutContact().show(contactApp.getContentContact(), "" + contactApp.getContact().getId());
-		}
-	}
+//	class ReturnPath implements ActionListener
+//	{
+//		@Override
+//		public void actionPerformed(ActionEvent e)
+//		{
+////			System.out.println(galleryPanel.photos.get(id));
+//			setImagePath(galleryPanel.photos.get(id)); 
+//			contactApp.getContactModify().getTempIcon().setIcon(new ImageIcon(imagePath));
+//			
+////			contactApp.getCardLayoutContact().show(contactApp.getContentContact(), "" + contactApp.getContact().getId());
+//		}
+//	}
 		
 	}
 

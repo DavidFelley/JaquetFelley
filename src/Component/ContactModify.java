@@ -34,7 +34,7 @@ public class ContactModify extends ContactForm{
 		buttonReturn.addActionListener(new ClickBack());
 		buttonValidate.addActionListener(new ClickSaveContact());
 		buttonDelete.addActionListener(new ClickDeleteContact(contact));
-		contactPhoto.addActionListener(new ClickPhotoContact());
+
 	}
 
 	//ActionListener sur le bouton modifier 
@@ -57,10 +57,6 @@ public class ContactModify extends ContactForm{
 //					contacts.add(modifiedContact());
 					contactList.updateListContact();
 					cl.show(jp, "contactList");
-			
-//					System.out.println(contactApp.getContacts().get(id).toString());
-//					System.out.println("valeur de l'id: " + id);
-//					id++;	
 				}
 			}
 			

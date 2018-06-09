@@ -265,7 +265,6 @@ homeButton.addActionListener(new ClickHome());
 
 	// Mouse Listener changement icône 
 	
-	
 	class ChangeLayoutButton extends MouseAdapter { 
 		public void mouseExited(MouseEvent arg0) {
 			// TODO Auto-generated method stub
@@ -331,7 +330,6 @@ homeButton.addActionListener(new ClickHome());
 				parameterButton.setIcon(new ImageIcon("images/Icones/parametrePlein.png"));		
 				break;
 			}
-			System.out.println(e.getComponent().getName());
 		}
 	}
 
