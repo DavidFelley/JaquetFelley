@@ -12,10 +12,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -32,7 +29,6 @@ import javax.swing.Timer;
 import Component.ButtonCreation;
 import Component.CalculatriceApp;
 import Component.ContactApp;
-import Component.ContactForm;
 import Component.GalleryApp;
 import View.BackgroundImagePanel;
 
@@ -62,7 +58,6 @@ public class MainFrame extends JFrame{
 	//Panel applications
 	//private JPanel homepagePanel = new JPanel (new GridBagLayout());
 	private JPanel homepagePanel = new JPanel (new GridLayout(3,3));
-	private GridBagConstraints c = new GridBagConstraints();
 
 	//Boutons et applications
 	private ButtonCreation offButton = new ButtonCreation("off", new ImageIcon("images/Icones/powerVide.png"));
