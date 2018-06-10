@@ -45,7 +45,6 @@ public class MenuBarre extends JPanel{
 	//Constructeur MenuBarre avec le boutonEast
 	public MenuBarre(String titre, ButtonCreation boutonEast, Color color )
 	{
-	
 		this.titre = titre ;
 		this.boutonEast = boutonEast;
 		this.color = color;
@@ -53,7 +52,7 @@ public class MenuBarre extends JPanel{
 		setPreferredSize(new Dimension(480, 40));
 		setBackground(color);
 		setLayout(new BorderLayout());
-		setBorder(new EmptyBorder(0, 40, 0, 5));
+		setBorder(new EmptyBorder(0, 5, 0, 5));
 		
 		JLabel entete = new JLabel(titre);
 		entete.setFont(new Font(null, Font.BOLD, 20));

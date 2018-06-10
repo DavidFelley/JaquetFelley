@@ -79,18 +79,11 @@ public class GalleryApp extends JPanel
 		fullscreenPanel.getMenuImage().remove(fullscreenPanel.getTrashButton());
 		fullscreenPanel.getMenuImage().add(contactApp.getValidButton(), BorderLayout.EAST);
 	}
-	
 
 	public String getImagePath() 
 	{
 			return imagePath;
 	}
-
-	private void setImagePath(String imagePath) 
-	{
-		 	this.imagePath = imagePath;
-	}
-	
 	
 	public GalleryPanel getGalleryPanel() {
 		return galleryPanel;
@@ -336,7 +329,6 @@ public class GalleryApp extends JPanel
 		
 		class afficheGrandePhoto implements ActionListener
 		{
-
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
@@ -345,10 +337,7 @@ public class GalleryApp extends JPanel
 				fullscreenPanel.refresh();
 				cardlayout.show(GalleryApp.this, "FullScreenPanel");
 			}
-	
 		}
-		
-		
 	}
 	
 	class FullScreenPanel extends JPanel
@@ -359,7 +348,6 @@ public class GalleryApp extends JPanel
 		private ButtonCreation backButton = new ButtonCreation("back", new ImageIcon("images/Icones/retour.png"));
 		private ButtonCreation nextPhoto = new ButtonCreation();
 		private ButtonCreation backPhoto = new ButtonCreation();
-		
 		private MenuBarre menuImage;
 		
 		private JLabel imageGrande = new JLabel() ;
@@ -378,7 +366,6 @@ public class GalleryApp extends JPanel
 			
 			backButton.addActionListener(new backGallery());
 			trashButton.addActionListener(new deleteGallery());
-			
 			
 			nextPhoto.addActionListener(new nextPhoto());
 			backPhoto.addActionListener(new backPhoto());
@@ -435,7 +422,6 @@ public class GalleryApp extends JPanel
 				}
 				
 			return null ;
-				
 		}
 		
 		public MenuBarre getMenuImage() {
@@ -450,12 +436,6 @@ public class GalleryApp extends JPanel
 		public void setTrashButton(ButtonCreation trashButton) {
 			this.trashButton = trashButton;
 		}
-		
-
-
-
-
-
 
 		class backGallery implements ActionListener
 		{
@@ -464,7 +444,6 @@ public class GalleryApp extends JPanel
 			{
 				cardlayout.show(GalleryApp.this,"GalleryPanel");
 			}
-			
 		}
 		
 		class deleteGallery implements ActionListener
@@ -480,7 +459,6 @@ public class GalleryApp extends JPanel
 				 
 				 cardlayout.show(GalleryApp.this, "GalleryPanel");
 			}
-			
 		}
 		
 		class nextPhoto implements ActionListener
@@ -489,13 +467,12 @@ public class GalleryApp extends JPanel
 			public void actionPerformed(ActionEvent e)
 			{
 				if(id == galleryPanel.photos.size()-1)
-				id = 0;
+					id = 0;
 				else
-				id++;
+					id++;
 				
 				fullscreenPanel.refresh();
 			}
-			
 		}
 		
 		class backPhoto implements ActionListener
@@ -504,28 +481,12 @@ public class GalleryApp extends JPanel
 			public void actionPerformed(ActionEvent e)
 			{
 				if(id == 0)
-				id = galleryPanel.photos.size()-1;
+					id = galleryPanel.photos.size()-1;
 				else
-				id--;
+					id--;
 				
 				fullscreenPanel.refresh();
 			}
-			
 		}
-		
-//	class ReturnPath implements ActionListener
-//	{
-//		@Override
-//		public void actionPerformed(ActionEvent e)
-//		{
-////			System.out.println(galleryPanel.photos.get(id));
-//			setImagePath(galleryPanel.photos.get(id)); 
-//			contactApp.getContactModify().getTempIcon().setIcon(new ImageIcon(imagePath));
-//			
-////			contactApp.getCardLayoutContact().show(contactApp.getContentContact(), "" + contactApp.getContact().getId());
-//		}
-//	}
-		
 	}
-
 }

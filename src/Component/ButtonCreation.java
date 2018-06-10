@@ -28,8 +28,8 @@ public class ButtonCreation extends JButton {
 		
 	public ButtonCreation(String name, ImageIcon image) {
 		super(image);
-		this.name = name;
 		
+		this.name = name;
 		setName(name);
 		setFocusable(false);
 		//Supprime les bordures autour de chaque bouton
@@ -58,20 +58,9 @@ public class ButtonCreation extends JButton {
 		setBorder(new EmptyBorder(0, 0, 0, 0));
 		setContentAreaFilled(false);
 	}
-	
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public ImageIcon getImage() {
-		return image;
-	}	
-	
-	public int getId() {
+		
+	public int getId()
+	{
 		return id;
 	}
 	
