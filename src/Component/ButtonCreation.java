@@ -25,14 +25,6 @@ public class ButtonCreation extends JButton {
 		setBorderPainted(false);
 		setPreferredSize(new Dimension(200,680));
 	}
-	
-	public ButtonCreation(String name)
-	{
-		setBackground(Color.white);
-		setBorderPainted(false);
-		setFocusable(false);
-		setText(name);
-	}
 		
 	public ButtonCreation(String name, ImageIcon image) {
 		super(image);
@@ -43,17 +35,6 @@ public class ButtonCreation extends JButton {
 		//Supprime les bordures autour de chaque bouton
 		setBorder(new EmptyBorder(0, 0, 0, 0));
 		setContentAreaFilled(false);
-	}
-	
-	public ButtonCreation (ImageIcon image) {
-		super(image);
-		this.image = image ;
-		
-		setFocusable(false);
-		//Supprime les bordures autour de chaque bouton
-		setBorder(new EmptyBorder(0, 0, 0, 0));
-		setContentAreaFilled(false);
-	
 	}
 	
 	public ButtonCreation (ImageIcon image, int id) {
@@ -71,17 +52,6 @@ public class ButtonCreation extends JButton {
 	public ButtonCreation(int width, int height) {		
 		setMaximumSize(new Dimension(width, height));
 		setMinimumSize(new Dimension(width, height));
-		setPreferredSize(new Dimension(width, height));
-		setFocusable(false);
-		//Supprime les bordures autour de chaque bouton
-		setBorder(new EmptyBorder(0, 0, 0, 0));
-//		setContentAreaFilled(false);
-	}
-	
-	
-	public ButtonCreation(ImageIcon image, int width, int height) {
-		super(image);
-		
 		setPreferredSize(new Dimension(width, height));
 		setFocusable(false);
 		//Supprime les bordures autour de chaque bouton
