@@ -3,7 +3,11 @@ package Component;
 import java.io.Serializable;
 
 import javax.swing.ImageIcon;
-
+/**
+ * 
+ * @author Valentin Jaquet
+ *
+ */
 public class Contact implements Serializable  {
 	
 	private String nom;

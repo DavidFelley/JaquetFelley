@@ -34,7 +34,6 @@ public class ContactModify extends ContactForm{
 		buttonReturn.addActionListener(new ClickBack());
 		buttonValidate.addActionListener(new ClickSaveContact());
 		buttonDelete.addActionListener(new ClickDeleteContact(contact));
-
 	}
 
 	//ActionListener sur le bouton modifier 

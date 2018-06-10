@@ -211,7 +211,6 @@ class SaveImageContact implements ActionListener
 		
 				// Constructeur de la liste des contacts
 				public ContactList() {
-					updateListContact();
 					setLayout(new BorderLayout());
 					add(menuBarreList, BorderLayout.NORTH);
 					scroll.setPreferredSize(new Dimension(450, 680));
@@ -219,7 +218,6 @@ class SaveImageContact implements ActionListener
 					buttonPlus.addActionListener(new ClickAddContact());
 					scroll.setBorder(new EmptyBorder(0,0,0,0));
 					add(scroll);
-					this.addComponentListener(new UpdateListContact());
 					updateListContact();
 				}
 				
@@ -277,33 +275,5 @@ class SaveImageContact implements ActionListener
 						cardLayoutContact.show(contentContact, "" + contact.getId());
 					}
 				}	
-				
-				// Componenent Lister qui met à jour la liste de contacts
-				class UpdateListContact implements ComponentListener{
-
-					@Override
-					public void componentHidden(ComponentEvent arg0) {
-						// TODO Auto-generated method stub
-						
-					}
-
-					@Override
-					public void componentMoved(ComponentEvent arg0) {
-						// TODO Auto-generated method stub
-						
-					}
-
-					@Override
-					public void componentResized(ComponentEvent arg0) {
-						// TODO Auto-generated method stub
-						
-					}
-
-					@Override
-					public void componentShown(ComponentEvent arg0) {
-						// TODO Auto-generated method stub
-						updateListContact();
-					}
-				}
 	}
 }
