@@ -107,7 +107,7 @@ setOpaque(true);
 		panelBase.add(photoPanel);
 		photoPanel.setPreferredSize(new Dimension(450,325));
 		photoPanel.add(contactPhoto);
-photoPanel.setBackground(Color.WHITE);
+		photoPanel.setBackground(Color.WHITE);
 		
 		//formPanel contenant les informations du contact
 		panelBase.add(formPanel);
@@ -193,6 +193,7 @@ photoPanel.setBackground(Color.WHITE);
 			tfEmail.setEditable(modification);
 			tfTelephone.setEditable(modification);
 			contactPhoto.removeActionListener(new ClickPhotoContact());
+			
 		} else {
 			bottomPanel.setVisible(modification);
 			bottomPanel.setVisible(modification);

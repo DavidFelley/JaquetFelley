@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
+import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
 
 import java.io.FileOutputStream;
@@ -19,7 +20,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
-
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -178,9 +179,12 @@ class SaveImageContact implements ActionListener
 //		id = actualContact.getId();
 //		System.out.println("chemin de l'image" + " " + galleryApp.getGalleryPanel().getPhotos().get(galleryApp.getId()));
 //		System.out.println("value of my boolean" + isFromContactAdd);
-		
+//		BufferedImage icontemp;
+//		icontemp = galleryApp.getGalleryPanel().createPreview((galleryApp.getGalleryPanel().getPhotos().get(galleryApp.getId())), 305);
 		if(isFromContactAdd == false) {
+			
 		contactModify.getContactPhoto().setIcon(new ImageIcon(galleryApp.getGalleryPanel().getPhotos().get(galleryApp.getId())));	
+//		contactModify.getContactPhoto().setIcon(new ImageIcon(galleryApp.getGalleryPanel().createPreview(galleryApp.getGalleryPanel().getPhotos().get(galleryApp.getId()), 310)));
 		cardLayoutContact.show(contentContact, "contactModify");
 		cardLayoutContact.show(contentContact, "" + contacts.get(id));	
 		}else{
@@ -198,8 +202,6 @@ class SaveImageContact implements ActionListener
 	 * 
 	 * 
 	 */
-	
-
 
 	class ContactList extends JPanel{
 		
@@ -215,6 +217,7 @@ class SaveImageContact implements ActionListener
 					add(menuBarreList, BorderLayout.NORTH);
 					scroll.setPreferredSize(new Dimension(450, 680));
 					panelList.setLayout(new GridLayout(0,1));
+					panelList.setBackground(Color.WHITE);
 					buttonPlus.addActionListener(new ClickAddContact());
 					scroll.setBorder(new EmptyBorder(0,0,0,0));
 					add(scroll);

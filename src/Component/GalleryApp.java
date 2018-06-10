@@ -241,7 +241,7 @@ public class GalleryApp extends JPanel
 			panelGallery.updateUI();
 		}
 		
-		private BufferedImage createPreview(String path, int newFormat)
+		public BufferedImage createPreview(String path, int newFormat)
 		{
 			BufferedImage img = null ;
 			int newWidth = newFormat;
