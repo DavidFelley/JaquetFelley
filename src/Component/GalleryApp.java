@@ -45,7 +45,6 @@ public class GalleryApp extends JPanel
 	private CardLayout cardlayout = new CardLayout();
 	private ButtonCreation element;
 
-
 	private int id;
 	private GalleryPanel galleryPanel = new GalleryPanel();
 	private FullScreenPanel fullscreenPanel = new FullScreenPanel(galleryPanel);
@@ -53,7 +52,6 @@ public class GalleryApp extends JPanel
 	private String imagePath;
 
 	private ContactApp contactApp;
-	
 	
 	public GalleryApp()
 	{
