@@ -20,6 +20,7 @@ import java.awt.event.MouseEvent;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.TimerTask;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -111,8 +112,8 @@ heure.setVisible(false);
 		//Gestion des panels
 		
 		
-contentPanel.add("lockscreen", lockscreen);
-lockscreen.getLockButton().addActionListener(new ClickUnLock());
+		contentPanel.add("lockscreen", lockscreen);
+		lockscreen.getLockButton().addActionListener(new ClickUnLock());
 		contentPanel.add(backgroundPanel, "backgroundPanel");
 		backgroundPanel.setLayout(new BorderLayout());
 		contentPanel.add(contactApp, "contactApp");	
@@ -125,7 +126,7 @@ lockscreen.getLockButton().addActionListener(new ClickUnLock());
 
 		homePanel.add(homeButton);
 		homeButton.addActionListener(new ClickHome());
-homeButton.setVisible(false);
+		homeButton.setVisible(false);
 
 		//Homepage panel
 		homepagePanel.setOpaque(false);
@@ -168,8 +169,9 @@ homeButton.setVisible(false);
 
 		//BOUTON OFF
 		homepagePanel.add(offButton);
-		offButton.addActionListener(new ClickApp());
+//		offButton.addActionListener(new ClickApp());
 		offButton.addMouseListener(new ChangeLayoutButton());
+		offButton.addMouseListener(new ShutDownButton());
 	}
 
 	public GalleryApp getGalleryApp() {
@@ -227,13 +229,40 @@ homeButton.setVisible(false);
 			case "gallery" :
 				cardLayout.show(contentPanel, "galleryPanel");
 				break;
-			case "off" : 
-			            contactApp.serializeContact();
-						System.exit(0);
-				break;
 			}
 		}
 	}
+	
+	class ShutDownButton extends MouseAdapter
+	{
+		private java.util.Timer timer;
+		public void mousePressed(MouseEvent e)
+        {
+			timer = new java.util.Timer();
+			
+			timer.schedule(new TimerTask()
+			{
+				public void run()
+				{
+					contactApp.serializeContact();
+					System.exit(0);
+				}
+			},2000);
+        }
+				public void mouseReleased(MouseEvent e)
+                {
+                    if(timer != null)
+                    {
+                        timer.cancel();
+                        timer = null;
+                        
+                        heure.setVisible(false);
+            			homeButton.setVisible(false);
+                        
+                        cardLayout.show(contentPanel, "lockscreen");
+                    }
+                }
+    }
 	
 
 	// Mouse Listener changement icône 
