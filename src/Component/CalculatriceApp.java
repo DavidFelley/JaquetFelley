@@ -43,7 +43,7 @@ public class CalculatriceApp extends JPanel
 		private ButtonCreation [] tabButton = new ButtonCreation[tabLabelButton.length];
 		private JLabel ecran = new JLabel() ;
 		private double chiffre ;
-		private boolean clicOperator = false, update = false ;
+		private boolean clicOperator = false, update = false, chiffre2 = false ;
 		private String operateur = "" ;
 		private JPanel panCalculatrice = new JPanel();
 		private JPanel panEcran = new JPanel();
@@ -88,9 +88,9 @@ public class CalculatriceApp extends JPanel
 		{
 			for (int i = 0; i < tabButton.length; i++)
 			{
-				switch (i) {
+				switch (i)
+				{
 				case 3:
-					
 					tabButton[i] = new ButtonCreation(tabLabelButton[i],106,75);
 					tabButton[i].addActionListener(new DivListener());
 					tabButton[i].setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Color.LIGHT_GRAY));
@@ -127,20 +127,18 @@ public class CalculatriceApp extends JPanel
 					tabButton[i].addActionListener(new EgalListener());
 					break;
 					
-				default:
-					
+				default:	
 					tabButton[i] = new ButtonCreation(tabLabelButton[i],106,75);
 					tabButton[i].addActionListener(new ChiffreListener());					
 					break;
-				}
-				
+				}	
 			}
 		}
 		
 		private void displayButton()
 		{
 			int numBtn = 0;
-			
+		
 			for (int i = 0; i < 4 ; i++)
 			{
 				for (int j = 0; j < 4 ; j++)
@@ -149,251 +147,160 @@ public class CalculatriceApp extends JPanel
 					c.gridy = i;
 					
 					panelButton.add(tabButton[numBtn],c);
-					numBtn++;
-					
+					numBtn++;	
 				}
 			}
 		}
 
 		  //Méthode permettant d'effectuer un calcul selon l'opérateur sélectionné
 
-		  private void calcul(){
-
-		    if(operateur.equals("+")){
-
-		      chiffre = chiffre + 
-
-		            Double.valueOf(ecran.getText()).doubleValue();
-
+		  private void calcul()
+		  {
+		    if(operateur.equals("+"))
+		    {
+		      chiffre = chiffre + Double.valueOf(ecran.getText()).doubleValue();
 		      ecran.setText(String.valueOf(chiffre));
-
 		    }
-
-		    if(operateur.equals("-")){
-
-		      chiffre = chiffre - 
-
-		            Double.valueOf(ecran.getText()).doubleValue();
-
+		    if(operateur.equals("-"))
+		    {
+		      chiffre = chiffre - Double.valueOf(ecran.getText()).doubleValue();
 		      ecran.setText(String.valueOf(chiffre));
-
 		    }          
 
-		    if(operateur.equals("*")){
-
-		      chiffre = chiffre * 
-
-		            Double.valueOf(ecran.getText()).doubleValue();
-
+		    if(operateur.equals("*"))
+		    {
+		      chiffre = chiffre * Double.valueOf(ecran.getText()).doubleValue();
 		      ecran.setText(String.valueOf(chiffre));
-
 		    }     
-
-		    if(operateur.equals("/")){
-
-		      try{
-
-		        chiffre = chiffre / 
-
-		              Double.valueOf(ecran.getText()).doubleValue();
-
+		    if(operateur.equals("/"))
+		    {
+		      try
+		      {
+		        chiffre = chiffre / Double.valueOf(ecran.getText()).doubleValue();
 		        ecran.setText(String.valueOf(chiffre));
-
-		      } catch(ArithmeticException e) {
-
+		      } 
+		      catch(ArithmeticException e)
+		      {
 		        ecran.setText("0");
-
 		      }
-
 		    }
-
 		  }
-
 
 		  //Listener utilisé pour les chiffres
 
 		  //Permet de stocker les chiffres et de les afficher
 
-		  class ChiffreListener implements ActionListener {
-
-		    public void actionPerformed(ActionEvent e){
-
+		  class ChiffreListener implements ActionListener
+		  {
+		    public void actionPerformed(ActionEvent e)
+		    {
 		      //On affiche le chiffre additionnel dans le label
 
 		      String str = ((JButton)e.getSource()).getText();
-
+		      
 		      if(update)
+		      {
 		        update = false;
-		      else
-		        if(!ecran.getText().equals("0") || str.equals("."))
-		        	str = ecran.getText() + str;
-
+		      	chiffre2 = true;
+		      }
+		      else if(str.equals(".") && ecran.getText().contains("."))  
+	    		  str = ecran.getText();
+		      else if(!ecran.getText().equals("0"))
+		    	  str = ecran.getText() + str;
 
 		      ecran.setText(str);
-
 		    }
-
 		  }
 
 
 		  //Listener affecté au bouton =
 
-		  class EgalListener implements ActionListener {
-
-		    public void actionPerformed(ActionEvent arg0){
-
-		      calcul();
-
-		      update = true;
-
-		      clicOperator = false;
-
+		  class EgalListener implements ActionListener
+		  {
+		    public void actionPerformed(ActionEvent arg0)
+		    {
+			     if (chiffre2)
+			     {
+			    	 calcul();
+			    	 update = false;
+			    	 clicOperator = false;
+			    	 chiffre2 = false;
+			    }
 		    }
-
 		  }
 
-
 		  //Listener affecté au bouton +
-
-		  class PlusListener implements ActionListener {
-
-		    public void actionPerformed(ActionEvent arg0){
-
-		      if(clicOperator){
-
-		        calcul();
-
-		        ecran.setText(String.valueOf(chiffre));
-
+		  class PlusListener implements ActionListener
+		  {
+		    public void actionPerformed(ActionEvent arg0)
+		    {
+		      if(!clicOperator)
+		      {
+		    	chiffre = Double.valueOf(ecran.getText()).doubleValue();
+			    clicOperator = true;
 		      }
-
-		      else{
-
-		        chiffre = Double.valueOf(ecran.getText()).doubleValue();
-
-		        clicOperator = true;
-
-		      }
-
 		      operateur = "+";
-
 		      update = true;
-
 		    }
-
 		  }
 
 
 		  //Listener affecté au bouton -
-
-		  class MoinsListener implements ActionListener {
-
-		    public void actionPerformed(ActionEvent arg0){
-
-		      if(clicOperator){
-
-		        calcul();
-
-		        ecran.setText(String.valueOf(chiffre));
-
+		  class MoinsListener implements ActionListener
+		  {
+		    public void actionPerformed(ActionEvent arg0)
+		    {
+		      if(!clicOperator)
+		      {
+		    	  chiffre = Double.valueOf(ecran.getText()).doubleValue();
+			      clicOperator = true;
 		      }
-
-		      else{
-
-		        chiffre = Double.valueOf(ecran.getText()).doubleValue();
-
-		        clicOperator = true;
-
-		      }
-
 		      operateur = "-";
-
 		      update = true;
-
 		    }
-
 		  }
-
 
 		  //Listener affecté au bouton *
-
-		  class MultiListener implements ActionListener {
-
-		    public void actionPerformed(ActionEvent arg0){
-
-		      if(clicOperator){
-
-		        calcul();
-
-		        ecran.setText(String.valueOf(chiffre));
-
+		  class MultiListener implements ActionListener
+		  {
+		    public void actionPerformed(ActionEvent arg0)
+		    {
+		      if(!clicOperator)
+		      {
+		    	  chiffre = Double.valueOf(ecran.getText()).doubleValue();
+			      clicOperator = true;
 		      }
-
-		      else{
-
-		        chiffre = Double.valueOf(ecran.getText()).doubleValue();
-
-		        clicOperator = true;
-
-		      }
-
 		      operateur = "*";
-
 		      update = true;
-
 		    }
-
 		  }
 
-
 		  //Listener affecté au bouton /
-
-		  class DivListener implements ActionListener {
-
-		    public void actionPerformed(ActionEvent arg0){
-
-		      if(clicOperator){
-
-		        calcul();
-
-		        ecran.setText(String.valueOf(chiffre));
-
+		  class DivListener implements ActionListener
+		  {
+		    public void actionPerformed(ActionEvent arg0)
+		    {
+		      if(!clicOperator)
+		      {
+		    	  chiffre = Double.valueOf(ecran.getText()).doubleValue();
+			      clicOperator = true;
 		      }
-
-		      else{
-
-		        chiffre = Double.valueOf(ecran.getText()).doubleValue();
-
-		        clicOperator = true;
-
-		      }
-
 		      operateur = "/";
-
 		      update = true;
-
 		    }
-
 		  }
 		  
 		  //Listener affecté au bouton de remise à zéro
-
-		  class ResetListener implements ActionListener {
-
-		    public void actionPerformed(ActionEvent arg0){
-
+		  class ResetListener implements ActionListener
+		  {
+		    public void actionPerformed(ActionEvent arg0)
+		    {
 		      clicOperator = false;
-
-		      update = true;
-
+		      update = false;
 		      chiffre = 0;
-
 		      operateur = "";
-
 		      ecran.setText("0");
-
 		    }
-
 		  }      
 	}
 	
