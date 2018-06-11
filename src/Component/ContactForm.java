@@ -12,6 +12,9 @@ import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -24,8 +27,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 
 import Main.MainFrame;
+
 
 public class ContactForm extends JPanel{
 
@@ -36,10 +41,10 @@ public class ContactForm extends JPanel{
 	protected JLabel telephone = new LabelPerso("Téléphone: ");
 
 	// TextField infos contacts
-	protected JTextField tfNom = new TextfieldPerso();
-	protected JTextField tfPrenom = new TextfieldPerso();
-	protected JTextField tfEmail = new TextfieldPerso();
-	protected JTextField tfTelephone = new TextfieldPerso();
+	protected TextfieldPerso tfNom = new TextfieldPerso();
+	protected TextfieldPerso tfPrenom = new TextfieldPerso();
+	protected TextfieldPerso tfEmail = new TextfieldPerso();
+	protected TextfieldPerso tfTelephone = new TextfieldPerso();
 
 	// Icone de base  du champ contact 
 	protected ButtonCreation contactPhoto = new ButtonCreation("images/Icones/ContactVideNoir.png", new ImageIcon("images/Icones/ContactVideNoir.png"));
@@ -75,6 +80,7 @@ public class ContactForm extends JPanel{
 	
 	protected String pathIcon;
 
+	private boolean checkFormular;
 	// Constructeur pour le formulaire vide
 	public ContactForm(boolean modification, CardLayout cl, JPanel jp, MainFrame mainframe) {
 		this.modification = modification;
@@ -112,7 +118,6 @@ setOpaque(true);
 		menuPanel.setPreferredSize(new Dimension(450,40));
 		menuPanel.setBorder(new EmptyBorder(0,0,0,0));
 		menuPanel.setOpaque(false);
-	
 
 		// PhotoPanel contenant la photo du contact
 		panelBase.add(photoPanel);
@@ -128,12 +133,43 @@ setOpaque(true);
 		
 		formPanel.add(prenom);
 		formPanel.add(tfPrenom);
+		tfPrenom.setForeground(Color.BLACK);
+		tfPrenom.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+					tfPrenom.setText("");
+					tfPrenom.setForeground(Color.BLACK);
+					tfPrenom.setBorder(new LineBorder(Color.GRAY));
+			}
+		});
+	
 		formPanel.add(nom);
 		formPanel.add(tfNom);
+		tfNom.setForeground(Color.BLACK);
+		tfNom.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+					tfNom.setText("");
+					tfNom.setForeground(Color.BLACK);
+					tfNom.setBorder(new LineBorder(Color.GRAY));
+			}
+		});
 		formPanel.add(email);
 		formPanel.add(tfEmail);
 		formPanel.add(telephone);
 		formPanel.add(tfTelephone);
+		tfTelephone.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+					tfTelephone.setText("");
+					tfTelephone.setForeground(Color.BLACK);
+					tfTelephone.setBorder(new LineBorder(Color.GRAY));
+			}
+		});
+		
 		
 		//BottomPanel contenant le bouton delete et le bouton save
 		panelBase.add(bottomPanel, BorderLayout.SOUTH);
@@ -162,9 +198,15 @@ setOpaque(true);
 	//Méthode permettant de vider les textFields
 	protected void eraseInfos() {
 		tfNom.setText(null);
+	
 		tfPrenom.setText(null);
+	
+		
 		tfEmail.setText(null);
 		tfTelephone.setText(null);
+		tfTelephone.setForeground(Color.BLACK);
+
+		
 		contactPhoto.setIcon(new ImageIcon("images/Icones/ContactVideNoir.png"));
 	}
 	
@@ -215,6 +257,22 @@ setOpaque(true);
 			tfTelephone.setEditable(modification);
 			contactPhoto.addActionListener(new ClickPhotoContact());
 		}
+	}
+	
+	public boolean checkInfosContact() 
+	{
+		boolean check;
+		CheckFormular checkFormular = new CheckFormular();
+		check = checkFormular.isNotEmpty(tfPrenom);
+		if(!check)
+			return check;
+		check = checkFormular.isNotEmpty(tfNom);
+		if(!check)
+			return check;
+		check = checkFormular.patternNumbers(tfTelephone);
+		if(!check)
+			return check;
+		return check;
 	}
 	
 	public BufferedImage createContactIcon(String path)

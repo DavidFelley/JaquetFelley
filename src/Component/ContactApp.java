@@ -240,7 +240,6 @@ class SaveImageContact implements ActionListener
 							temp.addActionListener(new ClickShowContact(contacts.get(i)));
 						
 								System.out.println("Contenu de l'array list: " + contacts.get(i).getNom() + " " + contacts.get(i).getImageContactPath());
-							
 						}  
 						updateUI();
 				}

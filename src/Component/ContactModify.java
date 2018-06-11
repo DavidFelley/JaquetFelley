@@ -52,10 +52,12 @@ public class ContactModify extends ContactForm{
 				@Override
 				public void actionPerformed(ActionEvent e) 
 				{
+					if(checkInfosContact()) {
 					contacts.set(contacts.indexOf(contact), modifiedContact());
-//					contacts.add(modifiedContact());
 					contactList.updateListContact();
 					cl.show(jp, "contactList");
+					return;
+					}
 				}
 			}
 			

@@ -41,13 +41,13 @@ public class ContactAdd extends ContactForm{
 				@Override
 				public void actionPerformed(ActionEvent e) 
 				{							
+					if(checkInfosContact()) {
 					contacts.add(getInfos());
 					System.out.println(mainframe.getContactApp().getContacts().toString());
-					
-					eraseInfos();
-//					System.out.println("valeur de l'id: " + id);
-//					id++;		 	
+					eraseInfos();		 	
 					contactList.updateListContact();
+					return;
+					}
 					
 				}
 			}
