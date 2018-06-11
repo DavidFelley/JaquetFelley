@@ -1,15 +1,23 @@
 package Component;
 
+import java.awt.AlphaComposite;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Graphics2D;
 import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -64,6 +72,8 @@ public class ContactForm extends JPanel{
 	protected int id = 0;
 
 	protected ButtonCreation tempIcon;
+	
+	protected String pathIcon;
 
 	// Constructeur pour le formulaire vide
 	public ContactForm(boolean modification, CardLayout cl, JPanel jp, MainFrame mainframe) {
@@ -93,8 +103,9 @@ public class ContactForm extends JPanel{
 setBackground(Color.WHITE);
 setOpaque(true);
 		add(panelBase, BorderLayout.NORTH);
+		
+		
 		panelBase.setLayout(new BoxLayout(panelBase, BoxLayout.Y_AXIS));
-
 
 		// menuPanel contenant la menu barre
 		panelBase.add(menuPanel);
@@ -105,7 +116,8 @@ setOpaque(true);
 
 		// PhotoPanel contenant la photo du contact
 		panelBase.add(photoPanel);
-		photoPanel.setPreferredSize(new Dimension(450,325));
+		photoPanel.setPreferredSize(new Dimension(325,325));
+		resizeIconContact();
 		photoPanel.add(contactPhoto);
 		photoPanel.setBackground(Color.WHITE);
 		
@@ -165,6 +177,18 @@ setOpaque(true);
 			tfTelephone.setText(contact.getTelephone());
 			contactPhoto.setIcon(new ImageIcon(contact.getImageContactPath()));
 	}
+	
+	public ImageIcon resizeIconContact() {
+		ImageIcon imageIcon = new ImageIcon(contactPhoto.getIcon().toString()); // load the image to a imageIcon
+		Image image = imageIcon.getImage(); // transform it 
+		Image newimg = image.getScaledInstance(450, 325,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+		imageIcon = new ImageIcon(newimg);  // transform it back
+		return imageIcon;
+	}
+	
+//	private ImageIcon getResizedPhoto(ImageIcon image) {
+//		return image.getScaledInstance( 160, 160,  java.awt.Image.SCALE_SMOOTH ) ;
+//	}	
 	
 	public ButtonCreation getContactPhoto() {
 		return contactPhoto;

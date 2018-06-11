@@ -9,6 +9,8 @@ package Component;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Image;
+
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -19,6 +21,8 @@ public class ButtonCreation extends JButton {
 	private String name;
 	private ImageIcon image;
 	private int id;
+	private int width;
+	private int height;
 
 	public ButtonCreation()
 	{
@@ -30,7 +34,6 @@ public class ButtonCreation extends JButton {
 		
 	public ButtonCreation(String name, ImageIcon image) {
 		super(image);
-		
 		this.name = name;
 		setName(name);
 		setFocusable(false);
@@ -80,7 +83,7 @@ public class ButtonCreation extends JButton {
 		setBorder(BorderFactory.createMatteBorder(1, 0, 0, 1, Color.LIGHT_GRAY));
 		//Supprime les bordures autour de chaque bouton	
 	}
-		
+			
 	public int getId()
 	{
 		return id;

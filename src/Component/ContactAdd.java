@@ -31,7 +31,6 @@ public class ContactAdd extends ContactForm{
 		buttonValidate.addActionListener(new ClickSaveContact());
 		contactPhoto.addActionListener(new ClickPhotoContact());
 		bottomPanel.setVisible(false);
-		
 	}
 	
 	
@@ -43,7 +42,6 @@ public class ContactAdd extends ContactForm{
 				public void actionPerformed(ActionEvent e) 
 				{							
 					contacts.add(getInfos());
-					
 					System.out.println(mainframe.getContactApp().getContacts().toString());
 					eraseInfos();
 //					System.out.println("valeur de l'id: " + id);

@@ -7,6 +7,7 @@ import java.awt.Dimension;
 
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
@@ -28,7 +29,6 @@ import javax.swing.border.EmptyBorder;
 
 import Main.MainFrame;
 
-
 public class ContactApp extends JPanel{
 	
 	private CardLayout cardLayoutContact = new CardLayout();
@@ -49,6 +49,8 @@ public class ContactApp extends JPanel{
 	private boolean isFromContactAdd ;
 
 	private int id;
+	
+	private String pathIcon;
 
 	public ContactApp (MainFrame mainframe) {
 		
@@ -169,29 +171,52 @@ public void setFromContactAdd(boolean isFromContactAdd) {
 	this.isFromContactAdd = isFromContactAdd;
 }
 
+public ImageIcon resizeIconContact(String path) {
+	String iconPath;
+	ImageIcon imageIcon = new ImageIcon(path); // load the image to a imageIcon
+	Image image = imageIcon.getImage(); // transform it 
+	Image newimg = image.getScaledInstance(120, 120,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+	imageIcon = new ImageIcon(newimg);  // transform it back
+	iconPath = imageIcon.toString();
+	return imageIcon;
+}
+
+public String resizeIconContacts(String path) {
+	String iconPath;
+	ImageIcon imageIcon = new ImageIcon(path); // load the image to a imageIcon
+	Image image = imageIcon.getImage(); // transform it 
+	Image newimg = image.getScaledInstance(300,300,java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+	imageIcon = new ImageIcon(newimg);  // transform it back
+	iconPath = imageIcon.toString();
+	return iconPath;
+}
 
 class SaveImageContact implements ActionListener
 {
+	
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
-//		actualContact = (ButtonCreation) e.getSource();
-//		id = actualContact.getId();
-//		System.out.println("chemin de l'image" + " " + galleryApp.getGalleryPanel().getPhotos().get(galleryApp.getId()));
-//		System.out.println("value of my boolean" + isFromContactAdd);
-//		BufferedImage icontemp;
-//		icontemp = galleryApp.getGalleryPanel().createPreview((galleryApp.getGalleryPanel().getPhotos().get(galleryApp.getId())), 305);
+//		pathIcon = resizeIconContact(galleryApp.getGalleryPanel().getPhotos().get(galleryApp.getId())).toString();
+//		galleryApp.getCardlayout().show(galleryApp, "GalleryPanel");
+
 		if(isFromContactAdd == false) {
 			
+//		contactModify.getContactPhoto().setIcon(resizeIconContact(galleryApp.getGalleryPanel().getPhotos().get(galleryApp.getId())));	
 		contactModify.getContactPhoto().setIcon(new ImageIcon(galleryApp.getGalleryPanel().getPhotos().get(galleryApp.getId())));	
-//		contactModify.getContactPhoto().setIcon(new ImageIcon(galleryApp.getGalleryPanel().createPreview(galleryApp.getGalleryPanel().getPhotos().get(galleryApp.getId()), 310)));
 		cardLayoutContact.show(contentContact, "contactModify");
 		cardLayoutContact.show(contentContact, "" + contacts.get(id));	
 		}else{
+			
+		contactAdd.getContactPhoto().setIcon(new ImageIcon(galleryApp.getGalleryPanel().getPhotos().get(galleryApp.getId())));
+	
 		contactAdd.getContactPhoto().setIcon(new ImageIcon(galleryApp.getGalleryPanel().getPhotos().get(galleryApp.getId())));
 		contentContact.add("contactAdd",contactAdd);
 		cardLayoutContact.show(contentContact, "contactAdd");
 		}
+		
+		
+		System.out.println("mon nouveau pathIcon: " +  pathIcon);
 	}
 }
 	

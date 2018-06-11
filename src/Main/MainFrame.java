@@ -30,6 +30,7 @@ import Component.ButtonCreation;
 import Component.CalculatriceApp;
 import Component.ContactApp;
 import Component.GalleryApp;
+import Component.LockScreen;
 import View.BackgroundImagePanel;
 
 public class MainFrame extends JFrame{
@@ -70,11 +71,13 @@ public class MainFrame extends JFrame{
 	private ButtonCreation musicButton = new ButtonCreation("music", new ImageIcon("images/Icones/earphonesVide.png"));
 	private ButtonCreation parameterButton = new ButtonCreation("parameter", new ImageIcon("images/Icones/parametreVide.png"));
 	private ButtonCreation homeButton = new ButtonCreation ("home", new ImageIcon("images/Icones/home.png"));
-
+	
 	private ContactApp contactApp = new ContactApp(this);
 	private GalleryApp galleryApp = new GalleryApp();
 	private CalculatriceApp calculatriceApp = new CalculatriceApp();
 
+	private LockScreen lockscreen = new LockScreen();
+	
 	public MainFrame() 
 	{
 		//Top Panel
@@ -87,6 +90,7 @@ public class MainFrame extends JFrame{
 		heure.setForeground(Color.WHITE);
 		heure.setPreferredSize(new Dimension(50, 40));
 		heure.setFont(new Font(null, Font.BOLD, 18));
+heure.setVisible(false);
 
 		//PARAMETRES DE LA FRAME
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -105,6 +109,10 @@ public class MainFrame extends JFrame{
 		formPanel.add(topPanel,BorderLayout.NORTH);
 
 		//Gestion des panels
+		
+		
+contentPanel.add("lockscreen", lockscreen);
+lockscreen.getLockButton().addActionListener(new ClickUnLock());
 		contentPanel.add(backgroundPanel, "backgroundPanel");
 		backgroundPanel.setLayout(new BorderLayout());
 		contentPanel.add(contactApp, "contactApp");	
@@ -117,6 +125,7 @@ public class MainFrame extends JFrame{
 
 		homePanel.add(homeButton);
 		homeButton.addActionListener(new ClickHome());
+homeButton.setVisible(false);
 
 		//Homepage panel
 		homepagePanel.setOpaque(false);
@@ -189,6 +198,17 @@ public class MainFrame extends JFrame{
 			cardLayout.show(contentPanel, "backgroundPanel");
 		}
 	}
+	
+	class ClickUnLock implements ActionListener 
+	{
+		@Override
+		public void actionPerformed(ActionEvent e) 
+		{
+			cardLayout.show(contentPanel, "backgroundPanel");
+			heure.setVisible(true);
+			homeButton.setVisible(true);
+		}
+	}
 
 	class ClickApp implements ActionListener 
 	{
@@ -208,12 +228,13 @@ public class MainFrame extends JFrame{
 				cardLayout.show(contentPanel, "galleryPanel");
 				break;
 			case "off" : 
-				contactApp.serializeContact();
-				System.exit(0);
+			            contactApp.serializeContact();
+						System.exit(0);
 				break;
 			}
 		}
 	}
+	
 
 	// Mouse Listener changement icône 
 
