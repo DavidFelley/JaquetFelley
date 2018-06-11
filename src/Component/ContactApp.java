@@ -171,25 +171,8 @@ public void setFromContactAdd(boolean isFromContactAdd) {
 	this.isFromContactAdd = isFromContactAdd;
 }
 
-public ImageIcon resizeIconContact(String path) {
-	String iconPath;
-	ImageIcon imageIcon = new ImageIcon(path); // load the image to a imageIcon
-	Image image = imageIcon.getImage(); // transform it 
-	Image newimg = image.getScaledInstance(120, 120,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
-	imageIcon = new ImageIcon(newimg);  // transform it back
-	iconPath = imageIcon.toString();
-	return imageIcon;
-}
 
-public String resizeIconContacts(String path) {
-	String iconPath;
-	ImageIcon imageIcon = new ImageIcon(path); // load the image to a imageIcon
-	Image image = imageIcon.getImage(); // transform it 
-	Image newimg = image.getScaledInstance(300,300,java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
-	imageIcon = new ImageIcon(newimg);  // transform it back
-	iconPath = imageIcon.toString();
-	return iconPath;
-}
+
 
 class SaveImageContact implements ActionListener
 {
@@ -197,26 +180,20 @@ class SaveImageContact implements ActionListener
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
-//		pathIcon = resizeIconContact(galleryApp.getGalleryPanel().getPhotos().get(galleryApp.getId())).toString();
-//		galleryApp.getCardlayout().show(galleryApp, "GalleryPanel");
-
+		galleryApp.getCardlayout().show(galleryApp, "GalleryPanel");
+		pathIcon = galleryApp.getGalleryPanel().getPhotos().get(galleryApp.getId());
+		System.out.println(pathIcon);
 		if(isFromContactAdd == false) {
-			
-//		contactModify.getContactPhoto().setIcon(resizeIconContact(galleryApp.getGalleryPanel().getPhotos().get(galleryApp.getId())));	
-		contactModify.getContactPhoto().setIcon(new ImageIcon(galleryApp.getGalleryPanel().getPhotos().get(galleryApp.getId())));	
+		contactModify.getContactPhoto().setIcon(new ImageIcon(contactModify.createContactIcon(pathIcon)));	
+		contactModify.getContactPhoto().setName(pathIcon);	
 		cardLayoutContact.show(contentContact, "contactModify");
 		cardLayoutContact.show(contentContact, "" + contacts.get(id));	
 		}else{
-			
-		contactAdd.getContactPhoto().setIcon(new ImageIcon(galleryApp.getGalleryPanel().getPhotos().get(galleryApp.getId())));
-	
-		contactAdd.getContactPhoto().setIcon(new ImageIcon(galleryApp.getGalleryPanel().getPhotos().get(galleryApp.getId())));
+		contactAdd.getContactPhoto().setIcon(new ImageIcon(contactAdd.createContactIcon(pathIcon)));
+		contactAdd.getContactPhoto().setName(pathIcon);
 		contentContact.add("contactAdd",contactAdd);
 		cardLayoutContact.show(contentContact, "contactAdd");
 		}
-		
-		
-		System.out.println("mon nouveau pathIcon: " +  pathIcon);
 	}
 }
 	
@@ -261,6 +238,9 @@ class SaveImageContact implements ActionListener
 							temp.setBackground(Color.white);
 							panelList.add(temp);
 							temp.addActionListener(new ClickShowContact(contacts.get(i)));
+						
+								System.out.println("Contenu de l'array list: " + contacts.get(i).getNom() + " " + contacts.get(i).getImageContactPath());
+							
 						}  
 						updateUI();
 				}
@@ -296,6 +276,7 @@ class SaveImageContact implements ActionListener
 					@Override
 					public void actionPerformed(ActionEvent e)
 					{
+						System.out.println(contact.getImageContactPath());
 						setFromContactAdd(false);
 						contactModify = new ContactModify(contact, true, cardLayoutContact, contentContact, mainframe, contacts, contactList);
 						contentContact.add("contactModify",contactModify);

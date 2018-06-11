@@ -43,6 +43,7 @@ public class ContactAdd extends ContactForm{
 				{							
 					contacts.add(getInfos());
 					System.out.println(mainframe.getContactApp().getContacts().toString());
+					
 					eraseInfos();
 //					System.out.println("valeur de l'id: " + id);
 //					id++;		 	

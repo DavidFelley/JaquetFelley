@@ -42,7 +42,7 @@ public class ContactForm extends JPanel{
 	protected JTextField tfTelephone = new TextfieldPerso();
 
 	// Icone de base  du champ contact 
-	protected ButtonCreation contactPhoto = new ButtonCreation("contactPhoto", new ImageIcon("images/Icones/ContactVideNoir.png"));
+	protected ButtonCreation contactPhoto = new ButtonCreation("images/Icones/ContactVideNoir.png", new ImageIcon("images/Icones/ContactVideNoir.png"));
 
 	// Bouton delete, valider, modifier, retour
 	protected ButtonCreation buttonDelete = new ButtonCreation("delete", new ImageIcon("images/Icones/trash.png"));
@@ -117,7 +117,6 @@ setOpaque(true);
 		// PhotoPanel contenant la photo du contact
 		panelBase.add(photoPanel);
 		photoPanel.setPreferredSize(new Dimension(325,325));
-		resizeIconContact();
 		photoPanel.add(contactPhoto);
 		photoPanel.setBackground(Color.WHITE);
 		
@@ -147,7 +146,7 @@ setOpaque(true);
 	
 	// Méthode qui retourne les informations d'un nouveau contact
 	public Contact getInfos() {
-		return new Contact (tfNom.getText(), tfPrenom.getText(),tfEmail.getText(), tfTelephone.getText(), id, contactPhoto.getIcon().toString());
+		return new Contact (tfNom.getText(), tfPrenom.getText(),tfEmail.getText(), tfTelephone.getText(), id, contactPhoto.getName());
 	}
 	
 	public Contact modifiedContact() {
@@ -155,7 +154,7 @@ setOpaque(true);
 		contact.setNom(tfNom.getText());
 		contact.setEmail(tfEmail.getText());
 		contact.setTelephone(tfTelephone.getText());
-		contact.setImageContactPath(contactPhoto.getIcon().toString());
+		contact.setImageContactPath(contactPhoto.getName());
 		return contact;
 	}
 	
@@ -169,26 +168,15 @@ setOpaque(true);
 		contactPhoto.setIcon(new ImageIcon("images/Icones/ContactVideNoir.png"));
 	}
 	
-	//Méthode permettant d'écrire les infos contacts dans les textFields
+	//Méthode permettant d'écrire les infos contacts dans les textFields et photo associées aux contacts
 	protected void writeInfos(Contact contact) {
 			tfNom.setText(contact.getNom());
 			tfPrenom.setText(contact.getPrenom());
 			tfEmail.setText(contact.getEmail());
 			tfTelephone.setText(contact.getTelephone());
-			contactPhoto.setIcon(new ImageIcon(contact.getImageContactPath()));
+			contactPhoto.setIcon(new ImageIcon(createContactIcon(contact.getImageContactPath())));
+			
 	}
-	
-	public ImageIcon resizeIconContact() {
-		ImageIcon imageIcon = new ImageIcon(contactPhoto.getIcon().toString()); // load the image to a imageIcon
-		Image image = imageIcon.getImage(); // transform it 
-		Image newimg = image.getScaledInstance(450, 325,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
-		imageIcon = new ImageIcon(newimg);  // transform it back
-		return imageIcon;
-	}
-	
-//	private ImageIcon getResizedPhoto(ImageIcon image) {
-//		return image.getScaledInstance( 160, 160,  java.awt.Image.SCALE_SMOOTH ) ;
-//	}	
 	
 	public ButtonCreation getContactPhoto() {
 		return contactPhoto;
@@ -227,6 +215,47 @@ setOpaque(true);
 			tfTelephone.setEditable(modification);
 			contactPhoto.addActionListener(new ClickPhotoContact());
 		}
+	}
+	
+	public BufferedImage createContactIcon(String path)
+	{
+		BufferedImage img = null ;
+		int newWidth = 450;
+		int newHeight = 325;
+		try 
+		{
+			img = ImageIO.read(new File(path));
+			if(path.equals("images/Icones/ContactVideNoir.png"))
+			return img;
+				if(img.getWidth() < img.getHeight())
+				{
+					newHeight = img.getHeight()*newWidth/img.getWidth();
+				}
+				else
+				{
+					newWidth = img.getWidth()*newHeight/img.getHeight();
+				}
+
+				BufferedImage resizedImage = new BufferedImage(newWidth, newHeight, img.getType());
+				Graphics2D g = resizedImage.createGraphics();
+				g.setComposite(AlphaComposite.Src);
+				g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+				g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+				g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+				g.drawImage(img, 0, 0, newWidth, newHeight, null);
+				g.dispose();
+
+				resizedImage = resizedImage.getSubimage(0, 0, 450, 325);
+
+				return resizedImage ;				
+			
+		}
+			catch (IOException e) 
+			{
+				e.printStackTrace();
+			}
+		return null ;
 	}
 
 	//ActionListener sur l'icône contact qui ouvre la galerie

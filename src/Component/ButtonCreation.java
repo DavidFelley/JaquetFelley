@@ -19,6 +19,7 @@ import javax.swing.border.EmptyBorder;
 public class ButtonCreation extends JButton {
 	
 	private String name;
+
 	private ImageIcon image;
 	private int id;
 	private int width;
@@ -87,6 +88,14 @@ public class ButtonCreation extends JButton {
 	public int getId()
 	{
 		return id;
+	}
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 }

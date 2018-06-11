@@ -103,6 +103,7 @@ public class GalleryApp extends JPanel
 	public void setCardlayout(CardLayout cardlayout) {
 		this.cardlayout = cardlayout;
 	}
+	
 	class GalleryPanel extends JPanel
 	{
 		private Color color = new Color(78,104,141);

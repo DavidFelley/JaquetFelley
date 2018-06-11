@@ -19,7 +19,7 @@ public class Contact implements Serializable  {
 	
 	
 	// Constructeur sans photo
-	public Contact (String nom, String prenom, String email, String telephone, int id, String imageContactPath ) {
+	public Contact (String nom, String prenom, String email, String telephone, int id, String imageContactPath) {
 		this.nom = nom;
 		this.prenom = prenom;
 		this.email = email;
