@@ -52,7 +52,7 @@ public class MenuBarre extends JPanel{
 		setPreferredSize(new Dimension(480, 40));
 		setBackground(color);
 		setLayout(new BorderLayout());
-		setBorder(new EmptyBorder(0, 5, 0, 5));
+		setBorder(new EmptyBorder(0, 40, 0, 5));
 		
 		JLabel entete = new JLabel(titre);
 		entete.setFont(new Font(null, Font.BOLD, 20));

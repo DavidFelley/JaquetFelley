@@ -22,6 +22,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 public class CalculatriceApp extends JPanel
 {	
@@ -35,11 +36,11 @@ public class CalculatriceApp extends JPanel
 	
 	class Calculatrice extends JPanel
 	{
-		private ButtonCreation ajout = new ButtonCreation("ajout", new ImageIcon("images/Icones/plus.png")); // A VIRER
-		private MenuBarre menuCalculatrice = new MenuBarre("CALCULATRICE",ajout, Color.BLACK); // CREER LE CONSTRUCTEUR SANS BOUTONS
+		private Color color = new Color(78,104,141);
+		private MenuBarre menuCalculatrice = new MenuBarre("CALCULATRICE", color); // CREER LE CONSTRUCTEUR SANS BOUTONS
 		
 		private String[] tabLabelButton = {"1","2","3","/","4","5","6","*","7","8","9","-",".","0","C","+","="};
-		private JButton [] tabButton = new JButton[tabLabelButton.length];
+		private ButtonCreation [] tabButton = new ButtonCreation[tabLabelButton.length];
 		private JLabel ecran = new JLabel() ;
 		private double chiffre ;
 		private boolean clicOperator = false, update = false ;
@@ -52,22 +53,20 @@ public class CalculatriceApp extends JPanel
 		public Calculatrice()
 		{
 			setLayout(new BorderLayout());
+			setBackground(Color.WHITE);
 			add(panCalculatrice, BorderLayout.NORTH);
 			panCalculatrice.setLayout(new BoxLayout(panCalculatrice, BoxLayout.Y_AXIS));
 			panCalculatrice.add(menuCalculatrice);
 			
 			ecran = new JLabel("0");
 			ecran.setHorizontalAlignment(JLabel.RIGHT);
-			ecran.setFont(new Font(null, Font.PLAIN,20));
-			ecran.setPreferredSize(new Dimension(450,100));
+			ecran.setFont(new Font(null, Font.PLAIN,40));
+			ecran.setPreferredSize(new Dimension(450,245));
 			panCalculatrice.add(panEcran);
 			panEcran.add(ecran);
-			panEcran.setBorder(BorderFactory.createLineBorder(Color.pink));
-			panEcran.setBackground(Color.WHITE);
-	
+			panEcran.setBackground(new Color(250,250,250));
 			
 			//Paramètre du panel de bouton
-			c.insets = new Insets(5,5,5,5);
 			c.fill = GridBagConstraints.BOTH;
 			c.weightx = 4;
 			c.weighty = 5;
@@ -80,7 +79,8 @@ public class CalculatriceApp extends JPanel
 			c.gridy = 4 ;
 			c.gridwidth = 4 ;
 			panelButton.add(tabButton[16],c);
-			
+			panelButton.setBackground(Color.WHITE);
+			panelButton.setBorder(new EmptyBorder(0,0,0,0));
 			panCalculatrice.add(panelButton);
 		}
 		
@@ -91,40 +91,46 @@ public class CalculatriceApp extends JPanel
 				switch (i) {
 				case 3:
 					
-					tabButton[i] = new JButton(tabLabelButton[i]);
+					tabButton[i] = new ButtonCreation(tabLabelButton[i],106,75);
 					tabButton[i].addActionListener(new DivListener());
+					tabButton[i].setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Color.LIGHT_GRAY));
 					break;
 					
 				case 7:
-					tabButton[i] = new JButton(tabLabelButton[i]);
+					tabButton[i] = new ButtonCreation(tabLabelButton[i],106,75);
 					tabButton[i].addActionListener(new MultiListener());
+					tabButton[i].setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Color.LIGHT_GRAY));
 					break;
 					
 				case 11:
-					tabButton[i] = new JButton(tabLabelButton[i]);
+					tabButton[i] = new ButtonCreation(tabLabelButton[i],106,75);
 					tabButton[i].addActionListener(new MoinsListener());
+					tabButton[i].setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Color.LIGHT_GRAY));
 					break;
 					
 				case 14:
-					tabButton[i] = new JButton(tabLabelButton[i]);
+					tabButton[i] = new ButtonCreation(tabLabelButton[i],106,75);
 					tabButton[i].addActionListener(new ResetListener());
+					tabButton[i].setForeground(Color.RED);
 					break;
 					
 				case 15:
-					tabButton[i] = new JButton(tabLabelButton[i]);
+					tabButton[i] = new ButtonCreation(tabLabelButton[i],106,75);
 					tabButton[i].addActionListener(new PlusListener());
+					tabButton[i].setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Color.LIGHT_GRAY));
 					break;
 					
 				case 16:
-					tabButton[i] = new JButton(tabLabelButton[i]);
+					tabButton[i] = new ButtonCreation(tabLabelButton[i],106,75);
+					tabButton[i].setBackground(color);
+					tabButton[i].setForeground(Color.WHITE);
 					tabButton[i].addActionListener(new EgalListener());
 					break;
 					
 				default:
 					
-					tabButton[i] = new JButton(tabLabelButton[i]);
-					tabButton[i].addActionListener(new ChiffreListener());
-					
+					tabButton[i] = new ButtonCreation(tabLabelButton[i],106,75);
+					tabButton[i].addActionListener(new ChiffreListener());					
 					break;
 				}
 				
@@ -216,19 +222,12 @@ public class CalculatriceApp extends JPanel
 
 		      String str = ((JButton)e.getSource()).getText();
 
-		      if(update){
-
+		      if(update)
 		        update = false;
+		      else
+		        if(!ecran.getText().equals("0") || str.equals("."))
+		        	str = ecran.getText() + str;
 
-		      }
-
-		      else{
-
-		        if(!ecran.getText().equals("0"))
-
-		          str = ecran.getText() + str;
-
-		      }
 
 		      ecran.setText(str);
 
@@ -391,7 +390,7 @@ public class CalculatriceApp extends JPanel
 
 		      operateur = "";
 
-		      ecran.setText("");
+		      ecran.setText("0");
 
 		    }
 
