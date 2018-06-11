@@ -1,11 +1,14 @@
-/*
-*Author David Felley
-*Created on 3 juin 2018
-*For JaquetFelley
-*/
-
 package Component;
-
+/**
+* ------------------------------------------------------------------------------------------------------ <br/>
+* Classe : CalculatriceApp <br/>
+* ------------------------------------------------------------------------------------------------------ <br/>
+* Auteur : David Felley et Valentin Jaquet <br/>
+* Description de la classe : ..... <br/>
+* ------------------------------------------------------------------------------------------------------ <br/>
+* Remarque : - <br/>
+* ------------------------------------------------------------------------------------------------------ <br/>
+*/
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;

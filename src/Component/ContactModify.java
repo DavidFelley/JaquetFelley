@@ -1,16 +1,21 @@
 package Component;
-
+/**
+* ------------------------------------------------------------------------------------------------------ <br/>
+* Classe : ContactModify <br/>
+* ------------------------------------------------------------------------------------------------------ <br/>
+* Auteur : David Felley et Valentin Jaquet <br/>
+* Description de la classe : ..... <br/>
+* ------------------------------------------------------------------------------------------------------ <br/>
+* Remarque : - <br/>
+* ------------------------------------------------------------------------------------------------------ <br/>
+*/
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-
-import javax.swing.ImageIcon;
 import javax.swing.JPanel;
-
 import Component.ContactApp.ContactList;
-import Component.ContactForm.ClickPhotoContact;
 import Main.MainFrame;
 
 public class ContactModify extends ContactForm{

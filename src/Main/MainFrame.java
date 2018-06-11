@@ -1,11 +1,15 @@
-/*
- *PW Week *
- *Exercise
- *Author : Valentin Jaquet
- *Creation date : 7 mai 2018
- */
-package Main;
 
+package Main;
+/**
+* ------------------------------------------------------------------------------------------------------ <br/>
+* Classe : MainFrame <br/>
+* ------------------------------------------------------------------------------------------------------ <br/>
+* Auteur : David Felley et Valentin Jaquet <br/>
+* Description de la classe : ..... <br/>
+* ------------------------------------------------------------------------------------------------------ <br/>
+* Remarque : - <br/>
+* ------------------------------------------------------------------------------------------------------ <br/>
+*/
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;

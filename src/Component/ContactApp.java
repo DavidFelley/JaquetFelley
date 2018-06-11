@@ -1,5 +1,14 @@
 package Component;
-
+/**
+* ------------------------------------------------------------------------------------------------------ <br/>
+* Classe : ContactApp <br/>
+* ------------------------------------------------------------------------------------------------------ <br/>
+* Auteur : David Felley et Valentin Jaquet <br/>
+* Description de la classe : ..... <br/>
+* ------------------------------------------------------------------------------------------------------ <br/>
+* Remarque : - <br/>
+* ------------------------------------------------------------------------------------------------------ <br/>
+*/
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -7,12 +16,8 @@ import java.awt.Dimension;
 
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
-import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
 
 import java.io.FileOutputStream;
@@ -21,7 +26,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;

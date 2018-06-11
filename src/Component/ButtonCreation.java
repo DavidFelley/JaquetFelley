@@ -1,11 +1,15 @@
-/*
-*PW Week *
-*Exercise
-*Author : Valentin Jaquet
-*Creation date : 12 mai 2018
-*/
-package Component;
 
+package Component;
+/**
+* ------------------------------------------------------------------------------------------------------ <br/>
+* Classe : ButtonCreation <br/>
+* ------------------------------------------------------------------------------------------------------ <br/>
+* Auteur : David Felley et Valentin Jaquet <br/>
+* Description de la classe : ..... <br/>
+* ------------------------------------------------------------------------------------------------------ <br/>
+* Remarque : - <br/>
+* ------------------------------------------------------------------------------------------------------ <br/>
+*/
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;

@@ -1,13 +1,20 @@
 package Component;
-
+/**
+* ------------------------------------------------------------------------------------------------------ <br/>
+* Classe : ContactAdd <br/>
+* ------------------------------------------------------------------------------------------------------ <br/>
+* Auteur : David Felley et Valentin Jaquet <br/>
+* Description de la classe : ..... <br/>
+* ------------------------------------------------------------------------------------------------------ <br/>
+* Remarque : - <br/>
+* ------------------------------------------------------------------------------------------------------ <br/>
+*/
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-
 import javax.swing.JPanel;
-
 import Component.ContactApp.ContactList;
 import Main.MainFrame;
 

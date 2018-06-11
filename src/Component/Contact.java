@@ -1,13 +1,21 @@
 package Component;
 
+/**
+* ------------------------------------------------------------------------------------------------------ <br/>
+* Classe : Contact <br/>
+* ------------------------------------------------------------------------------------------------------ <br/>
+* Auteur : David Felley et Valentin Jaquet <br/>
+* Description de la classe : ..... <br/>
+* ------------------------------------------------------------------------------------------------------ <br/>
+* Remarque : - <br/>
+* ------------------------------------------------------------------------------------------------------ <br/>
+*/
+
+
 import java.io.Serializable;
 
 import javax.swing.ImageIcon;
-/**
- * 
- * @author Valentin Jaquet
- *
- */
+
 public class Contact implements Serializable  {
 	
 	private String nom;
