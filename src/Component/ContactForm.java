@@ -139,7 +139,6 @@ setOpaque(true);
 		tfPrenom.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
 					tfPrenom.setText("");
 					tfPrenom.setForeground(Color.BLACK);
 					tfPrenom.setBorder(new LineBorder(Color.GRAY));
@@ -152,7 +151,6 @@ setOpaque(true);
 		tfNom.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
 					tfNom.setText("");
 					tfNom.setForeground(Color.BLACK);
 					tfNom.setBorder(new LineBorder(Color.GRAY));
@@ -165,7 +163,6 @@ setOpaque(true);
 		tfTelephone.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
 					tfTelephone.setText("");
 					tfTelephone.setForeground(Color.BLACK);
 					tfTelephone.setBorder(new LineBorder(Color.GRAY));

@@ -179,8 +179,13 @@ public class CalculatriceApp extends JPanel
 		    {
 		      try
 		      {
-		        chiffre = chiffre / Double.valueOf(ecran.getText()).doubleValue();
-		        ecran.setText(String.valueOf(chiffre));
+		    	if(Double.valueOf(ecran.getText()).doubleValue() == 0)
+		    		ecran.setText("Not a number");
+		    	else
+		    	{
+		    		chiffre = chiffre / Double.valueOf(ecran.getText()).doubleValue();
+		    		ecran.setText(String.valueOf(chiffre));
+		    	}
 		      } 
 		      catch(ArithmeticException e)
 		      {

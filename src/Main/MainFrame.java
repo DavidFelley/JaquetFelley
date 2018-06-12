@@ -220,7 +220,6 @@ heure.setVisible(false);
 	{
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			// TODO Auto-generated method stub
 			ButtonCreation element = (ButtonCreation) arg0.getSource();
 			String app = element.getName();
 			switch(app) {
@@ -273,7 +272,6 @@ heure.setVisible(false);
 
 	class ChangeLayoutButton extends MouseAdapter { 
 		public void mouseExited(MouseEvent arg0) {
-			// TODO Auto-generated method stub
 			switch(arg0.getComponent().getName()) {
 			case "off" :
 				offButton.setIcon(new ImageIcon("images/Icones/powerVide.png"));	
@@ -306,7 +304,6 @@ heure.setVisible(false);
 		}
 
 		public void mouseEntered(MouseEvent e) {
-			// TODO Auto-generated method stub
 			switch(e.getComponent().getName()) {
 			case "off" :
 				offButton.setIcon(new ImageIcon("images/Icones/powerPlein.png"));	
