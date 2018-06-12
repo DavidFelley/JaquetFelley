@@ -15,6 +15,7 @@ import java.awt.Font;
 import javax.swing.JTextField;
 
 public class TextfieldPerso extends JTextField{
+	
 	/**
 	 * Constructeur des textfields personnalisés
 	 */

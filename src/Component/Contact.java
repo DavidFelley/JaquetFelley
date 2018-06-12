@@ -4,7 +4,7 @@ package Component;
  * ------------------------------------------------------------------------------------------------------ <br/>
  * Classe : Contact <br/>
  * ------------------------------------------------------------------------------------------------------ <br/>
- * Auteur : Valentin Jaquet <br/>
+ * Auteur : David Felley et Valentin Jaquet <br/>
  * Description de la classe : Cette classe gère un contact <br/>
  * ------------------------------------------------------------------------------------------------------ <br/>
  * Remarque : - <br/>
@@ -13,8 +13,6 @@ package Component;
 
 
 import java.io.Serializable;
-
-import javax.swing.ImageIcon;
 
 public class Contact implements Serializable  
 {

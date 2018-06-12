@@ -4,9 +4,10 @@ package Component;
  * Classe : CalculatriceApp <br/>
  * ------------------------------------------------------------------------------------------------------ <br/>
  * Auteur : David Felley et Valentin Jaquet <br/>
- * Description de la classe : ..... <br/>
+ * Description de la classe : Cette classe gère l'application calculatrice<br/>
  * ------------------------------------------------------------------------------------------------------ <br/>
- * Remarque : - <br/>
+ * Remarque : Source du code de base de la calculatrice 
+ * 			  https://openclassrooms.com/courses/apprenez-a-programmer-en-java/tp-une-calculatrice <br/>
  * ------------------------------------------------------------------------------------------------------ <br/>
  */
 import java.awt.BorderLayout;
@@ -15,13 +16,11 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -153,7 +152,7 @@ public class CalculatriceApp extends JPanel
 		}
 
 		/**
-		 * ajout des boutons dans le panelButton
+		 * Ajout des boutons dans le panelButton
 		 */
 		private void displayButton()
 		{
@@ -173,7 +172,7 @@ public class CalculatriceApp extends JPanel
 		}
 
 		/**
-		 * Méthode de calcul en fonction de l'operateur
+		 * Méthode de calcul en fonction de l'opérateur
 		 */
 		public void calcul()
 		{
@@ -214,7 +213,6 @@ public class CalculatriceApp extends JPanel
 
 		/**
 		 * AL pour les chiffres et le point
-		 * @author david
 		 *
 		 */
 		class ChiffreListener implements ActionListener
@@ -222,9 +220,9 @@ public class CalculatriceApp extends JPanel
 			public void actionPerformed(ActionEvent e)
 			{
 				//On affiche le chiffre additionnel dans le label
-
+				
 				String str = ((JButton)e.getSource()).getText();
-
+				
 				if(update)
 				{
 					update = false;
@@ -240,11 +238,8 @@ public class CalculatriceApp extends JPanel
 		}
 
 
-		//Listener affecté au bouton =
-
 		/**
 		 * AL pour le bouton egal
-		 * @author david
 		 *
 		 */
 		class EgalListener implements ActionListener
@@ -263,7 +258,6 @@ public class CalculatriceApp extends JPanel
 
 		/**
 		 * AL pour le bouton plus
-		 * @author david
 		 *
 		 */
 		class PlusListener implements ActionListener
@@ -283,7 +277,6 @@ public class CalculatriceApp extends JPanel
 
 		/**
 		 * AL pour le bouton moins
-		 * @author david
 		 *
 		 */
 		class MoinsListener implements ActionListener
@@ -302,7 +295,6 @@ public class CalculatriceApp extends JPanel
 
 		/**
 		 * AL pour le bouton multiplier
-		 * @author david
 		 *
 		 */
 		class MultiListener implements ActionListener
@@ -321,7 +313,6 @@ public class CalculatriceApp extends JPanel
 
 		/**
 		 * AL pour le bouton diviser
-		 * @author david
 		 *
 		 */
 		class DivListener implements ActionListener
@@ -340,7 +331,6 @@ public class CalculatriceApp extends JPanel
 
 		/**
 		 * AL pour le bouton de reset
-		 * @author david
 		 *
 		 */
 		class ResetListener implements ActionListener

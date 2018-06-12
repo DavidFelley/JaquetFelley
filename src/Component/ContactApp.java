@@ -203,7 +203,6 @@ public class ContactApp extends JPanel
 
 	/**
 	 * ActionListener qui permet de sauver l'image du contact choisie dans la galerie
-	 * @author Valentin Jaquet
 	 *
 	 */
 	class SaveImageContact implements ActionListener
@@ -232,7 +231,6 @@ public class ContactApp extends JPanel
 
 	/**
 	 * Liste des contacts
-	 * @author Valentin Jaquet
 	 *
 	 */
 	class ContactList extends JPanel
@@ -290,7 +288,6 @@ public class ContactApp extends JPanel
 
 		/**
 		 * Ouvre le formulaire d'ajout d'un contact
-		 * @author Valentin Jaquet
 		 *
 		 */
 		class ClickAddContact implements ActionListener 
@@ -308,7 +305,6 @@ public class ContactApp extends JPanel
 
 		/**
 		 * Ouvre le contact sélectionné
-		 * @author Valentin Jaquet
 		 *
 		 */
 		class ClickShowContact implements ActionListener 

@@ -4,14 +4,14 @@ package Component;
  * Classe : GalleryApp <br/>
  * ------------------------------------------------------------------------------------------------------ <br/>
  * Auteur : David Felley et Valentin Jaquet <br/>
- * Description de la classe : ..... <br/>
+ * Description de la classe : Cette classe gère l'application galerie <br/>
  * ------------------------------------------------------------------------------------------------------ <br/>
- * Remarque : - <br/>
+  * Remarque : Source de la méthode ajustant la taille des images
+ * 			   https://www.mkyong.com/java/how-to-resize-an-image-in-java/ <br/>
  * ------------------------------------------------------------------------------------------------------ <br/>
  */
 import java.awt.AlphaComposite;
 import java.awt.BorderLayout;
-import java.awt.Button;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -20,7 +20,6 @@ import java.awt.GridLayout;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.font.ImageGraphicAttribute;
 import java.awt.image.BufferedImage;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -31,16 +30,12 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
-
-import Main.MainFrame;
 
 public class GalleryApp extends JPanel
 {
@@ -56,6 +51,7 @@ public class GalleryApp extends JPanel
 	private String imagePath;
 
 	private ContactApp contactApp;
+	
 	/**
 	 * Constructeur de la Galerie principale
 	 */
@@ -331,7 +327,6 @@ public class GalleryApp extends JPanel
 
 		/**
 		 * AL ouvrant le filechooser pour l'ajout d'images
-		 * @author david
 		 *
 		 */
 		class addGalerie implements ActionListener 
@@ -356,7 +351,6 @@ public class GalleryApp extends JPanel
 
 		/**
 		 * AL affichant les photos en grand
-		 * @author david
 		 *
 		 */
 		class afficheGrandePhoto implements ActionListener
@@ -414,7 +408,6 @@ public class GalleryApp extends JPanel
 
 		/**
 		 * Panel contenant l'image en grand
-		 * @param galleryPanel
 		 */
 		public FullScreenPanel(GalleryPanel galleryPanel) 
 		{
@@ -498,7 +491,6 @@ public class GalleryApp extends JPanel
 
 		/**
 		 * Raffiche la galerie avec les miniatures
-		 * @author david
 		 *
 		 */
 		class backGallery implements ActionListener
@@ -512,7 +504,6 @@ public class GalleryApp extends JPanel
 
 		/**
 		 * Supprime la photo de la Galerie
-		 * @author david
 		 *
 		 */
 		class deleteGallery implements ActionListener
@@ -532,7 +523,6 @@ public class GalleryApp extends JPanel
 
 		/**
 		 * Affiche la photo suivante en grand
-		 * @author david
 		 *
 		 */
 		class nextPhoto implements ActionListener
@@ -551,7 +541,6 @@ public class GalleryApp extends JPanel
 
 		/**
 		 * Affiche la photo précédente en grand
-		 * @author david
 		 *
 		 */
 		class backPhoto implements ActionListener

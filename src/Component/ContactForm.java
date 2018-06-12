@@ -78,8 +78,6 @@ public class ContactForm extends JPanel
 	private int id = 0;
 	private ButtonCreation tempIcon;
 	private String pathIcon;
-	
-
 	private boolean checkFormular;
 
 	/**
@@ -265,7 +263,6 @@ public class ContactForm extends JPanel
 			tfEmail.setEditable(modification);
 			tfTelephone.setEditable(modification);
 			contactPhoto.removeActionListener(new ClickPhotoContact());
-
 		} 
 		else 
 		{
@@ -347,8 +344,6 @@ public class ContactForm extends JPanel
 
 	/**
 	 * ActionListner qui permet d'ouvrir la galerie lorsque l'on clique sur l'icône du contact
-	 * @author Valentin Jaquet
-	 *
 	 */
 	class ClickPhotoContact implements ActionListener 
 	{

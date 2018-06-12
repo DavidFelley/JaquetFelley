@@ -53,7 +53,6 @@ public class ContactModify extends ContactForm
 
 	/**
 	 * ActionListener qui permet de rendre les textfields éditables, l'icône contact clickable et affiche les boutons sauvegarder et supprimer
-	 * @author Valentin Jaquet
 	 *
 	 */
 	class ClickModifyContact implements ActionListener 
@@ -67,7 +66,6 @@ public class ContactModify extends ContactForm
 
 	/**
 	 * ActionListener qui permet de sauver un contact modifié 
-	 * @author Valentin Jaquet
 	 *
 	 */
 	class ClickSaveContact implements ActionListener 
@@ -86,7 +84,6 @@ public class ContactModify extends ContactForm
 
 	/**
 	 * ActionListener qui permet de supprimer un contact
-	 * @author Valentin Jaquet
 	 *
 	 */
 	class ClickDeleteContact implements ActionListener 
@@ -109,7 +106,6 @@ public class ContactModify extends ContactForm
 
 	/**
 	 * Action Listener qui permet de retourner à la liste des contacts
-	 * @author Valentin Jaquet
 	 *
 	 */
 	class ClickBack implements ActionListener 

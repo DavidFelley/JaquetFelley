@@ -4,7 +4,7 @@ package Component;
 * Classe : ContactAdd <br/>
 * ------------------------------------------------------------------------------------------------------ <br/>
 * Auteur : David Felley et Valentin Jaquet <br/>
-* Description de la classe : Cette classe gère la panel lors de l'ajout d'un contact <br/>
+* Description de la classe : Cette classe gère le panel lors de l'ajout d'un contact <br/>
 * ------------------------------------------------------------------------------------------------------ <br/>
 * Remarque : - <br/>
 * ------------------------------------------------------------------------------------------------------ <br/>
@@ -35,6 +35,7 @@ public class ContactAdd extends ContactForm
 	 * @param contacts
 	 * @param contactList
 	 */
+	
 	public ContactAdd(boolean modification, CardLayout cl, JPanel jp, MainFrame mainframe,  ArrayList <Contact> contacts, ContactList contactList) 
 	{
 		super(modification, cl, jp, mainframe);
@@ -51,7 +52,6 @@ public class ContactAdd extends ContactForm
 	
 	/**
 	 * ActionListener qui permet de sauver un contact nouvellement créer
-	 * @author Valentin Jaquet
 	 *
 	 */
 			class ClickSaveContact implements ActionListener 
@@ -71,7 +71,6 @@ public class ContactAdd extends ContactForm
 			
 	/**
 	 * ActionListener qui permet de retourner à la liste des contacts
-	 * @author Valentin Jaquet
 	 *
 	 */
 			class ClickBack implements ActionListener 

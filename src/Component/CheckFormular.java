@@ -3,7 +3,7 @@ package Component;
  * ------------------------------------------------------------------------------------------------------ <br/>
  * Classe : CheckFormular <br/>
  * ------------------------------------------------------------------------------------------------------ <br/>
- * Auteur : Valentin Jaquet <br/>
+ * Auteur : David Felley et Valentin Jaquet <br/>
  * Description de la classe : Cette classe contrôle la saisie dans les textfields du formulaire <br/>
  * ------------------------------------------------------------------------------------------------------ <br/>
  * Remarque : - <br/>

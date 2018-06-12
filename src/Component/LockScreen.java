@@ -93,7 +93,6 @@ public class LockScreen extends JPanel
 
 	/**
 	 * ActionListener qui permet de récupérer la date du jour
-	 * @author Valentin Jaquet
 	 *
 	 */
 	class CurrentDate implements ActionListener
@@ -108,7 +107,6 @@ public class LockScreen extends JPanel
 
 	/**
 	 * ActionListener qui permet de récupérer l'heure
-	 * @author Valentin Jaquet
 	 *
 	 */
 	class CurrentTime implements ActionListener 

@@ -180,7 +180,6 @@ public class MainFrame extends JFrame
 
 	/**
 	 * ActionListener qui retourne l'heure
-	 * @author val
 	 *
 	 */
 	class CurrentTime implements ActionListener 
@@ -195,7 +194,6 @@ public class MainFrame extends JFrame
 
 	/**
 	 * ActionListener qui permet de retourner au launcher
-	 * @author val
 	 *
 	 */
 	class ClickHome implements ActionListener 
@@ -209,7 +207,6 @@ public class MainFrame extends JFrame
 
 	/**
 	 * ActionListener qui permet de devérouiller le téléphone
-	 * @author val
 	 *
 	 */
 	class ClickUnLock implements ActionListener 
@@ -225,7 +222,6 @@ public class MainFrame extends JFrame
 
 	/**
 	 * ActionListener qui permet d'ouvrir les applications contact, calculatrice, galerie
-	 * @author val
 	 *
 	 */
 	class ClickApp implements ActionListener 
@@ -250,7 +246,6 @@ public class MainFrame extends JFrame
 
 	/**
 	 * MouseAdapter permettant qui vérouille le smartphone après un click cours ou le ferme avec un click long
-	 * @author val
 	 *
 	 */
 	class ShutDownButton extends MouseAdapter
@@ -287,7 +282,6 @@ public class MainFrame extends JFrame
 
 	/**
 	 * MouseAdapter permemettant de changer entre les icônes pleines et vides
-	 * @author val
 	 *
 	 */
 	class ChangeLayoutButton extends MouseAdapter 
