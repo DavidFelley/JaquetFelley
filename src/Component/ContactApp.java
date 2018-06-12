@@ -33,8 +33,8 @@ import javax.swing.border.EmptyBorder;
 
 import Main.MainFrame;
 
-public class ContactApp extends JPanel{
-
+public class ContactApp extends JPanel
+{
 	private CardLayout cardLayoutContact = new CardLayout();
 	private JPanel contentContact = new JPanel(cardLayoutContact);
 
@@ -61,7 +61,8 @@ public class ContactApp extends JPanel{
 	 * Constructeur de l'application contact
 	 * @param mainframe
 	 */
-	public ContactApp (MainFrame mainframe) {
+	public ContactApp (MainFrame mainframe) 
+	{
 
 		this.mainframe = mainframe;
 
@@ -86,7 +87,8 @@ public class ContactApp extends JPanel{
 	/**
 	 * Sauvegarde des contacts
 	 */
-	public void serializeContact() {
+	public void serializeContact() 
+	{
 		try 
 		{
 			FileOutputStream file = new FileOutputStream ("serialization/contacts.ser");
@@ -105,7 +107,8 @@ public class ContactApp extends JPanel{
 	 * Chargement des contacts
 	 */
 	@SuppressWarnings("unchecked")
-	public void deserializeContact() {
+	public void deserializeContact() 
+	{
 		try {
 			FileInputStream file = new FileInputStream ("serialization/contacts.ser");
 			ObjectInputStream objectis = new ObjectInputStream (file);
@@ -122,63 +125,77 @@ public class ContactApp extends JPanel{
 		}
 	}
 
-	public MainFrame getMainframe() {
+	// Getters & Setters
+	public MainFrame getMainframe() 
+	{
 		return mainframe;
 	}
 
-	public ArrayList<Contact> getContacts() {
+	public ArrayList<Contact> getContacts() 
+	{
 
 		return contacts;
 	}
 
-	public void setContacts(ArrayList<Contact> contacts) {
+	public void setContacts(ArrayList<Contact> contacts) 
+	{
 		this.contacts = contacts;
 	}
 
-	public CardLayout getCardLayoutContact() {
+	public CardLayout getCardLayoutContact() 
+	{
 		return cardLayoutContact;
 	}
 
 
-	public JPanel getContentContact() {
+	public JPanel getContentContact() 
+	{
 		return contentContact;
 	}
 
 
-	public GalleryApp getGalleryApp() {
+	public GalleryApp getGalleryApp() 
+	{
 		return galleryApp;
 	}
 
 
-	public void setGalleryApp(GalleryApp galleryApp) {
+	public void setGalleryApp(GalleryApp galleryApp) 
+	{
 		this.galleryApp = galleryApp;
 	}
 
-	public ContactModify getContactModify() {
+	public ContactModify getContactModify() 
+	{
 		return contactModify;
 	}
 
 
-	public void setContactModify(ContactModify contactModify) {
+	public void setContactModify(ContactModify contactModify) 
+	{
 		this.contactModify = contactModify;
 	}
 
-	public ButtonCreation getValidButton() {
+	public ButtonCreation getValidButton() 
+	{
 		return validButton;
 	}
 
 
-	public void setValidButton(ButtonCreation validButton) {
+	public void setValidButton(ButtonCreation validButton) 
+	{
 		this.validButton = validButton;
 	}
 
 
-	public boolean isFromContactAdd() {
+	public boolean isFromContactAdd() 
+	{
 		return isFromContactAdd;
 	}
 
 
-	public void setFromContactAdd(boolean isFromContactAdd) {
+	public void setFromContactAdd(boolean isFromContactAdd) 
+	{
 		this.isFromContactAdd = isFromContactAdd;
 	}
 
@@ -218,7 +235,8 @@ public class ContactApp extends JPanel{
 	 * @author Valentin Jaquet
 	 *
 	 */
-	class ContactList extends JPanel{
+	class ContactList extends JPanel
+	{
 
 		private JPanel panelList = new JPanel();
 		private Color color = new Color(78,104,141);
@@ -229,7 +247,8 @@ public class ContactApp extends JPanel{
 		/**
 		 * Constructeur de la liste des contacts
 		 */
-		public ContactList() {
+		public ContactList() 
+		{
 			setLayout(new BorderLayout());
 			add(menuBarreList, BorderLayout.NORTH);
 			scroll.setPreferredSize(new Dimension(450, 680));
@@ -244,7 +263,8 @@ public class ContactApp extends JPanel{
 		/**
 		 * Affiche la liste des contacts
 		 */
-		public void displayListContacts() {
+		public void displayListContacts() 
+		{
 
 			ButtonCreation temp;
 
@@ -262,7 +282,8 @@ public class ContactApp extends JPanel{
 		/**
 		 * Met à jour la liste des contacts
 		 */
-		public void updateListContact() {
+		public void updateListContact() 
+		{
 			panelList.removeAll();
 			displayListContacts();
 		}
@@ -294,14 +315,14 @@ public class ContactApp extends JPanel{
 		{
 			Contact contact;
 
-			public ClickShowContact(Contact contact) {
+			public ClickShowContact(Contact contact) 
+			{
 				this.contact = contact;
 			}
 
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				System.out.println(contact.getImageContactPath());
 				setFromContactAdd(false);
 				contactModify = new ContactModify(contact, true, cardLayoutContact, contentContact, mainframe, contacts, contactList);
 				contentContact.add("contactModify",contactModify);

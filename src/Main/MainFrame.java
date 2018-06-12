@@ -1,15 +1,14 @@
-
 package Main;
 /**
-* ------------------------------------------------------------------------------------------------------ <br/>
-* Classe : MainFrame <br/>
-* ------------------------------------------------------------------------------------------------------ <br/>
-* Auteur : David Felley et Valentin Jaquet <br/>
-* Description de la classe : ..... <br/>
-* ------------------------------------------------------------------------------------------------------ <br/>
-* Remarque : - <br/>
-* ------------------------------------------------------------------------------------------------------ <br/>
-*/
+ * ------------------------------------------------------------------------------------------------------ <br/>
+ * Classe : MainFrame <br/>
+ * ------------------------------------------------------------------------------------------------------ <br/>
+ * Auteur : David Felley et Valentin Jaquet <br/>
+ * Description de la classe : Cette classe gère le launcher du smartphone <br/>
+ * ------------------------------------------------------------------------------------------------------ <br/>
+ * Remarque : - <br/>
+ * ------------------------------------------------------------------------------------------------------ <br/>
+ */
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -38,8 +37,8 @@ import Component.GalleryApp;
 import Component.LockScreen;
 import View.BackgroundImagePanel;
 
-public class MainFrame extends JFrame{
-
+public class MainFrame extends JFrame
+{
 	// Panel principal
 	private BackgroundImagePanel backgroundPanel = new BackgroundImagePanel(new ImageIcon("images/Fond/wallpaper3.jpg"));
 
@@ -76,13 +75,16 @@ public class MainFrame extends JFrame{
 	private ButtonCreation musicButton = new ButtonCreation("music", new ImageIcon("images/Icones/earphonesVide.png"));
 	private ButtonCreation parameterButton = new ButtonCreation("parameter", new ImageIcon("images/Icones/parametreVide.png"));
 	private ButtonCreation homeButton = new ButtonCreation ("home", new ImageIcon("images/Icones/home.png"));
-	
+
 	private ContactApp contactApp = new ContactApp(this);
 	private GalleryApp galleryApp = new GalleryApp();
 	private CalculatriceApp calculatriceApp = new CalculatriceApp();
 
 	private LockScreen lockscreen = new LockScreen();
-	
+
+	/**
+	 * Constructeur du launcher
+	 */
 	public MainFrame() 
 	{
 		//Top Panel
@@ -95,7 +97,7 @@ public class MainFrame extends JFrame{
 		heure.setForeground(Color.WHITE);
 		heure.setPreferredSize(new Dimension(50, 40));
 		heure.setFont(new Font(null, Font.BOLD, 18));
-heure.setVisible(false);
+		heure.setVisible(false);
 
 		//PARAMETRES DE LA FRAME
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -114,8 +116,7 @@ heure.setVisible(false);
 		formPanel.add(topPanel,BorderLayout.NORTH);
 
 		//Gestion des panels
-		
-		
+
 		contentPanel.add("lockscreen", lockscreen);
 		lockscreen.getLockButton().addActionListener(new ClickUnLock());
 		contentPanel.add(backgroundPanel, "backgroundPanel");
@@ -173,19 +174,15 @@ heure.setVisible(false);
 
 		//BOUTON OFF
 		homepagePanel.add(offButton);
-//		offButton.addActionListener(new ClickApp());
 		offButton.addMouseListener(new ChangeLayoutButton());
 		offButton.addMouseListener(new ShutDownButton());
 	}
 
-	public GalleryApp getGalleryApp() {
-		return galleryApp;
-	}
-
-	public ContactApp getContactApp() {
-		return contactApp;
-	}
-
+	/**
+	 * ActionListener qui retourne l'heure
+	 * @author val
+	 *
+	 */
 	class CurrentTime implements ActionListener 
 	{
 		@Override
@@ -196,6 +193,11 @@ heure.setVisible(false);
 		}
 	}
 
+	/**
+	 * ActionListener qui permet de retourner au launcher
+	 * @author val
+	 *
+	 */
 	class ClickHome implements ActionListener 
 	{
 		@Override
@@ -204,7 +206,12 @@ heure.setVisible(false);
 			cardLayout.show(contentPanel, "backgroundPanel");
 		}
 	}
-	
+
+	/**
+	 * ActionListener qui permet de devérouiller le téléphone
+	 * @author val
+	 *
+	 */
 	class ClickUnLock implements ActionListener 
 	{
 		@Override
@@ -216,6 +223,11 @@ heure.setVisible(false);
 		}
 	}
 
+	/**
+	 * ActionListener qui permet d'ouvrir les applications contact, calculatrice, galerie
+	 * @author val
+	 *
+	 */
 	class ClickApp implements ActionListener 
 	{
 		@Override
@@ -235,14 +247,19 @@ heure.setVisible(false);
 			}
 		}
 	}
-	
+
+	/**
+	 * MouseAdapter permettant qui vérouille le smartphone après un click cours ou le ferme avec un click long
+	 * @author val
+	 *
+	 */
 	class ShutDownButton extends MouseAdapter
 	{
 		private java.util.Timer timer;
 		public void mousePressed(MouseEvent e)
-        {
+		{
 			timer = new java.util.Timer();
-			
+
 			timer.schedule(new TimerTask()
 			{
 				public void run()
@@ -250,29 +267,35 @@ heure.setVisible(false);
 					contactApp.serializeContact();
 					System.exit(0);
 				}
-			},2000);
-        }
-				public void mouseReleased(MouseEvent e)
-                {
-                    if(timer != null)
-                    {
-                        timer.cancel();
-                        timer = null;
-                        
-                        heure.setVisible(false);
-            			homeButton.setVisible(false);
-                        
-                        cardLayout.show(contentPanel, "lockscreen");
-                    }
-                }
-    }
-	
+			},1000);
+		}
+		public void mouseReleased(MouseEvent e)
+		{
+			if(timer != null)
+			{
+				timer.cancel();
+				timer = null;
 
-	// Mouse Listener changement icône 
+				heure.setVisible(false);
+				homeButton.setVisible(false);
 
-	class ChangeLayoutButton extends MouseAdapter { 
-		public void mouseExited(MouseEvent arg0) {
-			switch(arg0.getComponent().getName()) {
+				cardLayout.show(contentPanel, "lockscreen");
+			}
+		}
+	}
+
+
+	/**
+	 * MouseAdapter permemettant de changer entre les icônes pleines et vides
+	 * @author val
+	 *
+	 */
+	class ChangeLayoutButton extends MouseAdapter 
+	{ 
+		public void mouseExited(MouseEvent arg0) 
+		{
+			switch(arg0.getComponent().getName()) 
+			{
 			case "off" :
 				offButton.setIcon(new ImageIcon("images/Icones/powerVide.png"));	
 				break;
@@ -303,8 +326,10 @@ heure.setVisible(false);
 			}
 		}
 
-		public void mouseEntered(MouseEvent e) {
-			switch(e.getComponent().getName()) {
+		public void mouseEntered(MouseEvent e) 
+		{
+			switch(e.getComponent().getName()) 
+			{
 			case "off" :
 				offButton.setIcon(new ImageIcon("images/Icones/powerPlein.png"));	
 				break;
@@ -336,19 +361,34 @@ heure.setVisible(false);
 		}
 	}
 
-	public CardLayout getCardLayout() {
+	// Getters & Setters
+	public GalleryApp getGalleryApp() 
+	{
+		return galleryApp;
+	}
+
+	public ContactApp getContactApp() 
+	{
+		return contactApp;
+	}
+
+	public CardLayout getCardLayout() 
+	{
 		return cardLayout;
 	}	
 
-	public BackgroundImagePanel getBackgroundPanel() {
+	public BackgroundImagePanel getBackgroundPanel() 
+	{
 		return backgroundPanel;
 	}
 
-	public JPanel getContentPanel() {
+	public JPanel getContentPanel() 
+	{
 		return contentPanel;
 	}
 
-	public JPanel getHomepagePanel() {
+	public JPanel getHomepagePanel() 
+	{
 		return homepagePanel;
 	}
 }

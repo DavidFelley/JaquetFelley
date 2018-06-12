@@ -1,31 +1,32 @@
 package Component;
 
 /**
-* ------------------------------------------------------------------------------------------------------ <br/>
-* Classe : Contact <br/>
-* ------------------------------------------------------------------------------------------------------ <br/>
-* Auteur : Valentin Jaquet <br/>
-* Description de la classe : Cette classe gère un contact <br/>
-* ------------------------------------------------------------------------------------------------------ <br/>
-* Remarque : - <br/>
-* ------------------------------------------------------------------------------------------------------ <br/>
-*/
+ * ------------------------------------------------------------------------------------------------------ <br/>
+ * Classe : Contact <br/>
+ * ------------------------------------------------------------------------------------------------------ <br/>
+ * Auteur : Valentin Jaquet <br/>
+ * Description de la classe : Cette classe gère un contact <br/>
+ * ------------------------------------------------------------------------------------------------------ <br/>
+ * Remarque : - <br/>
+ * ------------------------------------------------------------------------------------------------------ <br/>
+ */
 
 
 import java.io.Serializable;
 
 import javax.swing.ImageIcon;
 
-public class Contact implements Serializable  {
-	
+public class Contact implements Serializable  
+{
+
 	private String nom;
 	private String prenom;
 	private String email;
 	private String telephone;
 	private int id;
 	private String imageContactPath;
-	
-	
+
+
 	/**
 	 * Constructeur de contact
 	 * @param nom
@@ -35,7 +36,8 @@ public class Contact implements Serializable  {
 	 * @param id
 	 * @param imageContactPath
 	 */
-	public Contact (String nom, String prenom, String email, String telephone, String imageContactPath) {
+	public Contact (String nom, String prenom, String email, String telephone, String imageContactPath) 
+	{
 		this.nom = nom;
 		this.prenom = prenom;
 		this.email = email;
@@ -44,72 +46,86 @@ public class Contact implements Serializable  {
 	}
 
 	/**
-	 * Retourne les informations du contacts inséré
+	 * Retourne les informations du contact inséré
 	 * @return
 	 */
-	public String infosContact() {
+	public String infosContact() 
+	{
 		// TODO Auto-generated method stub
 		return  getId() + " " + getNom() + " " + getPrenom() + " " + getEmail() + " " + getTelephone();
 	}
-	
+
 	/**
 	 * Retourne les informations qui vont figurer sur le bouton contact
 	 * @return
 	 */
-	public String texteBoutonContact() {
+	public String texteBoutonContact() 
+	{
 		return getPrenom() + " " + getNom();
 	}
-	
+
 	// Getters & Setters 
-	
-	public String getNom() {
+
+	public String getNom() 
+	{
 		return nom;
 	}
 
-	public void setNom(String nom) {
+	public void setNom(String nom) 
+	{
 		this.nom = nom;
 	}
 
-	public String getPrenom() {
+	public String getPrenom() 
+	{
 		return prenom;
 	}
 
-	public void setPrenom(String prenom) {
+	public void setPrenom(String prenom) 
+	{
 		this.prenom = prenom;
 	}
 
-	public String getEmail() {
+	public String getEmail() 
+	{
 		return email;
 	}
 
-	public void setEmail(String email) {
+	public void setEmail(String email) 
+	{
 		this.email = email;
 	}
 
-	public String getTelephone() {
+	public String getTelephone() 
+	{
 		return telephone;
 	}
 
-	public void setTelephone(String telephone) {
+	public void setTelephone(String telephone) 
+	{
 		this.telephone = telephone;
 	}
 
-	public int getId() {
+	public int getId() 
+	{
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(int id) 
+	{
 		this.id = id;
 	}
 
-	public String getImageContactPath() {
+	public String getImageContactPath()
+	{
 		return imageContactPath;
 	}
 
-	public void setImageContactPath(String imageContactPath) {
+	public void setImageContactPath(String imageContactPath)
+	{
 		this.imageContactPath = imageContactPath;
 	}
-	
-	
-	
+
+
+
 }

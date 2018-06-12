@@ -18,12 +18,12 @@ import javax.swing.JPanel;
 import Component.ContactApp.ContactList;
 import Main.MainFrame;
 
-public class ContactModify extends ContactForm{
+public class ContactModify extends ContactForm
+{
 
 	private MenuBarre menuModify = new MenuBarre ("CONTACT", buttonReturn, buttonModify, color);
 	private CardLayout cl ;
 	private JPanel jp;
-	ArrayList <Contact> contacts;
 	private ContactList contactList;
 
 	/**
@@ -36,7 +36,8 @@ public class ContactModify extends ContactForm{
 	 * @param contacts
 	 * @param contactList
 	 */
-	public ContactModify(Contact contact, boolean modification, CardLayout cl, JPanel jp, MainFrame mainframe, ArrayList<Contact> contacts, ContactList contactList) {
+	public ContactModify(Contact contact, boolean modification, CardLayout cl, JPanel jp, MainFrame mainframe, ArrayList<Contact> contacts, ContactList contactList) 
+	{
 		super(contact, modification, cl, jp, mainframe);
 		this.contacts = contacts;
 		this.contactList = contactList;
@@ -51,7 +52,7 @@ public class ContactModify extends ContactForm{
 	}
 
 	/**
-	 * ActionListner qui permet de rendre les textfields éditables, l'icône contact clickable et affiche les boutons sauvegarder et supprimer
+	 * ActionListener qui permet de rendre les textfields éditables, l'icône contact clickable et affiche les boutons sauvegarder et supprimer
 	 * @author Valentin Jaquet
 	 *
 	 */
@@ -65,7 +66,7 @@ public class ContactModify extends ContactForm{
 	}
 
 	/**
-	 * ActionListner qui permet de sauver un contact modifié 
+	 * ActionListener qui permet de sauver un contact modifié 
 	 * @author Valentin Jaquet
 	 *
 	 */
@@ -92,7 +93,8 @@ public class ContactModify extends ContactForm{
 	{
 		Contact contact;
 
-		public ClickDeleteContact(Contact contact) {
+		public ClickDeleteContact(Contact contact) 
+		{
 			this.contact = contact;
 		}
 

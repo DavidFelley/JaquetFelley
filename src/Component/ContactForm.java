@@ -6,7 +6,8 @@ package Component;
  * Auteur : David Felley et Valentin Jaquet <br/>
  * Description de la classe : Cette classe gère la formulaire de contact de base <br/>
  * ------------------------------------------------------------------------------------------------------ <br/>
- * Remarque : - <br/>
+ * Remarque : Source de la méthode ajustant la taille des images
+ * 			  https://www.mkyong.com/java/how-to-resize-an-image-in-java/ <br/>
  * ------------------------------------------------------------------------------------------------------ <br/>
  */
 import java.awt.AlphaComposite;
@@ -24,6 +25,8 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -34,7 +37,8 @@ import javax.swing.border.LineBorder;
 import Main.MainFrame;
 
 
-public class ContactForm extends JPanel{
+public class ContactForm extends JPanel
+{
 
 	// Label infos contacts
 	private JLabel nom = new LabelPerso("Nom: ");
@@ -64,6 +68,7 @@ public class ContactForm extends JPanel{
 	private JPanel formPanel = new JPanel(new GridLayout(4,2,5,5));
 	protected JPanel bottomPanel = new JPanel(new BorderLayout());
 
+	protected ArrayList <Contact> contacts;
 	private CardLayout cl;
 	private JPanel jp;
 	protected MainFrame mainframe ;
@@ -73,6 +78,7 @@ public class ContactForm extends JPanel{
 	private int id = 0;
 	private ButtonCreation tempIcon;
 	private String pathIcon;
+	
 
 	private boolean checkFormular;
 
@@ -83,7 +89,8 @@ public class ContactForm extends JPanel{
 	 * @param jp
 	 * @param mainframe
 	 */
-	public ContactForm(boolean modification, CardLayout cl, JPanel jp, MainFrame mainframe) {
+	public ContactForm(boolean modification, CardLayout cl, JPanel jp, MainFrame mainframe) 
+	{
 		this.modification = modification;
 		this.cl = cl;
 		this.jp = jp;
@@ -99,7 +106,8 @@ public class ContactForm extends JPanel{
 	 * @param jp
 	 * @param mainframe
 	 */
-	public ContactForm(Contact contact, boolean modification, CardLayout cl, JPanel jp, MainFrame mainframe) {
+	public ContactForm(Contact contact, boolean modification, CardLayout cl, JPanel jp, MainFrame mainframe) 
+	{
 		this.contact = contact;
 		this.modification = modification;
 		this.cl = cl;
@@ -110,9 +118,10 @@ public class ContactForm extends JPanel{
 	}
 
 	/**
-	 * Méthode qui permet de créer le panel formulaire de base (barre de menus, photo du contact, champs du formulaire, bouton de sauvegarde et suppression)
+	 * Permet de créer le panel formulaire de base (barre de menus, photo du contact, champs du formulaire, bouton de sauvegarde et suppression)
 	 */
-	public void createFormPanel() {
+	public void createFormPanel() 
+	{
 
 		setLayout(new BorderLayout());
 		setBackground(Color.WHITE);
@@ -141,9 +150,11 @@ public class ContactForm extends JPanel{
 		formPanel.add(prenom);
 		formPanel.add(tfPrenom);
 		tfPrenom.setForeground(Color.BLACK);
-		tfPrenom.addMouseListener(new MouseAdapter() {
+		tfPrenom.addMouseListener(new MouseAdapter() 
+		{
 			@Override
-			public void mousePressed(MouseEvent e) {
+			public void mousePressed(MouseEvent e) 
+			{
 				tfPrenom.setText("");
 				tfPrenom.setForeground(Color.BLACK);
 				tfPrenom.setBorder(new LineBorder(Color.GRAY));
@@ -153,23 +164,27 @@ public class ContactForm extends JPanel{
 		formPanel.add(nom);
 		formPanel.add(tfNom);
 		tfNom.setForeground(Color.BLACK);
-		tfNom.addMouseListener(new MouseAdapter() {
+		tfNom.addMouseListener(new MouseAdapter() 
+		{
 			@Override
-			public void mousePressed(MouseEvent e) {
+			public void mousePressed(MouseEvent e) 
+			{
 				tfNom.setText("");
 				tfNom.setForeground(Color.BLACK);
 				tfNom.setBorder(new LineBorder(Color.GRAY));
 			}
 		});
-		
+
 		formPanel.add(email);
 		formPanel.add(tfEmail);
-		
+
 		formPanel.add(telephone);
 		formPanel.add(tfTelephone);
-		tfTelephone.addMouseListener(new MouseAdapter() {
+		tfTelephone.addMouseListener(new MouseAdapter() 
+		{
 			@Override
-			public void mousePressed(MouseEvent e) {
+			public void mousePressed(MouseEvent e) 
+			{
 				tfTelephone.setText("");
 				tfTelephone.setForeground(Color.BLACK);
 				tfTelephone.setBorder(new LineBorder(Color.GRAY));
@@ -186,18 +201,20 @@ public class ContactForm extends JPanel{
 	}
 
 	/**
-	 * Méthode qui retourne les informations d'un nouveau contact
+	 * Retourne les informations d'un nouveau contact
 	 * @return
 	 */
-	public Contact getInfos() {
+	public Contact getInfos() 
+	{
 		return new Contact (tfNom.getText(), tfPrenom.getText(),tfEmail.getText(), tfTelephone.getText(),contactPhoto.getName());
 	}
 
 	/**
-	 * Méthode qui retourne les informations d'un contact déjà existant
+	 * Retourne les informations d'un contact déjà existant
 	 * @return
 	 */
-	public Contact modifiedContact() {
+	public Contact modifiedContact() 
+	{
 		contact.setPrenom(tfPrenom.getText());
 		contact.setNom(tfNom.getText());
 		contact.setEmail(tfEmail.getText());
@@ -207,9 +224,10 @@ public class ContactForm extends JPanel{
 	}
 
 	/**
-	 * Méthode qui permet de vider les textFields et de mettre l'icône de contact de base
+	 * Permet de vider les textFields et de mettre l'icône de contact de base
 	 */
-	protected void eraseInfos() {
+	protected void eraseInfos() 
+	{
 		tfNom.setText(null);
 		tfPrenom.setText(null);
 		tfEmail.setText(null);
@@ -222,7 +240,8 @@ public class ContactForm extends JPanel{
 	 * Permet d'écrire les informations du contacts dans les champs textfields ainsi que la photo associée aux contacts
 	 * @param contact
 	 */
-	protected void writeInfos(Contact contact) {
+	protected void writeInfos(Contact contact) 
+	{
 		tfNom.setText(contact.getNom());
 		tfPrenom.setText(contact.getPrenom());
 		tfEmail.setText(contact.getEmail());
@@ -233,11 +252,13 @@ public class ContactForm extends JPanel{
 	/**
 	 * Permet de rendre les textfields éditables et la photo du contact cliquable si l'on vient de la classe ContactAdd ou ContactModify
 	 */
-	public void changeModification() {
+	public void changeModification() 
+	{
 
 		modification =! modification;
 
-		if(modification == false) {
+		if(modification == false) 
+		{
 			bottomPanel.setVisible(modification);
 			tfNom.setEditable(modification);
 			tfPrenom.setEditable(modification);
@@ -245,7 +266,9 @@ public class ContactForm extends JPanel{
 			tfTelephone.setEditable(modification);
 			contactPhoto.removeActionListener(new ClickPhotoContact());
 
-		} else {
+		} 
+		else 
+		{
 			bottomPanel.setVisible(modification);
 			bottomPanel.setVisible(modification);
 			tfNom.setEditable(modification);
@@ -255,7 +278,6 @@ public class ContactForm extends JPanel{
 			contactPhoto.addActionListener(new ClickPhotoContact());
 		}
 	}
-
 
 	/**
 	 * Permet d'ajuster la taille de l'icône contact
@@ -323,23 +345,6 @@ public class ContactForm extends JPanel{
 		return check;
 	}
 
-
-	public ButtonCreation getContactPhoto() {
-		return contactPhoto;
-	}
-
-	public void setContactPhoto(ButtonCreation contactPhoto) {
-		this.contactPhoto = contactPhoto;
-	}
-
-	public ButtonCreation getTempIcon() {
-		return tempIcon;
-	}
-
-	public void setTempIcon(ButtonCreation tempIcon) {
-		this.tempIcon = tempIcon;
-	}
-
 	/**
 	 * ActionListner qui permet d'ouvrir la galerie lorsque l'on clique sur l'icône du contact
 	 * @author Valentin Jaquet
@@ -353,4 +358,25 @@ public class ContactForm extends JPanel{
 			mainframe.getContactApp().getCardLayoutContact().show(mainframe.getContactApp().getContentContact(), "galleryApp");
 		}
 	}
+	
+	// Getters & Setters
+		public ButtonCreation getContactPhoto() 
+		{
+			return contactPhoto;
+		}
+
+		public void setContactPhoto(ButtonCreation contactPhoto) 
+		{
+			this.contactPhoto = contactPhoto;
+		}
+
+		public ButtonCreation getTempIcon() 
+		{
+			return tempIcon;
+		}
+
+		public void setTempIcon(ButtonCreation tempIcon) 
+		{
+			this.tempIcon = tempIcon;
+		}
 }

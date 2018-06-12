@@ -18,13 +18,12 @@ import javax.swing.JPanel;
 import Component.ContactApp.ContactList;
 import Main.MainFrame;
 
-public class ContactAdd extends ContactForm{
+public class ContactAdd extends ContactForm
+{
 	
 	private CardLayout cl ;
 	private JPanel jp;
-	ArrayList <Contact> contacts;
 	private MenuBarre menuAdd = new MenuBarre("AJOUTER UN CONTACT", buttonReturn, buttonValidate, color);
-
 	private ContactList contactList;
 	
 	/**
@@ -36,7 +35,8 @@ public class ContactAdd extends ContactForm{
 	 * @param contacts
 	 * @param contactList
 	 */
-	public ContactAdd(boolean modification, CardLayout cl, JPanel jp, MainFrame mainframe,  ArrayList <Contact> contacts, ContactList contactList) {
+	public ContactAdd(boolean modification, CardLayout cl, JPanel jp, MainFrame mainframe,  ArrayList <Contact> contacts, ContactList contactList) 
+	{
 		super(modification, cl, jp, mainframe);
 		this.contacts=contacts;
 		this.contactList = contactList;
@@ -48,8 +48,6 @@ public class ContactAdd extends ContactForm{
 		contactPhoto.addActionListener(new ClickPhotoContact());
 		bottomPanel.setVisible(false);
 	}
-	
-	
 	
 	/**
 	 * ActionListener qui permet de sauver un contact nouvellement créer
@@ -63,7 +61,6 @@ public class ContactAdd extends ContactForm{
 				{							
 					if(checkInfosContact()) {
 					contacts.add(getInfos());
-					System.out.println(mainframe.getContactApp().getContacts().toString());
 					eraseInfos();		 	
 					contactList.updateListContact();
 					return;
@@ -73,7 +70,7 @@ public class ContactAdd extends ContactForm{
 			}
 			
 	/**
-	 * Action Listener qui permet de retourner à la liste des contacts
+	 * ActionListener qui permet de retourner à la liste des contacts
 	 * @author Valentin Jaquet
 	 *
 	 */
