@@ -4,7 +4,7 @@ package Component;
 * Classe : LockScreen <br/>
 * ------------------------------------------------------------------------------------------------------ <br/>
 * Auteur : David Felley et Valentin Jaquet <br/>
-* Description de la classe : ..... <br/>
+* Description de la classe : Cette classe gère le lockscreen <br/>
 * ------------------------------------------------------------------------------------------------------ <br/>
 * Remarque : - <br/>
 * ------------------------------------------------------------------------------------------------------ <br/>
@@ -46,7 +46,9 @@ public class LockScreen extends JPanel{
 		private LabelPerso heure = new LabelPerso("");
 		private DateFormat DATEFORMAT = new SimpleDateFormat("HH:mm:ss");
 		private Timer timer = new Timer(0, new CurrentTime());
-		
+		/**
+		 * Constructeur du lockscreen
+		 */
 		public LockScreen () {
 			setLayout(new GridLayout(0,1));
 			add(lockScreenPanel, BorderLayout.CENTER);
@@ -84,7 +86,11 @@ public class LockScreen extends JPanel{
 			this.lockButton = lockButton;
 		}
 
-
+		/**
+		 * ActionListener qui permet de récupérer la date du jour
+		 * @author Valentin Jaquet
+		 *
+		 */
 		class CurrentDate implements ActionListener
 		{
 			@Override
@@ -95,6 +101,11 @@ public class LockScreen extends JPanel{
 			}
 		}
 		
+		/**
+		 * ActionListener qui permet de récupérer l'heure
+		 * @author Valentin Jaquet
+		 *
+		 */
 		class CurrentTime implements ActionListener 
 		{
 			@Override

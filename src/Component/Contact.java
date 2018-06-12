@@ -4,8 +4,8 @@ package Component;
 * ------------------------------------------------------------------------------------------------------ <br/>
 * Classe : Contact <br/>
 * ------------------------------------------------------------------------------------------------------ <br/>
-* Auteur : David Felley et Valentin Jaquet <br/>
-* Description de la classe : ..... <br/>
+* Auteur : Valentin Jaquet <br/>
+* Description de la classe : Cette classe gère un contact <br/>
 * ------------------------------------------------------------------------------------------------------ <br/>
 * Remarque : - <br/>
 * ------------------------------------------------------------------------------------------------------ <br/>
@@ -26,29 +26,41 @@ public class Contact implements Serializable  {
 	private String imageContactPath;
 	
 	
-	// Constructeur sans photo
-	public Contact (String nom, String prenom, String email, String telephone, int id, String imageContactPath) {
+	/**
+	 * Constructeur de contact
+	 * @param nom
+	 * @param prenom
+	 * @param email
+	 * @param telephone
+	 * @param id
+	 * @param imageContactPath
+	 */
+	public Contact (String nom, String prenom, String email, String telephone, String imageContactPath) {
 		this.nom = nom;
 		this.prenom = prenom;
 		this.email = email;
 		this.telephone = telephone;
-		this.id = id;
 		this.imageContactPath = imageContactPath;
 	}
 
-	public String toString() {
-		// TODO Auto-generated method stub
-		return "Contact inséré: " + getNom() + " " + getPrenom() + " " + getEmail() + " " + getTelephone();
-	}
-	
+	/**
+	 * Retourne les informations du contacts inséré
+	 * @return
+	 */
 	public String infosContact() {
 		// TODO Auto-generated method stub
 		return  getId() + " " + getNom() + " " + getPrenom() + " " + getEmail() + " " + getTelephone();
 	}
 	
+	/**
+	 * Retourne les informations qui vont figurer sur le bouton contact
+	 * @return
+	 */
 	public String texteBoutonContact() {
-		return getNom() + " " + getPrenom();
+		return getPrenom() + " " + getNom();
 	}
+	
+	// Getters & Setters 
 	
 	public String getNom() {
 		return nom;
