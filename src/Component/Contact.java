@@ -21,7 +21,6 @@ public class Contact implements Serializable
 	private String prenom;
 	private String email;
 	private String telephone;
-	private int id;
 	private String imageContactPath;
 
 
@@ -31,7 +30,6 @@ public class Contact implements Serializable
 	 * @param prenom
 	 * @param email
 	 * @param telephone
-	 * @param id
 	 * @param imageContactPath
 	 */
 	public Contact (String nom, String prenom, String email, String telephone, String imageContactPath) 
@@ -50,7 +48,7 @@ public class Contact implements Serializable
 	public String infosContact() 
 	{
 		// TODO Auto-generated method stub
-		return  getId() + " " + getNom() + " " + getPrenom() + " " + getEmail() + " " + getTelephone();
+		return  getNom() + " " + getPrenom() + " " + getEmail() + " " + getTelephone();
 	}
 
 	/**
@@ -102,16 +100,6 @@ public class Contact implements Serializable
 	public void setTelephone(String telephone) 
 	{
 		this.telephone = telephone;
-	}
-
-	public int getId() 
-	{
-		return id;
-	}
-
-	public void setId(int id) 
-	{
-		this.id = id;
 	}
 
 	public String getImageContactPath()

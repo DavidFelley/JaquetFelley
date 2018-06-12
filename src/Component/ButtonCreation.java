@@ -39,6 +39,8 @@ public class ButtonCreation extends JButton {
 		
 	/**
 	 * Constructeur du bouton avec nom et image
+	 * @param name
+	 * @param image
 	 */
 	public ButtonCreation(String name, ImageIcon image) {
 		super(image);
