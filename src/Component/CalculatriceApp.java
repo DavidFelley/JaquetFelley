@@ -30,14 +30,19 @@ import javax.swing.border.EmptyBorder;
 public class CalculatriceApp extends JPanel
 {	
 	private Calculatrice calculette = new Calculatrice();
-	
+
 	public CalculatriceApp() 
 	{
 		setLayout(new BorderLayout());
 		add(calculette);
 	}
 	
-	class Calculatrice extends JPanel
+	public Calculatrice getCalculette()
+	{
+		return calculette;
+	}
+	
+	public class Calculatrice extends JPanel
 	{
 		private Color color = new Color(78,104,141);
 		private MenuBarre menuCalculatrice = new MenuBarre("CALCULATRICE", color); // CREER LE CONSTRUCTEUR SANS BOUTONS
@@ -52,7 +57,7 @@ public class CalculatriceApp extends JPanel
 		private JPanel panEcran = new JPanel();
 		private JPanel panelButton = new JPanel(new GridBagLayout());
 		private GridBagConstraints c = new GridBagConstraints();
-		
+
 		public Calculatrice()
 		{
 			setLayout(new BorderLayout());
@@ -157,7 +162,7 @@ public class CalculatriceApp extends JPanel
 
 		  //Méthode permettant d'effectuer un calcul selon l'opérateur sélectionné
 
-		  private void calcul()
+		  public void calcul()
 		  {
 		    if(operateur.equals("+"))
 		    {
@@ -309,7 +314,38 @@ public class CalculatriceApp extends JPanel
 		      operateur = "";
 		      ecran.setText("0");
 		    }
-		  }      
+		  }
+		  
+		  // Getter nécessaire aux test JUnit
+		  public void setEcran(JLabel ecran)
+		  {
+			this.ecran = ecran;
+		  }
+		  
+		  public JLabel getEcran()
+		  {
+			return ecran;
+		  }
+
+		  public ButtonCreation[] getTabButton()
+		  {
+			return tabButton;
+		  }
+
+		  public String getOperateur()
+		  {
+			return operateur;
+		  }
+		  
+		  public void setChiffre(double chiffre)
+		  {
+			  this.chiffre = chiffre;
+		  }
+
+		  public double getChiffre()
+		  {
+			  return chiffre;
+		  }
 	}
 	
 
