@@ -77,25 +77,7 @@ class TestCalculatrice
 //		if(!calculatrice.getCalculette().getEcran().getText().equals("130.0"))
 //			fail("La méthode calcul n'a pas réalisé la multiplication correctement");
 		
-//		//Test de la division
-//		ecranTest = new JLabel("15");
-//		calculatrice.getCalculette().setEcran(ecranTest);
-//		//On simule un click sur le bouton moins
-//		calculatrice.getCalculette().getTabButton()[3].doClick();
-//		//Vérification de l'affectation de la variable Chiffre
-//		if(calculatrice.getCalculette().getChiffre() != 15)
-//			fail("Le bouton / n'a pas récupéré la bonne valeur !");
-//		//Vérification de l'affectation de la variable operateur
-//		if(!calculatrice.getCalculette().getOperateur().equals("/"))
-//			fail("Le bouton / n'a pas affecté le bon opérateur !");
-//		//On vérifie que la méthode addition fonctionne correctement
-//		ecranTest.setText("3");
-//		calculatrice.getCalculette().setEcran(ecranTest);
-//		calculatrice.getCalculette().calcul();
-//		if(!calculatrice.getCalculette().getEcran().getText().equals("5.0"))
-//			fail("La méthode calcul n'a pas réalisé la divison correctement");
-		
-		//Test de la division par 0
+		//Test de la division
 		ecranTest = new JLabel("15");
 		calculatrice.getCalculette().setEcran(ecranTest);
 		//On simule un click sur le bouton moins
@@ -107,11 +89,29 @@ class TestCalculatrice
 		if(!calculatrice.getCalculette().getOperateur().equals("/"))
 			fail("Le bouton / n'a pas affecté le bon opérateur !");
 		//On vérifie que la méthode addition fonctionne correctement
-		ecranTest.setText("0");
+		ecranTest.setText("3");
 		calculatrice.getCalculette().setEcran(ecranTest);
 		calculatrice.getCalculette().calcul();
-		if(!calculatrice.getCalculette().getEcran().getText().equals("Not a number"))
-			fail("La méthode calcul n'a pas pris en compte la division par 0");
+		if(!calculatrice.getCalculette().getEcran().getText().equals("5.0"))
+			fail("La méthode calcul n'a pas réalisé la divison correctement");
+		
+//		//Test de la division par 0
+//		ecranTest = new JLabel("15");
+//		calculatrice.getCalculette().setEcran(ecranTest);
+//		//On simule un click sur le bouton moins
+//		calculatrice.getCalculette().getTabButton()[3].doClick();
+//		//Vérification de l'affectation de la variable Chiffre
+//		if(calculatrice.getCalculette().getChiffre() != 15)
+//			fail("Le bouton / n'a pas récupéré la bonne valeur !");
+//		//Vérification de l'affectation de la variable operateur
+//		if(!calculatrice.getCalculette().getOperateur().equals("/"))
+//			fail("Le bouton / n'a pas affecté le bon opérateur !");
+//		//On vérifie que la méthode addition fonctionne correctement
+//		ecranTest.setText("0");
+//		calculatrice.getCalculette().setEcran(ecranTest);
+//		calculatrice.getCalculette().calcul();
+//		if(!calculatrice.getCalculette().getEcran().getText().equals("Not a number"))
+//			fail("La méthode calcul n'a pas pris en compte la division par 0");
 		
 	}
 
